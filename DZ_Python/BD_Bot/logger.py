@@ -29,15 +29,20 @@ def input_data():
 
 #вывод
 def print_data():
-    print('1 файл:')
-    with open('data_first_variant.csv', 'r', encoding='utf-8') as file:
-        data = file.readlines()
-        print(''.join(data))
-        
-    print('2 файл:')
-    with open('data_second_variant.csv', 'r', encoding='utf-8') as file:
-        data = file.readlines()
-        print(''.join(data))
+    var = int(input(f'\nИз какого файла вывести данные? \n'
+                    f'1 Вариант:\n'
+                    f'2 Вариант:\n'
+                    f'Ваш выбор: '))
+    if var == 1:
+        print('1 файл:')
+        with open('data_first_variant.csv', 'r', encoding='utf-8') as file:
+            data = file.readlines()
+            print(''.join(data))
+    elif var == 2:    
+        print('2 файл:')
+        with open('data_second_variant.csv', 'r', encoding='utf-8') as file:
+            data = file.readlines()
+            print(''.join(data))
 
 #изменение
 def transform_data():
@@ -45,14 +50,15 @@ def transform_data():
                      f'1 файл\n'
                      f'2 файл\n'
                      f'Ваш выбор: '))
-    varId = input(  f'\nДанные какого пользователя ИЩМЕНИТЬ? \n'
+    varId = input(  f'\nДанные какого пользователя ИЗМЕНИТЬ? \n'
                      f'Введите id пользователя: ')
     if varC == 1:
         with open('data_first_variant.csv', 'r', encoding='utf-8') as file:
             userId = list()
             for line in file:
-                if line.split() == list(varId):
-                    userId.append(line.strip())
+                line = line.rstrip('\n\r')
+                if line == varId:
+                    userId.append(line)
         with open('data_first_variant.csv', 'r', encoding='utf-8') as file:
             temp = list()
             for i in file:
@@ -73,6 +79,7 @@ def transform_data():
         with open('data_second_variant.csv', 'r', encoding='utf-8') as file:
                 userId = list()
                 for line in file:
+                    line = line.rstrip('\n\r')
                     if line.split(';')[0] == varId:
                         userId.append(line.split(';')[0])
         with open('data_second_variant.csv', 'r', encoding='utf-8') as file:
@@ -80,11 +87,12 @@ def transform_data():
             for i in file:
                 temp.append(i)
             for i in range (len(temp)):
-                    for j in temp[i]:
-                        if j == userId[0]:
-                            userId, name, surname, phone, adress = transform_user_data()
-                            temp[i] = (f'{userId};{name};{surname};{phone};{adress}\n')
-                            break
+                a = temp[i].split(';')
+                for j in a:
+                    if j == userId[0]:
+                        userId, name, surname, phone, adress = transform_user_data()
+                        temp[i] = (f'{userId};{name};{surname};{phone};{adress}\n')
+                        break
 
         with open('data_second_variant.csv', 'w', encoding='utf-8') as file:
             file.writelines(temp)   
@@ -106,20 +114,21 @@ def copy_data():
         with open('data_first_variant.csv', 'r', encoding='utf-8') as file:
             count = 0
             for line in file:
-                if line.split() == list(varId):
-                    userId = (line.strip())
+                line = line.rstrip('\n\r')
+                if line == varId:
+                    userId = line
                     count =+ 1
                 if count == 1:
-                    name = (line.strip())
+                    name = line
                     count+=1
                 elif count == 2:
-                    surname = (line.strip())
+                    surname = line
                     count+=1
                 elif count == 3:
-                    phone = (line.strip())
+                    phone = line
                     count+=1
                 elif count == 4:
-                    adress = (line.strip())
+                    adress = line
                     count = 0              
                     
         with open('data_second_variant.csv', 'a', encoding='utf-8') as file:
@@ -153,8 +162,9 @@ def delete_data():
         with open('data_first_variant.csv', 'r', encoding='utf-8') as file:
             userId = list()
             for line in file:
-                if line.split() == list(varId):
-                    userId.append(line.strip())
+                line = line.rstrip('\n\r')
+                if line == varId:
+                    userId.append(line)
         with open('data_first_variant.csv', 'r', encoding='utf-8') as file:
             temp = list()
             for i in file:
@@ -185,9 +195,10 @@ def delete_data():
                 temp.append(i)
             count = 0                       
             for i in range (len(temp)):
-                    for j in temp[i]:
-                        if j == userId[0]:
-                            count = i
+                a = temp[i].split(';')    
+                for j in a:
+                    if j == userId[0]:
+                        count = i
             temp.pop(count)
             temp.pop(count) 
 
