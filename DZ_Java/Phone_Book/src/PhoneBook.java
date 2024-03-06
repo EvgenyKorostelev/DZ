@@ -41,7 +41,7 @@ public class PhoneBook {
                 if (item.getValue().equals(value)) {
                     String name = item.getKey();
                     System.out.println(name + ": " + value);
-                    break;
+                    break; // исходим из того что номера уникальные и 1 номер может принадлежать только 1 пользователю
                 }
             }    
         }
