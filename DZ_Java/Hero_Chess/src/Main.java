@@ -2,7 +2,6 @@
 public class Main {
     public static void main(String[] args) {
         Peasant peasant = new Peasant("Peasant", 1,90.0, 90.0, 1, 1, 1, 1, 1, 3);
-
         Sniper sniper = new Sniper("Sniper", 1, 200.0, 200.0, 5, 30, 50, 3, 4 , 10);
         Crossbowman crossbowman = new Crossbowman("Crossbowman", 1, 220.0, 220.0, 4, 1, 4, 4, 3, 10);
         Pikeman pikeman = new Pikeman("Pikeman", 1, 300.0, 300.0, 3, 1, 3, 8, 3, 2);
@@ -30,6 +29,9 @@ public class Main {
         System.out.println();
         sniper.attackDamage(rogue);
         System.out.println(rogue.getHealth());
+
+        peasant.attackDamage(witch);
+        System.out.println(witch.getHealth());
 
 
     }

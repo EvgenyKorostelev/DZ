@@ -11,7 +11,6 @@ public class Crossbowman extends RangeClass{
             ", level=" + level +
             '}';
   }
-
   @Override
   protected void attackDamage(BaseClass unit) {
       if(arrows >= 1) {

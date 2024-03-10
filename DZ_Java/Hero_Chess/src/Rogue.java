@@ -19,7 +19,6 @@ public class Rogue extends MeleeClass{
             stamina -= 1;
         }
     }
-
     protected Integer poisoning(BaseClass unit){
         if((Math.random()*(100 - 1) + 1)<=25) {
             unit.attack = 1;

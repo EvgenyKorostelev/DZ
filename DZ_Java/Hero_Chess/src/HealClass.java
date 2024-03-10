@@ -5,7 +5,6 @@ public class HealClass extends BaseClass{
         super(className, level, health, healthMax, defense, speed, attack, damageMin, damageMax);
         this.mana = mana;
     }
-
     @Override
     protected void heal(BaseClass unit) {
         super.heal(unit);

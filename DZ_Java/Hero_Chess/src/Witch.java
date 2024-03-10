@@ -11,7 +11,6 @@ public class Witch extends HealClass{
               ", level=" + level +
               '}';
    }
-
    @Override
    protected void heal(BaseClass unit) {
       if(mana >= 10) {
