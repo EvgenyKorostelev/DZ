@@ -1,18 +1,29 @@
-public class Crossbowman extends RangeClass{
+package mainclasses;
+
+import mainclasses.subclasses.RangeClass;
+import mainclasses.subclasses.baseclasses.BaseClass;
+
+public class Crossbowman extends RangeClass {
 //  private Integer doubleShot;
 
-  public Crossbowman(String className, Integer level, double health, double healthMax, Integer attack, Integer damageMin, Integer damageMax, Integer defense, Integer speed, Integer arrows) {
-    super(className, level, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows);
+  public Crossbowman(String name, Integer level, double health, double healthMax,
+                     Integer attack, Integer damageMin, Integer damageMax, Integer defense,
+                     Integer speed, Integer arrows, Integer arrowsMax) {
+    super(name, level, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax);
   }
+    public Crossbowman() {
+        this(String.format("Crossbowman #%d", ++Crossbowman.num), 1, 200, 200,
+                20, 15, 25, 20, 4, 10, 10);
+    }
   @Override
   public String toString() {
     return "Crossbowman{" +
-            "className='" + className + '\'' +
+            "name='" + name + '\'' +
             ", level=" + level +
             '}';
   }
   @Override
-  protected void attackDamage(BaseClass unit) {
+  public void attackDamage(BaseClass unit) {
       if(arrows >= 1) {
           int i;
           int signI;
@@ -44,7 +55,7 @@ public class Crossbowman extends RangeClass{
           arrows -= 1;
     }
   }
-  protected boolean doubleShot(){
+  private boolean doubleShot(){
     return (Math.random() * (100 - 1) + 1) <= 30;
   }
 }

@@ -1,19 +1,29 @@
-public class Sniper extends RangeClass{
+package mainclasses;
+
+import mainclasses.subclasses.RangeClass;
+import mainclasses.subclasses.baseclasses.BaseClass;
+
+public class Sniper extends RangeClass {
 //   private Integer snipeShot;
 
-   public Sniper(String className, Integer level, double health, double healthMax, Integer attack, Integer damageMin, Integer damageMax, Integer defense, Integer speed, Integer arrows) {
-      super(className, level, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows);
+   public Sniper(String name, Integer level, double health, double healthMax, Integer attack,
+                 Integer damageMin, Integer damageMax, Integer defense, Integer speed,
+                 Integer arrows, Integer arrowsMax) {
+      super(name, level, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax);
    }
-
+   public Sniper() {
+      this(String.format("Sniper #%d", ++Sniper.num), 1, 200, 200, 20,
+              10, 30, 20, 4, 10, 10);
+   }
    @Override
    public String toString() {
       return "Sniper{" +
-              "className='" + className + '\'' +
+              "name='" + name + '\'' +
               ", level=" + level +
               '}';
    }
    @Override
-   protected void attackDamage(BaseClass unit) {
+   public void attackDamage(BaseClass unit) {
       if(arrows >= 1) {
       int i;
       int signI;
@@ -39,7 +49,7 @@ public class Sniper extends RangeClass{
       }
    }
 
-   protected boolean snipeShot(){
+   private boolean snipeShot(){
       return (Math.random() * (100 - 1) + 1) <= 60;
    }
 }
