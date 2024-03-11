@@ -1,34 +1,32 @@
 import mainclasses.*;
+import mainclasses.subclasses.baseclasses.BaseClass;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Peasant peasant = new Peasant();
-        Sniper sniper = new Sniper();
-        Crossbowman crossbowman = new Crossbowman();
-        Pikeman pikeman = new Pikeman();
-        Rogue rogue = new Rogue();
-        Monk monk = new Monk();
-        Witch witch = new Witch();
+        List<BaseClass> team1 = new ArrayList<>();
+        List<BaseClass> team2 = new ArrayList<>();
 
-        System.out.println(peasant);
-        System.out.println(sniper);
-        System.out.println(crossbowman);
-        System.out.println(pikeman);
-        System.out.println(rogue);
-        System.out.println(monk);
-        System.out.println(witch);
+        team1.add(new Peasant());
+        team2.add(new Peasant());
+        team1.add(new Sniper());
+        team2.add(new Crossbowman());
+        team2.add(new Pikeman());
+        team1.add(new Rogue());
+        team2.add(new Monk());
+        team1.add(new Witch());
+
+        System.out.println(team1.get(1));
+        System.out.println(team1.get(2));
+        System.out.println(team1.get(3));
+        System.out.println(team1.get(0));
+        System.out.println(team2.get(1));
+        System.out.println(team2.get(2));
+        System.out.println(team2.get(3));
+        System.out.println(team2.get(0));
         System.out.println();
 
-
-        sniper.attackDamage(pikeman);
-        System.out.println(pikeman.getHealth());
-        rogue.attackDamage(pikeman);
-        System.out.println(pikeman.getHealth());
-        witch.heal(pikeman);
-        System.out.println(pikeman.getHealth());
-        sniper.attackDamage(rogue);
-        System.out.println(rogue.getHealth());
-        peasant.attackDamage(witch);
-        System.out.println(witch.getHealth());
     }
 }
