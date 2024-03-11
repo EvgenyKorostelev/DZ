@@ -5,21 +5,23 @@ import java.util.Random;
 public abstract class BaseClass {
     protected static int num;
     protected static Random rnd;
+
     static {
         BaseClass.num = 0;
         BaseClass.rnd = new Random();
     }
-//    protected String buff;
+
+    //    protected String buff;
 //    protected String deBuff;
-    public String name;
-    public Integer level;
-    public double health;
-    public double healthMax;
-    public Integer defense;
-    public Integer speed;
-    public Integer attack;
-    public Integer damageMin;
-    public Integer damageMax;
+    protected String name;
+    protected Integer level;
+    protected double health;
+    protected double healthMax;
+    protected Integer defense;
+    protected Integer speed;
+    protected Integer attack;
+    protected Integer damageMin;
+    protected Integer damageMax;
 
     protected BaseClass(String name, Integer level, double health, double healthMax,
                         Integer defense, Integer speed, Integer attack, Integer damageMin, Integer damageMax) {
@@ -76,30 +78,21 @@ public abstract class BaseClass {
         }
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public Integer getLevel() {
-        return level;
-    }
+    public Integer getLevel() { return level; }
 
     public double getHealth() {
         return health;
     }
 
-    public Integer getDefense() {
-        return defense;
-    }
+    public Integer getDefense() { return defense; }
 
     public Integer getSpeed() {
         return speed;
     }
 
-    public int getAttack() {
-
-        return attack;
-    }
+    public int getAttack() { return attack; }
 
     public Integer getDamageMin() {
         return damageMin;
@@ -108,4 +101,7 @@ public abstract class BaseClass {
     public Integer getDamageMax() {
         return damageMax;
     }
+    public void setHealth(double health){ this.health = health; }
+    public void setDefense(Integer defense){ this.defense = defense; }
+    public void setAttack(Integer attack){ this.attack = attack; }
 }

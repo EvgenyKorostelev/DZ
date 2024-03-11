@@ -6,7 +6,6 @@ public abstract class MeleeClass extends BaseClass {
     protected Integer stamina;
     protected Integer staminaMax;
 
-
     protected MeleeClass(String name, Integer level, double health, double healthMax,
                          Integer attack, Integer damageMin, Integer damageMax, Integer defense,
                          Integer speed, Integer stamina, Integer staminaMax) {

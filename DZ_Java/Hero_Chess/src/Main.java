@@ -1,4 +1,5 @@
 import mainclasses.*;
+
 public class Main {
     public static void main(String[] args) {
         Peasant peasant = new Peasant();
@@ -22,7 +23,6 @@ public class Main {
         System.out.println(pikeman.getHealth());
         rogue.attackDamage(pikeman);
         System.out.println(pikeman.getHealth());
-
         witch.heal(pikeman);
         System.out.println(pikeman.getHealth());
 

@@ -10,10 +10,12 @@ public class Peasant extends WorkersClass {
                    Integer attack, Integer damageMin, Integer damageMax, Integer fatigue, Integer fatigueMax) {
         super(name, level, health, healthMax, defense, speed, attack, damageMin, damageMax, fatigue, fatigueMax);
     }
+
     public Peasant() {
         this(String.format("Peasant #%d", ++Peasant.num), 1, 50, 50, 1,
                 1, 1, 1, 1, 3, 3);
     }
+
     @Override
     public String toString() {
         return "Peasant{" +

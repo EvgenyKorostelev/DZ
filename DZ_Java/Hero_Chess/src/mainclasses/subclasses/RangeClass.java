@@ -6,7 +6,6 @@ public abstract class RangeClass extends BaseClass {
     protected Integer arrows;
     protected Integer arrowsMax;
 
-
     protected RangeClass(String name, Integer level, double health, double healthMax,
                          Integer attack, Integer damageMin, Integer damageMax, Integer defense,
                          Integer speed, Integer arrows, Integer arrowsMax) {

@@ -6,7 +6,6 @@ public abstract class HealClass extends BaseClass {
     protected Integer mana;
     protected Integer manaMax;
 
-
     protected HealClass(String name, Integer level, double health, double healthMax,
                         Integer attack, Integer damageMin, Integer damageMax, Integer defense,
                         Integer speed, Integer mana, Integer manaMax) {
