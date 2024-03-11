@@ -18,4 +18,8 @@ public abstract class HealClass extends BaseClass {
     public void heal(BaseClass unit) {
         super.heal(unit);
     }
+
+    public Integer getMana() { return mana; }
+
+    public void setMana(Integer mana) { this.mana = mana; }
 }

@@ -18,4 +18,8 @@ public abstract class RangeClass extends BaseClass {
     public void attackDamage(BaseClass unit) {
         super.attackDamage(unit);
     }
+
+    public Integer getArrows() { return arrows; }
+
+    public void setArrows(Integer arrows) { this.arrows = arrows; }
 }

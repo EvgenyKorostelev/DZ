@@ -17,6 +17,7 @@ public class Main {
         System.out.println(rogue);
         System.out.println(monk);
         System.out.println(witch);
+        System.out.println();
 
 
         sniper.attackDamage(pikeman);
@@ -25,12 +26,8 @@ public class Main {
         System.out.println(pikeman.getHealth());
         witch.heal(pikeman);
         System.out.println(pikeman.getHealth());
-
-
-        System.out.println();
         sniper.attackDamage(rogue);
         System.out.println(rogue.getHealth());
-
         peasant.attackDamage(witch);
         System.out.println(witch.getHealth());
     }

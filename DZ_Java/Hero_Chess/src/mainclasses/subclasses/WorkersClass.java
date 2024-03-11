@@ -18,4 +18,8 @@ public abstract class WorkersClass extends BaseClass {
     public void attackDamage(BaseClass unit) {
         super.attackDamage(unit);
     }
+
+    public Integer getFatigue() { return fatigue; }
+
+    public void setFatigue(Integer fatigue) { this.fatigue = fatigue; }
 }

@@ -18,4 +18,8 @@ public abstract class MeleeClass extends BaseClass {
     public void attackDamage(BaseClass unit) {
         super.attackDamage(unit);
     }
+
+    public Integer getStamina() { return stamina; }
+
+    public void setStamina(Integer stamina) { this.stamina = stamina; }
 }
