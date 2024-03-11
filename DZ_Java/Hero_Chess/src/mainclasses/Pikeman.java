@@ -13,7 +13,7 @@ public class Pikeman extends MeleeClass {
     }
 
     public Pikeman() {
-        this(String.format("Pikeman #%d", ++Pikeman.num), 1, 300, 300,
+        this(randomName(), 1, 300, 300,
                 30, 30, 40, 30, 3, 2, 2);
     }
 

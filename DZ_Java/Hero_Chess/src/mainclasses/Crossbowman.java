@@ -13,7 +13,7 @@ public class Crossbowman extends RangeClass {
     }
 
     public Crossbowman() {
-        this(String.format("Crossbowman #%d", ++Crossbowman.num), 1, 200, 200,
+        this(randomName(), 1, 200, 200,
                 20, 15, 25, 20, 4, 10, 10);
     }
 

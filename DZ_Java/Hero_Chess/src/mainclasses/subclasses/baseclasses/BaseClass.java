@@ -1,5 +1,8 @@
 package mainclasses.subclasses.baseclasses;
 
+import mainclasses.*;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class BaseClass {
@@ -36,9 +39,16 @@ public abstract class BaseClass {
         this.damageMax = damageMax;
 
     }
+    public enum Names {
+        Один, Тор, Локи, Мимир, Фригг, Сиф, Идунн, Бальдр, Хеймдалль, Тюр, Хёнир, Браги, Улль, Нанна;
+    }
+
+    protected static String randomName(){
+        return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
+    }
 
     protected BaseClass() {
-        this(String.format("Hero_Priest #%d", ++BaseClass.num), 99, 999, 999, 999, 999, 999, 999, 999);
+        this(randomName(), 99, 999, 999, 999, 999, 999, 999, 999);
     }
 
     public void attackDamage(BaseClass unit) {
@@ -98,10 +108,43 @@ public abstract class BaseClass {
         return damageMin;
     }
 
-    public Integer getDamageMax() {
-        return damageMax;
-    }
+    public Integer getDamageMax() {return damageMax;}
     public void setHealth(double health){ this.health = health; }
     public void setDefense(Integer defense){ this.defense = defense; }
     public void setAttack(Integer attack){ this.attack = attack; }
+
+    public static ArrayList<BaseClass> createTeam(int count, String str){
+        ArrayList<BaseClass> team = new ArrayList<>();
+        int temp = 0;
+        if (str.equals("A")) {temp = 0;} else if (str.equals("H")) {temp = 3;}
+        while (count-- > 0) {
+            int r = temp + rnd.nextInt(4);
+            switch (r) {
+                case 0:
+                    team.add(new Crossbowman());
+                    break;
+                case 1:
+                    team.add(new Pikeman());
+                    break;
+                case 2:
+                    team.add(new Witch());
+                    break;
+                case 3:
+                    team.add(new Peasant());
+                    break;
+                case 4:
+                    team.add(new Sniper());
+                    break;
+                case 5:
+                    team.add(new Monk());
+                    break;
+                case 6:
+                    team.add(new Rogue());
+                    break;
+
+            }
+
+        }
+        return team;
+    }
 }

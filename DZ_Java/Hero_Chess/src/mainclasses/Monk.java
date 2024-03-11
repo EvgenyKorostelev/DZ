@@ -13,7 +13,7 @@ public class Monk extends HealClass {
     }
 
     public Monk() {
-        this(String.format("Monk #%d", ++Monk.num), 1, 100, 100,
+        this(randomName(), 1, 100, 100,
                 1, 30, 80, 10, 2, 150, 150);
     }
 

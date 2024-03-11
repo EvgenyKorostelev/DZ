@@ -13,7 +13,7 @@ public class Rogue extends MeleeClass {
     }
 
     public Rogue() {
-        this(String.format("Rogue #%d", ++Rogue.num), 1, 300, 300, 30,
+        this(randomName(), 1, 300, 300, 30,
                 20, 50, 30, 3, 2, 2);
     }
 

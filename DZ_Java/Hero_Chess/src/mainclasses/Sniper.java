@@ -13,7 +13,7 @@ public class Sniper extends RangeClass {
     }
 
     public Sniper() {
-        this(String.format("Sniper #%d", ++Sniper.num), 1, 200, 200, 20,
+        this(randomName(), 1, 200, 200, 20,
                 10, 30, 20, 4, 10, 10);
     }
 

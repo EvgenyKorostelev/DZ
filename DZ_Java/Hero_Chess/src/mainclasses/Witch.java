@@ -13,7 +13,7 @@ public class Witch extends HealClass {
     }
 
     public Witch() {
-        this(String.format("Witch #%d", ++Witch.num), 1, 100, 100, 1,
+        this(randomName(), 1, 100, 100, 1,
                 4, 65, 10, 2, 150, 150);
     }
 

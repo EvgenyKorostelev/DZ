@@ -12,7 +12,7 @@ public class Peasant extends WorkersClass {
     }
 
     public Peasant() {
-        this(String.format("Peasant #%d", ++Peasant.num), 1, 50, 50, 1,
+        this(randomName(), 1, 50, 50, 1,
                 1, 1, 1, 1, 3, 3);
     }
 
