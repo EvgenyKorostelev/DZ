@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class BaseClass {
-    protected static int num;
     protected static Random rnd;
 
     static {
-        BaseClass.num = 0;
         BaseClass.rnd = new Random();
     }
 
@@ -18,6 +16,7 @@ public abstract class BaseClass {
 //    protected String deBuff;
     protected String name;
     protected Integer level;
+    protected Point unitpoint;
     protected double health;
     protected double healthMax;
     protected Integer defense;
@@ -26,10 +25,11 @@ public abstract class BaseClass {
     protected Integer damageMin;
     protected Integer damageMax;
 
-    protected BaseClass(String name, Integer level, double health, double healthMax,
+    protected BaseClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                         Integer defense, Integer speed, Integer attack, Integer damageMin, Integer damageMax) {
         this.name = name;
         this.level = level;
+        this.unitpoint = unitpoint;
         this.health = health;
         this.healthMax = healthMax;
         this.defense = defense;
@@ -39,16 +39,20 @@ public abstract class BaseClass {
         this.damageMax = damageMax;
 
     }
+
     public enum Names {
         Один, Тор, Локи, Мимир, Фригг, Сиф, Идунн, Бальдр, Хеймдалль, Тюр, Хёнир, Браги, Улль, Нанна;
     }
 
-    protected static String randomName(){
+    protected static String randomName() {
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
+    }
+    protected BaseClass(int x, int y){
+        this(randomName(), 99, new Point(x, y),999, 999, 999, 999, 999, 999, 999);
     }
 
     protected BaseClass() {
-        this(randomName(), 99, 999, 999, 999, 999, 999, 999, 999);
+        this(randomName(), 99,  new Point(),999, 999, 999, 999, 999, 999, 999);
     }
 
     public void attackDamage(BaseClass unit) {
@@ -88,58 +92,89 @@ public abstract class BaseClass {
         }
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public Integer getLevel() { return level; }
+    public Integer getLevel() {
+        return level;
+    }
+
+    public Point getUnitpoint() {
+        return unitpoint;
+    }
 
     public double getHealth() {
         return health;
     }
 
-    public Integer getDefense() { return defense; }
+    public Integer getDefense() {
+        return defense;
+    }
 
     public Integer getSpeed() {
         return speed;
     }
 
-    public int getAttack() { return attack; }
+    public int getAttack() {
+        return attack;
+    }
 
     public Integer getDamageMin() {
         return damageMin;
     }
 
-    public Integer getDamageMax() {return damageMax;}
-    public void setHealth(double health){ this.health = health; }
-    public void setDefense(Integer defense){ this.defense = defense; }
-    public void setAttack(Integer attack){ this.attack = attack; }
+    public Integer getDamageMax() {
+        return damageMax;
+    }
 
-    public static ArrayList<BaseClass> createTeam(int count, String str){
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public void setUnitpoint(Point unitpoint) {
+        this.unitpoint = unitpoint;
+    }
+
+    public void setDefense(Integer defense) {
+        this.defense = defense;
+    }
+
+    public void setAttack(Integer attack) {
+        this.attack = attack;
+    }
+
+    public static ArrayList<BaseClass> createTeam(int count, String str) {
         ArrayList<BaseClass> team = new ArrayList<>();
         int temp = 0;
-        if (str.equals("A")) {temp = 0;} else if (str.equals("H")) {temp = 3;}
-        while (count-- > 0) {
+        if (str.equals("Alliance")) {
+            temp = 0;
+        } else if (str.equals("Horde")) {
+            temp = 3;
+        }
+        while (--count >= 0) {
             int r = temp + rnd.nextInt(4);
             switch (r) {
                 case 0:
-                    team.add(new Crossbowman());
+                    team.add(new Crossbowman(0, count));
                     break;
                 case 1:
-                    team.add(new Pikeman());
+                    team.add(new Pikeman(0, count));
                     break;
                 case 2:
-                    team.add(new Witch());
+                    team.add(new Witch(0, count));
                     break;
                 case 3:
-                    team.add(new Peasant());
+                    team.add(new Peasant(temp * 3, count));
                     break;
                 case 4:
-                    team.add(new Sniper());
+                    team.add(new Sniper(9, count));
                     break;
                 case 5:
-                    team.add(new Monk());
+                    team.add(new Monk(9, count));
                     break;
                 case 6:
-                    team.add(new Rogue());
+                    team.add(new Rogue(9, count));
                     break;
 
             }

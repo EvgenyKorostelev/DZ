@@ -2,18 +2,23 @@ package mainclasses;
 
 import mainclasses.subclasses.HealClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
+import mainclasses.subclasses.baseclasses.Point;
 
 public class Witch extends HealClass {
 //   private Integer blessOfProtection;
 
-    public Witch(String name, Integer level, double health, double healthMax, Integer attack,
+    public Witch(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                  Integer damageMin, Integer damageMax, Integer defense, Integer speed,
                  Integer mana, Integer manaMax) {
-        super(name, level, health, healthMax, attack, damageMin, damageMax, defense, speed, mana, manaMax);
+        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, mana, manaMax);
+    }
+    public Witch(int x, int y) {
+        this(randomName(), 1, new Point(x, y),200, 200,
+                20, 15, 25, 20, 4, 10, 10);
     }
 
     public Witch() {
-        this(randomName(), 1, 100, 100, 1,
+        this(randomName(), 1, new Point(), 100, 100, 1,
                 4, 65, 10, 2, 150, 150);
     }
 
@@ -21,7 +26,7 @@ public class Witch extends HealClass {
     public String toString() {
         return "Witch{" +
                 "name='" + name + '\'' +
-                ", level=" + level +
+                ", position=" + unitpoint +
                 '}';
     }
 

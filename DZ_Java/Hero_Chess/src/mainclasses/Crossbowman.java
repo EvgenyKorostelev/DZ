@@ -2,18 +2,23 @@ package mainclasses;
 
 import mainclasses.subclasses.RangeClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
+import mainclasses.subclasses.baseclasses.Point;
 
 public class Crossbowman extends RangeClass {
 //  private Integer doubleShot;
 
-    public Crossbowman(String name, Integer level, double health, double healthMax,
+    public Crossbowman(String name, Integer level, Point unitpoint, double health, double healthMax,
                        Integer attack, Integer damageMin, Integer damageMax, Integer defense,
                        Integer speed, Integer arrows, Integer arrowsMax) {
-        super(name, level, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax);
+        super(name, level,  unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax);
+    }
+    public Crossbowman(int x, int y) {
+        this(randomName(), 1, new Point(x, y),200, 200,
+                20, 15, 25, 20, 4, 10, 10);
     }
 
     public Crossbowman() {
-        this(randomName(), 1, 200, 200,
+        this(randomName(), 1, new Point(),200, 200,
                 20, 15, 25, 20, 4, 10, 10);
     }
 
@@ -21,7 +26,7 @@ public class Crossbowman extends RangeClass {
     public String toString() {
         return "Crossbowman{" +
                 "name='" + name + '\'' +
-                ", level=" + level +
+                ", position=" + unitpoint +
                 '}';
     }
 
