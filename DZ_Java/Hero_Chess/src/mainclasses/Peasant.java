@@ -12,7 +12,7 @@ public class Peasant extends WorkersClass {
         super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, fatigue, fatigueMax);
     }
     public Peasant(int x, int y) {
-        this(randomName(), 1, new Point(x, y),200, 200,
+        this(randomName(), 1, new Point(x, y, 10),200, 200,
                 20, 15, 25, 20, 4, 10, 10);
     }
 

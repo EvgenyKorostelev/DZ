@@ -48,7 +48,7 @@ public abstract class BaseClass {
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
     }
     protected BaseClass(int x, int y){
-        this(randomName(), 99, new Point(x, y),999, 999, 999, 999, 999, 999, 999);
+        this(randomName(), 99, new Point(x, y, 10),999, 999, 999, 999, 999, 999, 999);
     }
 
     protected BaseClass() {
@@ -119,27 +119,18 @@ public abstract class BaseClass {
     public int getAttack() {
         return attack;
     }
-
-    public Integer getDamageMin() {
-        return damageMin;
-    }
-
-    public Integer getDamageMax() {
-        return damageMax;
-    }
+    public Integer getDamageMin() {return damageMin;}
+    public Integer getDamageMax() {return damageMax;}
 
     public void setHealth(double health) {
         this.health = health;
     }
-
     public void setUnitpoint(Point unitpoint) {
         this.unitpoint = unitpoint;
     }
-
     public void setDefense(Integer defense) {
         this.defense = defense;
     }
-
     public void setAttack(Integer attack) {
         this.attack = attack;
     }
@@ -181,5 +172,18 @@ public abstract class BaseClass {
 
         }
         return team;
+    }
+
+    public BaseClass findTarget(ArrayList<BaseClass> units){//Метод поиска ближайшего врага или союзника
+        double minDistance = Double.MAX_VALUE;
+        BaseClass target = units.getFirst();
+        for (BaseClass unit : units) {
+            double temp = unitpoint.distanceTo(unit.getUnitpoint());
+            if(temp < minDistance) {
+                minDistance = temp;
+                target = unit;
+            }
+        }
+        return target;
     }
 }

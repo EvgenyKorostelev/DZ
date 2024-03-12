@@ -13,7 +13,7 @@ public class Monk extends HealClass {
         super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, mana, manaMax);
     }
     public Monk(int x, int y) {
-        this(randomName(), 1, new Point(x, y),200, 200,
+        this(randomName(), 1, new Point(x, y, 10),200, 200,
                 20, 15, 25, 20, 4, 10, 10);
     }
 
