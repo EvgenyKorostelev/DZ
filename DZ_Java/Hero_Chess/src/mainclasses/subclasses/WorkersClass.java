@@ -2,15 +2,15 @@ package mainclasses.subclasses;
 
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
-
+//Класс обобщающий юнитов рабочих
 public abstract class WorkersClass extends BaseClass {
     protected Integer fatigue;
     protected Integer fatigueMax;
 
     protected WorkersClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                            Integer defense, Integer speed, Integer attack, Integer damageMin,
-                           Integer damageMax, Integer fatigue, Integer fatigueMax) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax);
+                           Integer damageMax, Integer fatigue, Integer fatigueMax, boolean die) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die);
         this.fatigueMax = fatigueMax;
         this.fatigue = fatigue;
     }
