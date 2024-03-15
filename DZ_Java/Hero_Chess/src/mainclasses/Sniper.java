@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 //Класс Снайперы
 public class Sniper extends RangeClass {
-//   private Integer snipeShot;
+
 
     public Sniper(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                   Integer damageMin, Integer damageMax, Integer defense, Integer speed,

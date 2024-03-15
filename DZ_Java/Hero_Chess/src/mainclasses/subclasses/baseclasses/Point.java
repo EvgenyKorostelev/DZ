@@ -19,6 +19,10 @@ public class Point {
         return Math.sqrt(Math.pow(target.coordinateX-coordinateX, 2)+Math.pow(target.coordinateY-coordinateY,2));
     }
 
+    public int getFieldsize() {
+        return fieldsize;
+    }
+
     @Override
     public String toString() {
         return "{" +

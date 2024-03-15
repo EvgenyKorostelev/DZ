@@ -1,5 +1,6 @@
 package mainclasses;
 
+import mainclasses.subclasses.RangeClass;
 import mainclasses.subclasses.WorkersClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
@@ -37,10 +38,27 @@ public class Peasant extends WorkersClass {
         super.attackDamage(unit);
     }
 
+    public void returnArrows(BaseClass unit){
+        if(RangeClass.class.isAssignableFrom(unit.getClass())) {
+            if (((RangeClass) unit).getArrows() < ((RangeClass) unit).getArrowsMax())
+                ((RangeClass) unit).setArrows(((RangeClass) unit).getArrows() + 1);
+        }
+    }
+
     @Override
     public void step(ArrayList<BaseClass> units) {
         if(!this.die){
-            this.attackDamage(this.findTarget(units));
+            int min = 10;
+            RangeClass temp = null;
+            for(BaseClass unit : units){
+                if(RangeClass.class.isAssignableFrom(unit.getClass())){
+                   if (((RangeClass) unit).getArrows() < min){
+                       min = ((RangeClass) unit).getArrows();
+                       temp = ((RangeClass) unit);
+                   }
+                }
+            }
+            returnArrows(temp);
         }
     }
 }

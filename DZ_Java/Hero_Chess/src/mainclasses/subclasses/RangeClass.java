@@ -22,5 +22,9 @@ public abstract class RangeClass extends BaseClass {
 
     public Integer getArrows() { return arrows; }
 
+    public Integer getArrowsMax() {
+        return arrowsMax;
+    }
+
     public void setArrows(Integer arrows) { this.arrows = arrows; }
 }

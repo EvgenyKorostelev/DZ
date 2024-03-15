@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 //Класс Копейщики
 public class Pikeman extends MeleeClass {
-//    private Integer armorPenetration;
+
 
     public Pikeman(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                    Integer damageMin, Integer damageMax, Integer defense, Integer speed,
