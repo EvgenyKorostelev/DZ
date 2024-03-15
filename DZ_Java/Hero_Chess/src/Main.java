@@ -5,9 +5,13 @@ import mainclasses.subclasses.RangeClass;
 import mainclasses.subclasses.WorkersClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
+
+import javax.sound.sampled.*;
+import java.io.File;
 
 
 public class Main {
@@ -49,6 +53,8 @@ public class Main {
 //        System.out.println("=====================================================");
 
         fight(A, H);
+
+
 
 
     }
@@ -155,12 +161,32 @@ public class Main {
                 }
             }
         }
-        if(deadAlliance.size() > deadHorde.size())
-            System.out.println("Победила команда ОРДЫ");
-        else
-            System.out.println("Победила команда АЛЬЯНСА");
+        if(deadAlliance.size() > deadHorde.size()) {
+            System.out.println("Победила команда ОРДЫ !!!");
+            playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/horde.wav");
+        }
+        else {
+            System.out.println("Победила команда АЛЬЯНСА !!!");
+            playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/alliance.wav");
+        }
+
         System.out.println(deadAlliance);
         System.out.println(deadHorde);
     }
 
+
+    public static void playSound(String soundFileName) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File(soundFileName)));
+            clip.setFramePosition(0);
+            clip.start();
+            Thread.sleep(clip.getMicrosecondLength()/1000);
+            clip.stop();
+            clip.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
