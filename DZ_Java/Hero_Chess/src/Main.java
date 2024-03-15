@@ -111,17 +111,17 @@ public class Main {
     }
     //метод боя
     public static void fight(ArrayList<BaseClass> team1, ArrayList<BaseClass> team2){
-        HashSet<BaseClass> Alliance = new HashSet<>();
-        HashSet<BaseClass> Horde = new HashSet<>();
+        HashSet<BaseClass> deadAlliance = new HashSet<>();
+        HashSet<BaseClass> deadHorde = new HashSet<>();
         ArrayList<BaseClass> queue = turnOrder(team1, team2);
 
-        while (Alliance.size() < queue.size() / 2 && Horde.size() < queue.size() / 2) {
+        while (deadAlliance.size() < queue.size() / 2 && deadHorde.size() < queue.size() / 2) {
             if (team1.getFirst().getTeam().equals("Alliance") && team2.getFirst().getTeam().equals("Horde")) {
                 for(BaseClass unit : team1 ){
-                    if(unit.getDie()) Alliance.add(unit);
+                    if(unit.getDie()) deadAlliance.add(unit);
                 }
                 for(BaseClass unit : team2 ){
-                    if(unit.getDie()) Horde.add(unit);
+                    if(unit.getDie()) deadHorde.add(unit);
                 }
                 for (BaseClass unit : queue) {
                     if (unit.getTeam().equals("Alliance") && (RangeClass.class.isAssignableFrom(unit.getClass()) || MeleeClass.class.isAssignableFrom(unit.getClass()))) {
@@ -137,10 +137,10 @@ public class Main {
 
             } else if (team1.getFirst().getTeam().equals("Horde") && team2.getFirst().getTeam().equals("Alliance")) {
                 for(BaseClass unit : team1 ){
-                    if(unit.getDie()) Horde.add(unit);
+                    if(unit.getDie()) deadHorde.add(unit);
                 }
                 for(BaseClass unit : team2 ){
-                    if(unit.getDie()) Alliance.add(unit);
+                    if(unit.getDie()) deadAlliance.add(unit);
                 }
                 for (BaseClass unit : queue) {
                     if (unit.getTeam().equals("Alliance") && (RangeClass.class.isAssignableFrom(unit.getClass()) || MeleeClass.class.isAssignableFrom(unit.getClass()))) {
@@ -155,12 +155,12 @@ public class Main {
                 }
             }
         }
-        if(Alliance.size() > Horde.size())
+        if(deadAlliance.size() > deadHorde.size())
             System.out.println("Победила команда ОРДЫ");
         else
             System.out.println("Победила команда АЛЬЯНСА");
-        System.out.println(Alliance);
-        System.out.println(Horde);
+        System.out.println(deadAlliance);
+        System.out.println(deadHorde);
     }
 
 }
