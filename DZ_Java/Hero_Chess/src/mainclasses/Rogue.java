@@ -17,7 +17,7 @@ public class Rogue extends MeleeClass {
     }
     public Rogue(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10),200, 200,
-                20, 15, 25, 20, 2, 10, 10, false, team);
+                20, 15, 75, 20, 2, 10, 10, false, team);
     }
 
     public Rogue() {
@@ -35,10 +35,12 @@ public class Rogue extends MeleeClass {
 
     @Override
     public void attackDamage(BaseClass unit) {
+        //if(если в мили нет противника делает шаг к ближайшему противнику)
+        //else(бьет)
         if (stamina >= 1) {
             super.attackDamage(unit);
             unit.setAttack(poisoning(unit));
-            stamina -= 1;
+
         }
         if(unit.getHealth() <= 0) {unit.setDie(true);}
     }

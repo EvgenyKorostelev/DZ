@@ -57,10 +57,12 @@ public abstract class BaseClass implements IMove{
         double minDistance = Double.MAX_VALUE;
         BaseClass target = units.getFirst();
         for (BaseClass unit : units) {
-            double temp = unitpoint.distanceTo(unit.getUnitpoint());
-            if(temp < minDistance) {
-                minDistance = temp;
-                target = unit;
+            if(!unit.die) {
+                double temp = unitpoint.distanceTo(unit.getUnitpoint());
+                if (temp < minDistance) {
+                    minDistance = temp;
+                    target = unit;
+                }
             }
         }
         return target;

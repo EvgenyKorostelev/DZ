@@ -18,7 +18,7 @@ public class Sniper extends RangeClass {
 
     public Sniper(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 15, 25, 20, 3, 10, 10, false, team);
+                20, 15, 75, 20, 3, 10, 10, false, team);
     }
 
     public Sniper() {

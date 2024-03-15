@@ -58,7 +58,8 @@ public class Peasant extends WorkersClass {
                    }
                 }
             }
-            returnArrows(temp);
+            if (temp != null)
+                returnArrows(temp);
         }
     }
 }
