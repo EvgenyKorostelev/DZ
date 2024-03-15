@@ -9,8 +9,8 @@ public abstract class HealClass extends BaseClass {
 
     protected HealClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                         Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                        Integer speed, Integer mana, Integer manaMax, boolean die) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die);
+                        Integer speed, Integer mana, Integer manaMax, boolean die, String team) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team);
         this.manaMax = manaMax;
         this.mana = mana;
     }

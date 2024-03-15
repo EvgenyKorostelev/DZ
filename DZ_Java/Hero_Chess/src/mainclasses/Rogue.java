@@ -12,17 +12,17 @@ public class Rogue extends MeleeClass {
 
     public Rogue(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                  Integer damageMin, Integer damageMax, Integer defense, Integer speed,
-                 Integer stamina, Integer staminaMax, boolean die) {
-        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, stamina, staminaMax, die);
+                 Integer stamina, Integer staminaMax, boolean die, String team) {
+        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, stamina, staminaMax, die, team);
     }
-    public Rogue(int x, int y) {
+    public Rogue(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10),200, 200,
-                20, 15, 25, 20, 2, 10, 10, false);
+                20, 15, 25, 20, 2, 10, 10, false, team);
     }
 
     public Rogue() {
         this(randomName(), 1, new Point(), 300, 300, 30,
-                20, 50, 30, 2, 2, 2, false);
+                20, 50, 30, 2, 2, 2, false, "нет");
     }
 
     @Override

@@ -1,19 +1,20 @@
-import mainclasses.Peasant;
-import mainclasses.Sniper;
+import mainclasses.*;
 import mainclasses.subclasses.baseclasses.BaseClass;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 
 
 public class Main {
     public static void main(String[] args) {
-        //проверка создания команд
-        ArrayList<BaseClass> A = BaseClass.createTeam(10, "Alliance");
-        ArrayList<BaseClass> H = BaseClass.createTeam(10, "Horde");
+
+        //проверка createTeam
+        ArrayList<BaseClass> A = createTeam(10, "Alliance");
+        ArrayList<BaseClass> H = createTeam(10, "Horde");
         System.out.println(A);
         System.out.println(H);
-        System.out.println(BaseClass.createTeam(10, "Horde"));
+        System.out.println(A.getFirst().getTeam());
+        System.out.println(H.getFirst().getTeam());
         System.out.println("=====================================================");
         //проверка findTarget
         System.out.println(A.get(5));
@@ -50,6 +51,55 @@ public class Main {
         team1.addAll(team2);
         team1.sort((o1, o2)-> o2.getSpeed() - o1.getSpeed());
         return team1;
+    }
+    //рандом
+    protected static Random rnd;
+    static {
+        rnd = new Random();
+    }
+    //метод создания команд
+    public static ArrayList<BaseClass> createTeam(int count, String str) {
+        ArrayList<BaseClass> team = new ArrayList<>();
+        int temp = Integer.MAX_VALUE;
+        if (str.equals("Alliance")) {
+            temp = 0;
+        } else if (str.equals("Horde")) {
+            temp = 3;
+        }
+        while (--count >= 0) {
+            int r = temp + rnd.nextInt(4);
+            switch (r) {
+                case 0:
+                    team.add(new Crossbowman(0, count, str));
+                    break;
+                case 1:
+                    team.add(new Pikeman(0, count, str));
+                    break;
+                case 2:
+                    team.add(new Witch(0, count, str));
+                    break;
+                case 3:
+                    if(temp == 0) {
+                        team.add(new Peasant(0, count, str));
+                    }
+                    else if (temp == 3) {
+                        team.add(new Peasant(9, count, str));
+                    }
+                    break;
+                case 4:
+                    team.add(new Sniper(9, count, str));
+                    break;
+                case 5:
+                    team.add(new Monk(9, count, str));
+                    break;
+                case 6:
+                    team.add(new Rogue(9, count, str));
+                    break;
+
+            }
+
+        }
+        return team;
     }
 
 }

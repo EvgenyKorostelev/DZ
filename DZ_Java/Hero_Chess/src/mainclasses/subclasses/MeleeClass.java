@@ -9,8 +9,8 @@ public abstract class MeleeClass extends BaseClass {
 
     protected MeleeClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                          Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                         Integer speed, Integer stamina, Integer staminaMax, boolean die) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die);
+                         Integer speed, Integer stamina, Integer staminaMax, boolean die, String team) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team);
         this.staminaMax = staminaMax;
         this.stamina = stamina;
     }

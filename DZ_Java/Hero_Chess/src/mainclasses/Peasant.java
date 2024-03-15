@@ -12,17 +12,17 @@ public class Peasant extends WorkersClass {
 //    private Integer returnArrows;
 
     public Peasant(String name, Integer level, Point unitpoint, double health, double healthMax, Integer defense, Integer speed,
-                   Integer attack, Integer damageMin, Integer damageMax, Integer fatigue, Integer fatigueMax, boolean die) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, fatigue, fatigueMax, die);
+                   Integer attack, Integer damageMin, Integer damageMax, Integer fatigue, Integer fatigueMax, boolean die, String team) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, fatigue, fatigueMax, die, team);
     }
-    public Peasant(int x, int y) {
+    public Peasant(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10),200, 200,
-                20, 0, 25, 20, 4, 10, 10, false);
+                20, 0, 25, 20, 4, 10, 10, false, team);
     }
 
     public Peasant() {
         this(randomName(), 1, new Point(), 50, 50, 1,
-                0, 1, 1, 1, 3, 3, false);
+                0, 1, 1, 1, 3, 3, false, "нет");
     }
 
     @Override

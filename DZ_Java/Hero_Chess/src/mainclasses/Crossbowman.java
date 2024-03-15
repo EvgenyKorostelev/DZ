@@ -12,18 +12,18 @@ public class Crossbowman extends RangeClass {
 
     public Crossbowman(String name, Integer level, Point unitpoint, double health, double healthMax,
                        Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                       Integer speed, Integer arrows, Integer arrowsMax, boolean die) {
-        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax, die);
+                       Integer speed, Integer arrows, Integer arrowsMax, boolean die, String team) {
+        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax, die, team);
     }
 
-    public Crossbowman(int x, int y) {
+    public Crossbowman(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 15, 25, 20, 3, 10, 10, false);
+                20, 15, 25, 20, 3, 10, 10, false, team);
     }
 
     public Crossbowman() {
         this(randomName(), 1, new Point(), 200, 200,
-                20, 15, 25, 20, 3, 10, 10, false);
+                20, 15, 25, 20, 3, 10, 10, false, "нет");
     }
 
     @Override

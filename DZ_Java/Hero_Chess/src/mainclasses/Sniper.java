@@ -12,18 +12,18 @@ public class Sniper extends RangeClass {
 
     public Sniper(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                   Integer damageMin, Integer damageMax, Integer defense, Integer speed,
-                  Integer arrows, Integer arrowsMax, boolean die) {
-        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax, die);
+                  Integer arrows, Integer arrowsMax, boolean die, String team) {
+        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax, die, team);
     }
 
-    public Sniper(int x, int y) {
+    public Sniper(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 15, 25, 20, 3, 10, 10, false);
+                20, 15, 25, 20, 3, 10, 10, false, team);
     }
 
     public Sniper() {
         this(randomName(), 1, new Point(), 200, 200, 20,
-                10, 30, 20, 3, 10, 10, false);
+                10, 30, 20, 3, 10, 10, false, "нет");
     }
 
     @Override

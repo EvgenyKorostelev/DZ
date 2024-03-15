@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 //Базовый класс для всех типов инитов
 public abstract class BaseClass implements IMove{
-    protected static Random rnd;
-    static {
-        BaseClass.rnd = new Random();
-    }
-
 //    protected String buff;
 //    protected String deBuff;
     protected String name;
@@ -24,9 +19,10 @@ public abstract class BaseClass implements IMove{
     protected Integer damageMin;
     protected Integer damageMax;
     protected boolean die;
+    protected String team;
 
     protected BaseClass(String name, Integer level, Point unitpoint, double health, double healthMax,
-                        Integer defense, Integer speed, Integer attack, Integer damageMin, Integer damageMax, boolean die) {
+                        Integer defense, Integer speed, Integer attack, Integer damageMin, Integer damageMax, boolean die, String team) {
         this.name = name;
         this.level = level;
         this.unitpoint = unitpoint;
@@ -38,14 +34,15 @@ public abstract class BaseClass implements IMove{
         this.damageMin = damageMin;
         this.damageMax = damageMax;
         this.die = die;
+        this.team = team;
 
     }
     //Конструкторы
-    protected BaseClass(int x, int y){
-        this(randomName(), 99, new Point(x, y, 10),999, 999, 999, 999, 999, 999, 999,false);
+    protected BaseClass(int x, int y, String team){
+        this(randomName(), 99, new Point(x, y, 10),999, 999, 999, 999, 999, 999, 999,false, "нет");
     }
     protected BaseClass() {
-        this(randomName(), 99,  new Point(),999, 999, 999, 999, 999, 999, 999,false);
+        this(randomName(), 99,  new Point(),999, 999, 999, 999, 999, 999, 999,false, "нет");
     }
     //Список стандартных имен
     public enum Names {
@@ -54,45 +51,6 @@ public abstract class BaseClass implements IMove{
     //Метод извлечения имени из стандартных
     protected static String randomName() {
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
-    }
-    //Метод создания команд
-    public static ArrayList<BaseClass> createTeam(int count, String str) {
-        ArrayList<BaseClass> team = new ArrayList<>();
-        int temp = 0;
-        if (str.equals("Alliance")) {
-            temp = 0;
-        } else if (str.equals("Horde")) {
-            temp = 3;
-        }
-        while (--count >= 0) {
-            int r = temp + rnd.nextInt(4);
-            switch (r) {
-                case 0:
-                    team.add(new Crossbowman(0, count));
-                    break;
-                case 1:
-                    team.add(new Pikeman(0, count));
-                    break;
-                case 2:
-                    team.add(new Witch(0, count));
-                    break;
-                case 3:
-                    team.add(new Peasant(temp * 3, count));
-                    break;
-                case 4:
-                    team.add(new Sniper(9, count));
-                    break;
-                case 5:
-                    team.add(new Monk(9, count));
-                    break;
-                case 6:
-                    team.add(new Rogue(9, count));
-                    break;
-
-            }
-
-        }
-        return team;
     }
     //Метод поиска ближайшего противника
     public BaseClass findTarget(ArrayList<BaseClass> units){//Метод поиска ближайшего врага или союзника
@@ -177,6 +135,10 @@ public abstract class BaseClass implements IMove{
     public Integer getDamageMin() {return damageMin;}
     public Integer getDamageMax() {return damageMax;}
     public boolean getDie() {return die;}
+
+    public String getTeam() {
+        return team;
+    }
 
     public void setHealth(double health) {
         this.health = health;

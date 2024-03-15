@@ -9,8 +9,8 @@ public abstract class RangeClass extends BaseClass {
 
     protected RangeClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                          Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                         Integer speed, Integer arrows, Integer arrowsMax, boolean die) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die);
+                         Integer speed, Integer arrows, Integer arrowsMax, boolean die, String team) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team);
         this.arrowsMax = arrowsMax;
         this.arrows = arrows;
     }
