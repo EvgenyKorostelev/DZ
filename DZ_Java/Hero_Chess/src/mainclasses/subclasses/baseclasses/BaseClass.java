@@ -20,7 +20,7 @@ public abstract class BaseClass implements IMove{
     protected Integer damageMax;
     protected boolean die;
     protected String team;
-
+    //Конструкторы
     protected BaseClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                         Integer defense, Integer speed, Integer attack, Integer damageMin, Integer damageMax, boolean die, String team) {
         this.name = name;
@@ -37,7 +37,6 @@ public abstract class BaseClass implements IMove{
         this.team = team;
 
     }
-    //Конструкторы
     protected BaseClass(int x, int y, String team){
         this(randomName(), 99, new Point(x, y, 10),999, 999, 999, 999, 999, 999, 999,false, "нет");
     }

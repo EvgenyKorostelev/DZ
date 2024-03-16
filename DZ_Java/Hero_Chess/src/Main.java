@@ -9,7 +9,7 @@ import mainclasses.subclasses.baseclasses.BaseClass;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-
+//для wav файлов
 import javax.sound.sampled.*;
 import java.io.File;
 
@@ -39,7 +39,7 @@ public class Main {
 //        //проверка turnOrder
 //        turnOrder(A, H).forEach(i -> System.out.println(i + " " + i.getSpeed()));
 //        System.out.println("=====================================================");
-//        // проверка return arrow
+//        //проверка return arrow
 //        Peasant psn = new Peasant();
 //        Sniper snp = new Sniper();
 //        ArrayList<BaseClass> temp = new ArrayList<>();
@@ -53,12 +53,8 @@ public class Main {
 //        System.out.println("=====================================================");
 
         fight(A, H);
-
-
-
-
     }
-    //метод создания списка очередности ходов
+    //Метод создания списка очередности ходов
     public static ArrayList<BaseClass> turnOrder(ArrayList<BaseClass> team1, ArrayList<BaseClass> team2){
         ArrayList<BaseClass> all = new ArrayList<>();
         all.addAll(team1);
@@ -71,7 +67,7 @@ public class Main {
     static {
         rnd = new Random();
     }
-    //метод создания команд
+    //Метод создания команд
     public static ArrayList<BaseClass> createTeam(int count, String str) {
         ArrayList<BaseClass> team = new ArrayList<>();
         int temp = Integer.MAX_VALUE;
@@ -120,6 +116,9 @@ public class Main {
         HashSet<BaseClass> deadAlliance = new HashSet<>();
         HashSet<BaseClass> deadHorde = new HashSet<>();
         ArrayList<BaseClass> queue = turnOrder(team1, team2);
+
+        System.out.println("Да начнется битва !!!");
+        playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/fight.wav");
 
         while (deadAlliance.size() < queue.size() / 2 && deadHorde.size() < queue.size() / 2) {
             if (team1.getFirst().getTeam().equals("Alliance") && team2.getFirst().getTeam().equals("Horde")) {
@@ -170,11 +169,11 @@ public class Main {
             playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/alliance.wav");
         }
 
-        System.out.println(deadAlliance);
-        System.out.println(deadHorde);
+        System.out.println("Потери Альянс:" + deadAlliance);
+        System.out.println("Потери Орда:" + deadHorde);
     }
 
-
+    //Метод воспроизведения wav файлов
     public static void playSound(String soundFileName) {
         try {
             Clip clip = AudioSystem.getClip();

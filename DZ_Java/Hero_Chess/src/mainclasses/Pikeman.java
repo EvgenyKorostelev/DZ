@@ -17,12 +17,12 @@ public class Pikeman extends MeleeClass {
     }
     public Pikeman(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10),300, 300,
-                30, 35, 75, 30, 2, 10, 10, false, team);
+                30, 25, 75, 30, 2, 10, 10, false, team);
     }
 
     public Pikeman() {
         this(randomName(), 1, new Point(), 300, 300,
-                30, 35, 75, 30, 2, 2, 2, false, "нет");
+                30, 25, 75, 30, 2, 2, 2, false, "нет");
     }
 
     @Override
