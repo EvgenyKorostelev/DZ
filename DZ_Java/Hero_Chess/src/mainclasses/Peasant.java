@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 //Класс Крестьяне
 public class Peasant extends WorkersClass {
-//    private Integer returnArrows;
-
     public Peasant(String name, Integer level, Point unitpoint, double health, double healthMax, Integer defense, Integer speed,
                    Integer attack, Integer damageMin, Integer damageMax, Integer fatigue, Integer fatigueMax, boolean die, String team) {
         super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, fatigue, fatigueMax, die, team);
@@ -46,11 +44,11 @@ public class Peasant extends WorkersClass {
     }
 
     @Override
-    public void step(ArrayList<BaseClass> units) {
+    public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         if(!this.die){
             int min = 10;
             RangeClass temp = null;
-            for(BaseClass unit : units){
+            for(BaseClass unit : allies){
                 if(RangeClass.class.isAssignableFrom(unit.getClass())){
                    if (((RangeClass) unit).getArrows() < min){
                        min = ((RangeClass) unit).getArrows();
@@ -60,6 +58,7 @@ public class Peasant extends WorkersClass {
             }
             if (temp != null)
                 returnArrows(temp);
+            //else this.attackDamage(this.findTarget(units));
         }
     }
 }

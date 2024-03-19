@@ -4,12 +4,8 @@ import mainclasses.subclasses.RangeClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
 
-import java.util.ArrayList;
-
 //Класс Снайперы
 public class Sniper extends RangeClass {
-
-
     public Sniper(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                   Integer damageMin, Integer damageMax, Integer defense, Integer speed,
                   Integer arrows, Integer arrowsMax, boolean die, String team) {
@@ -18,12 +14,12 @@ public class Sniper extends RangeClass {
 
     public Sniper(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 25, 75, 20, 3, 10, 10, false, team);
+                20, 15, 45, 20, 3, 10, 10, false, team);
     }
 
     public Sniper() {
         this(randomName(), 1, new Point(), 200, 200, 20,
-                25, 75, 20, 3, 10, 10, false, "нет");
+                15, 45, 20, 3, 10, 10, false, "нет");
     }
 
     @Override
@@ -74,15 +70,6 @@ public class Sniper extends RangeClass {
     //Уникальный метод для снайперов
     private boolean snipeShot() {
         return (Math.random() * (100 - 1) + 1) <= 60;
-    }
-
-    @Override
-    public void step(ArrayList<BaseClass> units) {
-        if (!this.die && this.arrows > 0) {
-            this.attackDamage(this.findTarget(units));
-            this.arrows--;
-        }
-
     }
 
     @Override

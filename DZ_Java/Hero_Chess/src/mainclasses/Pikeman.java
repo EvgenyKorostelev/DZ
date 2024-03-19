@@ -4,12 +4,8 @@ import mainclasses.subclasses.MeleeClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
 
-import java.util.ArrayList;
-
 //Класс Копейщики
 public class Pikeman extends MeleeClass {
-
-
     public Pikeman(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                    Integer damageMin, Integer damageMax, Integer defense, Integer speed,
                    Integer stamina, Integer staminaMax, boolean die, String team) {
@@ -50,12 +46,5 @@ public class Pikeman extends MeleeClass {
             unit.setDefense(0);
         }
         return unit.getDefense();
-    }
-
-    @Override
-    public void step(ArrayList<BaseClass> units) {
-        if(!this.die){
-            this.attackDamage(this.findTarget(units));
-        }
     }
 }

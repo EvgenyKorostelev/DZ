@@ -2,6 +2,9 @@ package mainclasses.subclasses;
 
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
+
+import java.util.ArrayList;
+
 //Класс обобщающий юнитов дальнего боя
 public abstract class RangeClass extends BaseClass {
     protected Integer arrows;
@@ -18,6 +21,14 @@ public abstract class RangeClass extends BaseClass {
     @Override
     public void attackDamage(BaseClass unit) {
         super.attackDamage(unit);
+    }
+
+    @Override
+    public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
+        if (!this.die && this.arrows > 0) {
+            this.attackDamage(this.findTarget(enemy));
+            this.arrows--;
+        }
     }
 
     public Integer getArrows() { return arrows; }

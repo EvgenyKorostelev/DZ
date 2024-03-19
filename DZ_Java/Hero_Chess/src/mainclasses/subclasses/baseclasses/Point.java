@@ -1,4 +1,5 @@
 package mainclasses.subclasses.baseclasses;
+
 //Класс координат для юнитов
 public class Point {
     protected int coordinateX;
@@ -9,7 +10,9 @@ public class Point {
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
         this.fieldsize = fieldsize;
-
+    }
+    public Point(int coordinateX, int coordinateY){
+        this(coordinateX, coordinateY, 10);
     }
     public Point() {
         this(0, 0, 10);
@@ -21,6 +24,22 @@ public class Point {
 
     public int getFieldsize() {
         return fieldsize;
+    }
+
+    public int getCoordinateX() {
+        return coordinateX;
+    }
+
+    public int getCoordinateY() {
+        return coordinateY;
+    }
+
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
+    }
+
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
     }
 
     @Override

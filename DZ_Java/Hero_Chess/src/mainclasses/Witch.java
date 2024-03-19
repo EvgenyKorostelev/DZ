@@ -4,12 +4,8 @@ import mainclasses.subclasses.HealClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
 
-import java.util.ArrayList;
-
 //Класс Колдуны
 public class Witch extends HealClass {
-
-
     public Witch(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                  Integer damageMin, Integer damageMax, Integer defense, Integer speed,
                  Integer mana, Integer manaMax, boolean die, String team) {
@@ -47,12 +43,5 @@ public class Witch extends HealClass {
             unit.setDefense(unit.getDefense() * 2);
         }
         return unit.getDefense();
-    }
-
-    @Override
-    public void step(ArrayList<BaseClass> units) {
-        if(!this.die){
-            this.heal(this.findTarget(units));
-        }
     }
 }

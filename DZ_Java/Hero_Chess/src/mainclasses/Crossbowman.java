@@ -4,12 +4,8 @@ import mainclasses.subclasses.RangeClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
 
-import java.util.ArrayList;
-
 //Класс Арбалетчики
 public class Crossbowman extends RangeClass {
-
-
     public Crossbowman(String name, Integer level, Point unitpoint, double health, double healthMax,
                        Integer attack, Integer damageMin, Integer damageMax, Integer defense,
                        Integer speed, Integer arrows, Integer arrowsMax, boolean die, String team) {
@@ -18,12 +14,12 @@ public class Crossbowman extends RangeClass {
 
     public Crossbowman(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 35, 75, 20, 3, 10, 10, false, team);
+                20, 25, 45, 20, 3, 10, 10, false, team);
     }
 
     public Crossbowman() {
         this(randomName(), 1, new Point(), 200, 200,
-                20, 35, 75, 20, 3, 10, 10, false, "нет");
+                20, 25, 45, 20, 3, 10, 10, false, "нет");
     }
 
     @Override
@@ -81,14 +77,6 @@ public class Crossbowman extends RangeClass {
     //Уникальный метод для арбалетчиков
     private boolean doubleShot() {
         return (Math.random() * (100 - 1) + 1) <= 30;
-    }
-
-    @Override
-    public void step(ArrayList<BaseClass> units) {
-        if (!this.die && this.arrows > 0) {
-            this.attackDamage(this.findTarget(units));
-            this.arrows--;
-        }
     }
 
     @Override

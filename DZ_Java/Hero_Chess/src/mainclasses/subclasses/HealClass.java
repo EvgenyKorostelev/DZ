@@ -2,6 +2,9 @@ package mainclasses.subclasses;
 
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
+
+import java.util.ArrayList;
+
 //Класс обобщающий юнитов лекарей
 public abstract class HealClass extends BaseClass {
     protected Integer mana;
@@ -18,6 +21,12 @@ public abstract class HealClass extends BaseClass {
     @Override
     public void heal(BaseClass unit) {
         super.heal(unit);
+    }
+    @Override
+    public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
+        if(!this.die){
+            this.heal(this.findTarget(allies));
+        }
     }
 
     public Integer getMana() { return mana; }

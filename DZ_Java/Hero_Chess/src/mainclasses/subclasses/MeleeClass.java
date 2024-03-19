@@ -2,6 +2,9 @@ package mainclasses.subclasses;
 
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
+
+import java.util.ArrayList;
+
 //Класс обобщающий юнитов ближнего боя
 public abstract class MeleeClass extends BaseClass {
     protected Integer stamina;
@@ -19,8 +22,53 @@ public abstract class MeleeClass extends BaseClass {
     public void attackDamage(BaseClass unit) {
         super.attackDamage(unit);
     }
+    //Метод передвижения юнитов ближнего боя
+    public void moveTo(BaseClass target, ArrayList<BaseClass> allies) {
+        int thisX = this.unitpoint.getCoordinateX();
+        int thisY = this.unitpoint.getCoordinateY();
+        int targetX = target.getUnitpoint().getCoordinateX();
+        int targetY = target.getUnitpoint().getCoordinateY();
+        Point newPlace = new Point(thisX, thisY);
 
-    public Integer getStamina() { return stamina; }
+        if ((Math.abs(targetX - thisX) > Math.abs(targetY - thisY))) {
+            if (targetX - thisX > 0) {
+                newPlace.setCoordinateX(thisX + 1);
+            } else {
+                newPlace.setCoordinateX(thisX - 1);
+            }
+        } else {
+            if (targetY - thisY > 0)
+                newPlace.setCoordinateY(thisY + 1);
+            else newPlace.setCoordinateY(thisY - 1);
+        }
 
-    public void setStamina(Integer stamina) { this.stamina = stamina; }
+        for (BaseClass unit : allies) {
+            if (this != unit && !unit.getDie() && unit.getUnitpoint() == newPlace) {
+                return;
+            }
+        }
+        this.setUnitpoint(newPlace);
+        //для проверки, передвижения юнитов
+        // System.out.println(this);
+    }
+
+    @Override
+    public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
+        if (!this.die) {
+            BaseClass target = this.findTarget(enemy);
+            if (unitpoint.distanceTo(target.getUnitpoint()) < 2) {
+                this.attackDamage(target);
+            } else {
+                this.moveTo(target, allies);
+            }
+        }
+    }
+
+    public Integer getStamina() {
+        return stamina;
+    }
+
+    public void setStamina(Integer stamina) {
+        this.stamina = stamina;
+    }
 }

@@ -1,9 +1,9 @@
 package mainclasses.subclasses.baseclasses;
 
-import mainclasses.*;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 //Базовый класс для всех типов инитов
 public abstract class BaseClass implements IMove{
 //    protected String buff;
@@ -52,7 +52,7 @@ public abstract class BaseClass implements IMove{
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
     }
     //Метод поиска ближайшего противника
-    public BaseClass findTarget(ArrayList<BaseClass> units){//Метод поиска ближайшего врага или союзника
+    public BaseClass findTarget(ArrayList<BaseClass> units){
         double minDistance = Double.MAX_VALUE;
         BaseClass target = units.getFirst();
         for (BaseClass unit : units) {
@@ -110,23 +110,18 @@ public abstract class BaseClass implements IMove{
     public String getName() {
         return name;
     }
-
     public Integer getLevel() {
         return level;
     }
-
     public Point getUnitpoint() {
         return unitpoint;
     }
-
     public double getHealth() {
         return health;
     }
-
     public Integer getDefense() {
         return defense;
     }
-
     public Integer getSpeed() {
         return speed;
     }
@@ -136,7 +131,6 @@ public abstract class BaseClass implements IMove{
     public Integer getDamageMin() {return damageMin;}
     public Integer getDamageMax() {return damageMax;}
     public boolean getDie() {return die;}
-
     public String getTeam() {
         return team;
     }
@@ -156,6 +150,4 @@ public abstract class BaseClass implements IMove{
     public void setDie(boolean die) {
         this.die = die;
     }
-
-
 }

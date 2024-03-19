@@ -1,8 +1,4 @@
 import mainclasses.*;
-import mainclasses.subclasses.HealClass;
-import mainclasses.subclasses.MeleeClass;
-import mainclasses.subclasses.RangeClass;
-import mainclasses.subclasses.WorkersClass;
 import mainclasses.subclasses.baseclasses.BaseClass;
 
 
@@ -13,44 +9,12 @@ import java.util.Random;
 import javax.sound.sampled.*;
 import java.io.File;
 
-
+//Что то типа контроллера
 public class Main {
     public static void main(String[] args) {
         //проверка createTeam
         ArrayList<BaseClass> A = createTeam(10, "Alliance");
         ArrayList<BaseClass> H = createTeam(10, "Horde");
-//        System.out.println(A);
-//        System.out.println(H);
-//        System.out.println(A.getFirst().getTeam());
-//        System.out.println(H.getFirst().getTeam());
-//        System.out.println("=====================================================");
-//        //проверка findTarget
-//        System.out.println(A.get(5));
-//        System.out.println("Ближайший враг: "+A.get(5).findTarget(H));
-//        System.out.println("=====================================================");
-//        //проверка step
-//        Sniper sniper = new Sniper();
-//        System.out.println(sniper.getArrows());
-//        System.out.println(sniper.findTarget(H).getHealth());
-//        sniper.step(H);
-//        System.out.println(sniper.getArrows());
-//        System.out.println(sniper.findTarget(H).getHealth());
-//        System.out.println("=====================================================");
-//        //проверка turnOrder
-//        turnOrder(A, H).forEach(i -> System.out.println(i + " " + i.getSpeed()));
-//        System.out.println("=====================================================");
-//        //проверка return arrow
-//        Peasant psn = new Peasant();
-//        Sniper snp = new Sniper();
-//        ArrayList<BaseClass> temp = new ArrayList<>();
-//        ArrayList<BaseClass> temp2 = new ArrayList<>();
-//        temp.add(snp);
-//        temp2.add(psn);
-//        temp.getFirst().step(temp2);
-//        System.out.println(snp.getArrows());
-//        psn.returnArrows(temp.getFirst());
-//        System.out.println(snp.getArrows());
-//        System.out.println("=====================================================");
 
         fight(A, H);
     }
@@ -129,17 +93,12 @@ public class Main {
                     if(unit.getDie()) deadHorde.add(unit);
                 }
                 for (BaseClass unit : queue) {
-                    if (unit.getTeam().equals("Alliance") && (RangeClass.class.isAssignableFrom(unit.getClass()) || MeleeClass.class.isAssignableFrom(unit.getClass()))) {
-                        unit.step(team2);
-                    } else if (unit.getTeam().equals("Alliance") && (HealClass.class.isAssignableFrom(unit.getClass()) || WorkersClass.class.isAssignableFrom(unit.getClass()))) {
-                        unit.step(team1);
-                    } else if (unit.getTeam().equals("Horde") && (RangeClass.class.isAssignableFrom(unit.getClass()) || MeleeClass.class.isAssignableFrom(unit.getClass()))) {
-                        unit.step(team1);
-                    } else if (unit.getTeam().equals("Horde") && (HealClass.class.isAssignableFrom(unit.getClass()) || WorkersClass.class.isAssignableFrom(unit.getClass()))) {
-                        unit.step(team2);
+                    if (unit.getTeam().equals("Alliance")) {
+                        unit.step(team2, team1);
+                    } else if (unit.getTeam().equals("Horde")) {
+                        unit.step(team1, team2);
                     }
                 }
-
             } else if (team1.getFirst().getTeam().equals("Horde") && team2.getFirst().getTeam().equals("Alliance")) {
                 for(BaseClass unit : team1 ){
                     if(unit.getDie()) deadHorde.add(unit);
@@ -148,14 +107,10 @@ public class Main {
                     if(unit.getDie()) deadAlliance.add(unit);
                 }
                 for (BaseClass unit : queue) {
-                    if (unit.getTeam().equals("Alliance") && (RangeClass.class.isAssignableFrom(unit.getClass()) || MeleeClass.class.isAssignableFrom(unit.getClass()))) {
-                        unit.step(team1);
-                    } else if (unit.getTeam().equals("Alliance") && (HealClass.class.isAssignableFrom(unit.getClass()) || WorkersClass.class.isAssignableFrom(unit.getClass()))) {
-                        unit.step(team2);
-                    } else if (unit.getTeam().equals("Horde") && (RangeClass.class.isAssignableFrom(unit.getClass()) || MeleeClass.class.isAssignableFrom(unit.getClass()))) {
-                        unit.step(team2);
-                    } else if (unit.getTeam().equals("Horde") && (HealClass.class.isAssignableFrom(unit.getClass()) || WorkersClass.class.isAssignableFrom(unit.getClass()))) {
-                        unit.step(team1);
+                    if (unit.getTeam().equals("Alliance")) {
+                        unit.step(team1, team2);
+                    }  else if (unit.getTeam().equals("Horde")) {
+                        unit.step(team2, team1);
                     }
                 }
             }
