@@ -56,7 +56,7 @@ public abstract class MeleeClass extends BaseClass {
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         if (!this.die) {
             BaseClass target = this.findTarget(enemy);
-            if (unitpoint.distanceTo(target.getUnitpoint()) < 2) {
+            if (this.unitpoint.distanceTo(target.getUnitpoint()) < 2) {
                 this.attackDamage(target);
             } else {
                 this.moveTo(target, allies);
