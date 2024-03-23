@@ -25,7 +25,7 @@ public abstract class HealClass extends BaseClass {
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         combatLog="";
-        if(!this.die){
+        if(!this.die && this.mana > 0){
             BaseClass allie = allies.getFirst();
             for(BaseClass unit : allies){
                 if(!unit.getDie() && unit.getHealth() < unit.getHealthMax()){
@@ -37,6 +37,8 @@ public abstract class HealClass extends BaseClass {
             this.heal(allie);
             double hpAfter = allie.getHealth();
             this.combatLog = this.toString().charAt(0) + " " + this.name + " healed: " + allie.toString().charAt(0) + " " + allie.getName() + " health: " + (hpAfter - hpBefore);
+        } else if (!this.die && this.mana == 0) {
+            this.combatLog = this.toString().charAt(0) + " " + this.name + " awaits his fate !";
         }
         System.out.println(getInfo());
     }

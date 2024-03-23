@@ -32,6 +32,8 @@ public abstract class RangeClass extends BaseClass {
             double hpAfter = this.findTarget(enemy).getHealth();
             this.arrows--;
             this.combatLog = this.toString().charAt(0) + " " + this.name + " shot at: " + this.findTarget(enemy).toString().charAt(0) + " " + this.findTarget(enemy).getName() + " damage: " + (hpBefore - hpAfter);
+        } else if (!this.die && this.arrows == 0) {
+            this.combatLog = this.toString().charAt(0) + " " + this.name + " awaits his fate !";
         }
         System.out.println(getInfo());
     }
