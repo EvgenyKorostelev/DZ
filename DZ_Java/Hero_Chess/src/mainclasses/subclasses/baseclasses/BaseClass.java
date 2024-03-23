@@ -20,9 +20,10 @@ public abstract class BaseClass implements IMove{
     protected Integer damageMax;
     protected boolean die;
     protected String team;
+    protected String combatLog;
     //Конструкторы
     protected BaseClass(String name, Integer level, Point unitpoint, double health, double healthMax,
-                        Integer defense, Integer speed, Integer attack, Integer damageMin, Integer damageMax, boolean die, String team) {
+                        Integer defense, Integer speed, Integer attack, Integer damageMin, Integer damageMax, boolean die, String team, String combatLog) {
         this.name = name;
         this.level = level;
         this.unitpoint = unitpoint;
@@ -35,13 +36,14 @@ public abstract class BaseClass implements IMove{
         this.damageMax = damageMax;
         this.die = die;
         this.team = team;
+        this.combatLog = combatLog;
 
     }
     protected BaseClass(int x, int y, String team){
-        this(randomName(), 99, new Point(x, y, 10),999, 999, 999, 999, 999, 999, 999,false, "нет");
+        this(randomName(), 99, new Point(x, y, 10),999, 999, 999, 999, 999, 999, 999,false, "нет", "");
     }
     protected BaseClass() {
-        this(randomName(), 99,  new Point(),999, 999, 999, 999, 999, 999, 999,false, "нет");
+        this(randomName(), 99,  new Point(),999, 999, 999, 999, 999, 999, 999,false, "нет", "");
     }
     //Список стандартных имен
     public enum Names {
@@ -99,9 +101,7 @@ public abstract class BaseClass implements IMove{
     //Метод исцеления союзника
     public void heal(BaseClass unit) {
         double heal = Math.random() * (damageMax - damageMin) + damageMin;
-        if (unit.health < unit.healthMax) {
-            unit.health = unit.health + heal;
-        }
+        unit.health = unit.health + heal;
         if (unit.health >= unit.healthMax) {
             unit.health = unit.healthMax;
         }
@@ -119,6 +119,7 @@ public abstract class BaseClass implements IMove{
     public double getHealth() {
         return health;
     }
+    public double getHealthMax() {return healthMax;}
     public Integer getDefense() {
         return defense;
     }
@@ -131,9 +132,7 @@ public abstract class BaseClass implements IMove{
     public Integer getDamageMin() {return damageMin;}
     public Integer getDamageMax() {return damageMax;}
     public boolean getDie() {return die;}
-    public String getTeam() {
-        return team;
-    }
+    public String getTeam() {return team;}
 
     public void setHealth(double health) {
         this.health = health;

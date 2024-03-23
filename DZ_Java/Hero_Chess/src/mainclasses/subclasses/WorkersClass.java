@@ -9,8 +9,8 @@ public abstract class WorkersClass extends BaseClass {
 
     protected WorkersClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                            Integer defense, Integer speed, Integer attack, Integer damageMin,
-                           Integer damageMax, Integer fatigue, Integer fatigueMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team);
+                           Integer damageMax, Integer fatigue, Integer fatigueMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team, combatLog);
         this.fatigueMax = fatigueMax;
         this.fatigue = fatigue;
     }

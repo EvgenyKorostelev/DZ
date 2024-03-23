@@ -12,8 +12,8 @@ public abstract class MeleeClass extends BaseClass {
 
     protected MeleeClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                          Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                         Integer speed, Integer stamina, Integer staminaMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team);
+                         Integer speed, Integer stamina, Integer staminaMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team, combatLog);
         this.staminaMax = staminaMax;
         this.stamina = stamina;
     }
@@ -31,11 +31,9 @@ public abstract class MeleeClass extends BaseClass {
         Point newPlace = new Point(thisX, thisY);
 
         if ((Math.abs(targetX - thisX) > Math.abs(targetY - thisY))) {
-            if (targetX - thisX > 0) {
+            if (targetX - thisX > 0) 
                 newPlace.setCoordinateX(thisX + 1);
-            } else {
-                newPlace.setCoordinateX(thisX - 1);
-            }
+             else newPlace.setCoordinateX(thisX - 1);
         } else {
             if (targetY - thisY > 0)
                 newPlace.setCoordinateY(thisY + 1);
@@ -43,9 +41,8 @@ public abstract class MeleeClass extends BaseClass {
         }
 
         for (BaseClass unit : allies) {
-            if (this != unit && !unit.getDie() && unit.getUnitpoint() == newPlace) {
+            if (this != unit && !unit.getDie() && unit.getUnitpoint() == newPlace) 
                 return;
-            }
         }
         this.setUnitpoint(newPlace);
         //для проверки, передвижения юнитов
@@ -54,14 +51,22 @@ public abstract class MeleeClass extends BaseClass {
 
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
+        combatLog="";
         if (!this.die) {
             BaseClass target = this.findTarget(enemy);
             if (this.unitpoint.distanceTo(target.getUnitpoint()) < 2) {
+                double hpBefore = target.getHealth();
                 this.attackDamage(target);
+                double hpAfter = target.getHealth();
+                this.combatLog = this.toString().charAt(0) + " " + this.name + " hit in: " + target.toString().charAt(0) + " " + target.getName() + " damage: " + (hpBefore - hpAfter);
             } else {
+                Point positionBefore = this.unitpoint;
                 this.moveTo(target, allies);
+                Point positionAfter = this.unitpoint;
+                this.combatLog = this.toString().charAt(0) + " " + this.name + " move to: " + target.toString().charAt(0) + " " + target.getName() + " " + positionBefore + " -> " + positionAfter;
             }
         }
+        System.out.println(getInfo());
     }
 
     public Integer getStamina() {

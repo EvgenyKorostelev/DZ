@@ -12,8 +12,8 @@ public abstract class HealClass extends BaseClass {
 
     protected HealClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                         Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                        Integer speed, Integer mana, Integer manaMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team);
+                        Integer speed, Integer mana, Integer manaMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team, combatLog);
         this.manaMax = manaMax;
         this.mana = mana;
     }
@@ -24,9 +24,21 @@ public abstract class HealClass extends BaseClass {
     }
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
+        combatLog="";
         if(!this.die){
-            this.heal(this.findTarget(allies));
+            BaseClass allie = allies.getFirst();
+            for(BaseClass unit : allies){
+                if(!unit.getDie() && unit.getHealth() < unit.getHealthMax()){
+                    if(allie.getHealth() / allie.getHealthMax() * 100 > unit.getHealth() / unit.getHealthMax() * 100)
+                        allie = unit;
+                }
+            }
+            double hpBefore = allie.getHealth();
+            this.heal(allie);
+            double hpAfter = allie.getHealth();
+            this.combatLog = this.toString().charAt(0) + " " + this.name + " healed: " + allie.toString().charAt(0) + " " + allie.getName() + " health: " + (hpAfter - hpBefore);
         }
+        System.out.println(getInfo());
     }
 
     public Integer getMana() { return mana; }

@@ -44,9 +44,8 @@ public class Point {
 
     @Override
     public String toString() {
-        return "{" +
-                "x=" + coordinateX +
-                ", y=" + coordinateY +
+        return "{" + coordinateX +
+                ", " + coordinateY +
                 '}';
     }
 }

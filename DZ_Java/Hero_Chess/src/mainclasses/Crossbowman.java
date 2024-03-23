@@ -8,25 +8,30 @@ import mainclasses.subclasses.baseclasses.Point;
 public class Crossbowman extends RangeClass {
     public Crossbowman(String name, Integer level, Point unitpoint, double health, double healthMax,
                        Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                       Integer speed, Integer arrows, Integer arrowsMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax, die, team);
+                       Integer speed, Integer arrows, Integer arrowsMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax, die, team, combatLog);
     }
 
     public Crossbowman(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 25, 45, 20, 3, 10, 10, false, team);
+                20, 25, 45, 20, 3, 10, 10, false, team, "");
     }
 
     public Crossbowman() {
         this(randomName(), 1, new Point(), 200, 200,
-                20, 25, 45, 20, 3, 10, 10, false, "нет");
+                20, 25, 45, 20, 3, 10, 10, false, "нет", "");
     }
 
     @Override
     public String toString() {
-        return "Crossbowman{" +
-                "name='" + name + '\'' +
-                ", position=" + unitpoint +
+        return "Арбалетчик{" + name +
+                ", ❤=" + health +
+                ", \uD83C\uDFF9=" + arrows +
+                ", ⚔️=" + attack +
+                ", \uD83D\uDEE1️=" + defense +
+                ", ⚡=" + speed +
+                ", \uD83D\uDEA9" + unitpoint +
+                ", \uD83D\uDC80" + die +
                 '}';
     }
 
@@ -71,7 +76,10 @@ public class Crossbowman extends RangeClass {
             else
                 {unit.setHealth(unit.getHealth() - dmg * hI);}
         }
-        if (unit.getHealth() <= 0) {unit.setDie(true);}
+        if (unit.getHealth() <= 0) {
+            unit.setDie(true);
+            unit.setHealth(0);
+        }
     }
 
     //Уникальный метод для арбалетчиков
@@ -83,4 +91,10 @@ public class Crossbowman extends RangeClass {
     public Integer getArrows() {
         return super.getArrows();
     }
+
+    @Override
+    public String getInfo() {
+        return combatLog;
+    }
+
 }

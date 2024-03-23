@@ -1,5 +1,8 @@
+package controller;
+
 import mainclasses.*;
 import mainclasses.subclasses.baseclasses.BaseClass;
+import view.View;
 
 
 import java.util.ArrayList;
@@ -8,13 +11,18 @@ import java.util.Random;
 //для wav файлов
 import javax.sound.sampled.*;
 import java.io.File;
+import java.util.Scanner;
 
-//Что то типа контроллера
+
 public class Main {
+    public static ArrayList<BaseClass> A;
+    public static ArrayList<BaseClass> H;
+    public static ArrayList<BaseClass> all = new ArrayList<>();
     public static void main(String[] args) {
-        //проверка createTeam
-        ArrayList<BaseClass> A = createTeam(10, "Alliance");
-        ArrayList<BaseClass> H = createTeam(10, "Horde");
+
+        A = createTeam(10, "Alliance");
+        H = createTeam(10, "Horde");
+        all = turnOrder(A, H);
 
         fight(A, H);
     }
@@ -32,42 +40,43 @@ public class Main {
         rnd = new Random();
     }
     //Метод создания команд
-    public static ArrayList<BaseClass> createTeam(int count, String str) {
+    public static ArrayList<BaseClass> createTeam(int teamSize, String teamName) {
         ArrayList<BaseClass> team = new ArrayList<>();
         int temp = Integer.MAX_VALUE;
-        if (str.equals("Alliance")) {
+        if (teamName.equals("Alliance")) {
             temp = 0;
-        } else if (str.equals("Horde")) {
+        } else if (teamName.equals("Horde")) {
             temp = 3;
         }
-        while (--count >= 0) {
+        int yY = 0;
+        while (teamSize >= yY++) {
             int r = temp + rnd.nextInt(4);
             switch (r) {
                 case 0:
-                    team.add(new Crossbowman(0, count, str));
+                    team.add(new Crossbowman(1, yY, teamName));
                     break;
                 case 1:
-                    team.add(new Pikeman(0, count, str));
+                    team.add(new Pikeman(1, yY, teamName));
                     break;
                 case 2:
-                    team.add(new Witch(0, count, str));
+                    team.add(new Monk(1, yY, teamName));
                     break;
                 case 3:
                     if(temp == 0) {
-                        team.add(new Peasant(0, count, str));
+                        team.add(new Peasant(1, yY, teamName));
                     }
-                    else if (temp == 3) {
-                        team.add(new Peasant(9, count, str));
+                    else {
+                        team.add(new Peasant(teamSize, yY, teamName));
                     }
                     break;
                 case 4:
-                    team.add(new Sniper(9, count, str));
+                    team.add(new Sniper(teamSize, yY, teamName));
                     break;
                 case 5:
-                    team.add(new Monk(9, count, str));
+                    team.add(new Witch(teamSize, yY, teamName));
                     break;
                 case 6:
-                    team.add(new Rogue(9, count, str));
+                    team.add(new Rogue(teamSize, yY, teamName));
                     break;
 
             }
@@ -80,6 +89,7 @@ public class Main {
         HashSet<BaseClass> deadAlliance = new HashSet<>();
         HashSet<BaseClass> deadHorde = new HashSet<>();
         ArrayList<BaseClass> queue = turnOrder(team1, team2);
+        Scanner step = new Scanner(System.in);
 
         System.out.println("Да начнется битва !!!");
         playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/fight.wav");
@@ -92,6 +102,7 @@ public class Main {
                 for(BaseClass unit : team2 ){
                     if(unit.getDie()) deadHorde.add(unit);
                 }
+                View.view();
                 for (BaseClass unit : queue) {
                     if (unit.getTeam().equals("Alliance")) {
                         unit.step(team2, team1);
@@ -99,6 +110,7 @@ public class Main {
                         unit.step(team1, team2);
                     }
                 }
+
             } else if (team1.getFirst().getTeam().equals("Horde") && team2.getFirst().getTeam().equals("Alliance")) {
                 for(BaseClass unit : team1 ){
                     if(unit.getDie()) deadHorde.add(unit);
@@ -106,6 +118,7 @@ public class Main {
                 for(BaseClass unit : team2 ){
                     if(unit.getDie()) deadAlliance.add(unit);
                 }
+                View.view();
                 for (BaseClass unit : queue) {
                     if (unit.getTeam().equals("Alliance")) {
                         unit.step(team1, team2);
@@ -114,6 +127,7 @@ public class Main {
                     }
                 }
             }
+            step.nextLine();
         }
         if(deadAlliance.size() > deadHorde.size()) {
             System.out.println("Победила команда ОРДЫ !!!");
@@ -123,7 +137,6 @@ public class Main {
             System.out.println("Победила команда АЛЬЯНСА !!!");
             playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/alliance.wav");
         }
-
         System.out.println("Потери Альянс:" + deadAlliance);
         System.out.println("Потери Орда:" + deadHorde);
     }
@@ -140,7 +153,7 @@ public class Main {
             clip.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 }

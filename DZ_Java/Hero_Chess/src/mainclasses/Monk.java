@@ -8,24 +8,29 @@ import mainclasses.subclasses.baseclasses.Point;
 public class Monk extends HealClass {
     public Monk(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                 Integer damageMin, Integer damageMax, Integer defense, Integer speed,
-                Integer mana, Integer manaMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, mana, manaMax, die, team);
+                Integer mana, Integer manaMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, mana, manaMax, die, team, combatLog);
     }
     public Monk(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10),100, 100,
-                1, 25, 35, 10, 1, 150, 150, false, team);
+                1, 25, 35, 10, 1, 150, 150, false, team, "");
     }
 
     public Monk() {
         this(randomName(), 1,  new Point(), 100, 100,
-                1, 25, 35, 10, 1, 150, 150, false, "нет");
+                1, 25, 35, 10, 1, 150, 150, false, "нет", "");
     }
 
     @Override
     public String toString() {
-        return "Monk{" +
-                "name='" + name + '\'' +
-                ", position=" + unitpoint +
+        return "Монах{" + name +
+                ", ❤=" + health +
+                ", \uD83D\uDD2E=" + mana +
+                ", ⚔️=" + attack +
+                ", \uD83D\uDEE1️=" + defense +
+                ", ⚡=" + speed +
+                ", \uD83D\uDEA9" + unitpoint +
+                ", \uD83D\uDC80" + die +
                 '}';
     }
 
@@ -43,5 +48,10 @@ public class Monk extends HealClass {
             unit.setAttack(unit.getAttack() * 2);
         }
         return unit.getAttack();
+    }
+
+    @Override
+    public String getInfo() {
+        return combatLog;
     }
 }

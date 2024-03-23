@@ -10,24 +10,29 @@ import java.util.ArrayList;
 //Класс Крестьяне
 public class Peasant extends WorkersClass {
     public Peasant(String name, Integer level, Point unitpoint, double health, double healthMax, Integer defense, Integer speed,
-                   Integer attack, Integer damageMin, Integer damageMax, Integer fatigue, Integer fatigueMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, fatigue, fatigueMax, die, team);
+                   Integer attack, Integer damageMin, Integer damageMax, Integer fatigue, Integer fatigueMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, fatigue, fatigueMax, die, team, combatLog);
     }
     public Peasant(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10),50, 50,
-                1, 0, 1, 1, 1, 3, 3, false, team);
+                1, 0, 1, 1, 1, 3, 3, false, team, "");
     }
 
     public Peasant() {
         this(randomName(), 1, new Point(), 50, 50, 1,
-                0, 1, 1, 1, 3, 3, false, "нет");
+                0, 1, 1, 1, 3, 3, false, "нет", "");
     }
 
     @Override
     public String toString() {
-        return "Peasant{" +
-                "name='" + name + '\'' +
-                    ", position=" + unitpoint +
+        return "Крестьянин{" + name +
+                ", ❤=" + health +
+                ", ♻=" + fatigue +
+                ", ⚔️=" + attack +
+                ", \uD83D\uDEE1️=" + defense +
+                ", ⚡=" + speed +
+                ", \uD83D\uDEA9" + unitpoint +
+                ", \uD83D\uDC80" + die +
                 '}';
     }
 
@@ -45,6 +50,7 @@ public class Peasant extends WorkersClass {
 
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
+        combatLog="";
         if(!this.die){
             int min = 10;
             RangeClass temp = null;
@@ -56,9 +62,20 @@ public class Peasant extends WorkersClass {
                    }
                 }
             }
-            if (temp != null)
+            if (temp != null) {
                 returnArrows(temp);
+                this.combatLog = this.toString().charAt(0) + " " + this.name + " return arrow to: " + temp.toString().charAt(0) + " " + temp.getName();
+            }
             //else this.attackDamage(this.findTarget(units));
+            else {
+                this.combatLog = this.toString().charAt(0) + " " + this.name + " awaits his fate !";
+            }
         }
+        System.out.println(getInfo());
+    }
+
+    @Override
+    public String getInfo() {
+        return combatLog;
     }
 }

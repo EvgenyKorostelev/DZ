@@ -12,8 +12,8 @@ public abstract class RangeClass extends BaseClass {
 
     protected RangeClass(String name, Integer level, Point unitpoint, double health, double healthMax,
                          Integer attack, Integer damageMin, Integer damageMax, Integer defense,
-                         Integer speed, Integer arrows, Integer arrowsMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team);
+                         Integer speed, Integer arrows, Integer arrowsMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, defense, speed, attack, damageMin, damageMax, die, team, combatLog);
         this.arrowsMax = arrowsMax;
         this.arrows = arrows;
     }
@@ -25,10 +25,15 @@ public abstract class RangeClass extends BaseClass {
 
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
+        combatLog="";
         if (!this.die && this.arrows > 0) {
+            double hpBefore = this.findTarget(enemy).getHealth();
             this.attackDamage(this.findTarget(enemy));
+            double hpAfter = this.findTarget(enemy).getHealth();
             this.arrows--;
+            this.combatLog = this.toString().charAt(0) + " " + this.name + " shot at: " + this.findTarget(enemy).toString().charAt(0) + " " + this.findTarget(enemy).getName() + " damage: " + (hpBefore - hpAfter);
         }
+        System.out.println(getInfo());
     }
 
     public Integer getArrows() { return arrows; }
@@ -38,4 +43,6 @@ public abstract class RangeClass extends BaseClass {
     }
 
     public void setArrows(Integer arrows) { this.arrows = arrows; }
+
+    public abstract String getInfo();
 }

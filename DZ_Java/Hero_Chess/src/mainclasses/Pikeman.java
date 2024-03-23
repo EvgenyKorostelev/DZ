@@ -8,24 +8,29 @@ import mainclasses.subclasses.baseclasses.Point;
 public class Pikeman extends MeleeClass {
     public Pikeman(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                    Integer damageMin, Integer damageMax, Integer defense, Integer speed,
-                   Integer stamina, Integer staminaMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, stamina, staminaMax, die, team);
+                   Integer stamina, Integer staminaMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, stamina, staminaMax, die, team, combatLog);
     }
     public Pikeman(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10),300, 300,
-                30, 25, 75, 30, 2, 10, 10, false, team);
+                30, 25, 75, 30, 2, 10, 10, false, team, "");
     }
 
     public Pikeman() {
         this(randomName(), 1, new Point(), 300, 300,
-                30, 25, 75, 30, 2, 2, 2, false, "нет");
+                30, 25, 75, 30, 2, 2, 2, false, "нет", "");
     }
 
     @Override
     public String toString() {
-        return "Pikeman{" +
-                "name='" + name + '\'' +
-                ", position=" + unitpoint +
+        return "Пикинер{" + name +
+                ", ❤=" + health +
+                ", \uD83D\uDCAA=" + stamina +
+                ", ⚔️" + attack +
+                ", \uD83D\uDEE1️=" + defense +
+                ", ⚡=" + speed +
+                ", \uD83D\uDEA9" + unitpoint +
+                ", \uD83D\uDC80" + die +
                 '}';
     }
 
@@ -38,7 +43,10 @@ public class Pikeman extends MeleeClass {
             unit.setDefense(armorPenetration(unit));
 
         }
-        if(unit.getHealth() <= 0) {unit.setDie(true);}
+        if(unit.getHealth() <= 0) {
+            unit.setDie(true);
+            unit.setHealth(0);
+        }
     }
     //Уникальный метод для копейщиков
     private Integer armorPenetration(BaseClass unit) {
@@ -46,5 +54,10 @@ public class Pikeman extends MeleeClass {
             unit.setDefense(0);
         }
         return unit.getDefense();
+    }
+
+    @Override
+    public String getInfo() {
+        return combatLog;
     }
 }

@@ -8,25 +8,30 @@ import mainclasses.subclasses.baseclasses.Point;
 public class Sniper extends RangeClass {
     public Sniper(String name, Integer level, Point unitpoint, double health, double healthMax, Integer attack,
                   Integer damageMin, Integer damageMax, Integer defense, Integer speed,
-                  Integer arrows, Integer arrowsMax, boolean die, String team) {
-        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax, die, team);
+                  Integer arrows, Integer arrowsMax, boolean die, String team, String combatLog) {
+        super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, arrows, arrowsMax, die, team, combatLog);
     }
 
     public Sniper(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 15, 45, 20, 3, 10, 10, false, team);
+                20, 15, 45, 20, 3, 10, 10, false, team, "");
     }
 
     public Sniper() {
         this(randomName(), 1, new Point(), 200, 200, 20,
-                15, 45, 20, 3, 10, 10, false, "нет");
+                15, 45, 20, 3, 10, 10, false, "нет", "");
     }
 
     @Override
     public String toString() {
-        return "Sniper{" +
-                "name='" + name + '\'' +
-                ", position=" + unitpoint +
+        return "Снайпер{" + name +
+                ", ❤=" + health +
+                ", \uD83C\uDFF9=" + arrows +
+                ", ⚔️=" + attack +
+                ", \uD83D\uDEE1️=" + defense +
+                ", ⚡=" + speed +
+                ", \uD83D\uDEA9" + unitpoint +
+                ", \uD83D\uDC80" + die +
                 '}';
     }
 
@@ -63,6 +68,7 @@ public class Sniper extends RangeClass {
         }
         if (unit.getHealth() <= 0) {
             unit.setDie(true);
+            unit.setHealth(0);
         }
 
     }
@@ -75,5 +81,10 @@ public class Sniper extends RangeClass {
     @Override
     public Integer getArrows() {
         return super.getArrows();
+    }
+
+    @Override
+    public String getInfo() {
+        return combatLog;
     }
 }
