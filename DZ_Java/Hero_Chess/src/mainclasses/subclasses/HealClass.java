@@ -33,14 +33,18 @@ public abstract class HealClass extends BaseClass {
                         allie = unit;
                 }
             }
-            double hpBefore = allie.getHealth();
-            this.heal(allie);
-            double hpAfter = allie.getHealth();
-            this.combatLog = this.toString().charAt(0) + " " + this.name + " healed: " + allie.toString().charAt(0) + " " + allie.getName() + " health: " + (hpAfter - hpBefore);
+            if(allie.getHealth() < allie.getHealthMax()) {
+                double hpBefore = allie.getHealth();
+                this.heal(allie);
+                double hpAfter = allie.getHealth();
+                this.combatLog = this.toString().charAt(0) + " " + this.name + " healed: " + allie.toString().charAt(0) + " " + allie.getName() + " health: " + (hpAfter - hpBefore);
+            }
+            else if (allie.getHealth() == allie.getHealthMax()){
+                this.combatLog = this.toString().charAt(0) + " " + this.name + " no wounded !";
+            }
         } else if (!this.die && this.mana == 0) {
             this.combatLog = this.toString().charAt(0) + " " + this.name + " awaits his fate !";
         }
-        System.out.println(getInfo());
     }
 
     public Integer getMana() { return mana; }

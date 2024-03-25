@@ -44,7 +44,7 @@ public class Witch extends HealClass {
     }
     //Уникальный метод для колдунов
     private Integer blessOfProtection(BaseClass unit) {
-        if ((Math.random() * (100 - 1) + 1) <= 50) {
+        if ((Math.random() * (100 - 1) + 1) <= 40) {
             unit.setDefense(unit.getDefense() * 2);
         }
         return unit.getDefense();

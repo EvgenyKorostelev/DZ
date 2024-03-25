@@ -38,10 +38,9 @@ public class Pikeman extends MeleeClass {
     public void attackDamage(BaseClass unit) {
         //if(если в мили нет противника делает шаг к ближайшему противнику)
         //else(бьет)
-        if (stamina >= 1) {
+        if (stamina > 0) {
             super.attackDamage(unit);
             unit.setDefense(armorPenetration(unit));
-
         }
         if(unit.getHealth() <= 0) {
             unit.setDie(true);
@@ -50,7 +49,7 @@ public class Pikeman extends MeleeClass {
     }
     //Уникальный метод для копейщиков
     private Integer armorPenetration(BaseClass unit) {
-        if ((Math.random() * (100 - 1) + 1) <= 35) {
+        if ((Math.random() * (100 - 1) + 1) <= 45) {
             unit.setDefense(0);
         }
         return unit.getDefense();

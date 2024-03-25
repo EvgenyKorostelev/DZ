@@ -66,7 +66,6 @@ public abstract class MeleeClass extends BaseClass {
                 this.combatLog = this.toString().charAt(0) + " " + this.name + " move to: " + target.toString().charAt(0) + " " + target.getName() + " " + positionBefore + " -> " + positionAfter;
             }
         }
-        System.out.println(getInfo());
     }
 
     public Integer getStamina() {

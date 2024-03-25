@@ -6,16 +6,17 @@ import controller.Main;
 import java.util.Collections;
 
 public class View {
-    private static int step = 1;
+    private static int step = 0;
     private static int l = 0;
     private static final String top10 = formatDiv("a") + String.join("", Collections.nCopies(9, formatDiv("-b"))) + formatDiv("-c");
     private static final String midl10 = formatDiv("d") + String.join("", Collections.nCopies(9, formatDiv("-e"))) + formatDiv("-f");
     private static final String bottom10 = formatDiv("g") + String.join("", Collections.nCopies(9, formatDiv("-h"))) + formatDiv("-i");
     private static void tabSetter(int cnt, int max){
         int dif = max - cnt + 2;
-        if (dif>0) System.out.printf("%" + dif + "s", ":\t"); else System.out.print(":\t");
+        if (dif>0) System.out.printf("%" + dif + "s", ":\t");
+        else System.out.print(":\t");
     }
-    //Символы юникода для отрисовки поля
+    //Символы для отрисовки поля
     private static String formatDiv(String str) {
         return str.replace('a', '\u250c')
                 .replace('b', '\u252c')
@@ -37,16 +38,24 @@ public class View {
                     out = "|" + (AnsiColors.ANSI_WHITE + unit.toString().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
                 }
-                if (Main.H.contains(unit)) out = "|" + (AnsiColors.ANSI_GREEN + unit.toString().charAt(0) + AnsiColors.ANSI_RESET);
-                if (Main.A.contains(unit)) out = "|" + (AnsiColors.ANSI_BLUE + unit.toString().charAt(0) + AnsiColors.ANSI_RESET);
-                break;
+            }
+        }
+        for (BaseClass unit: Main.all) {
+            if (unit.getUnitpoint().getCoordinateY() == x && unit.getUnitpoint().getCoordinateX() == y){
+                if(!unit.getDie()){
+                    if (Main.H.contains(unit)) out = "|" + (AnsiColors.ANSI_GREEN + unit.toString().charAt(0) + AnsiColors.ANSI_RESET);
+                    if (Main.A.contains(unit)) out = "|" + (AnsiColors.ANSI_BLUE + unit.toString().charAt(0) + AnsiColors.ANSI_RESET);
+                    break;
+                }
             }
         }
         return out;
     }
     //Логика построения всей картинки
     public static void view() {
-        System.out.print(AnsiColors.ANSI_YELLOW + "Step:" + step++ + AnsiColors.ANSI_RESET);
+        if (step == 0) {System.out.print(AnsiColors.ANSI_YELLOW + "Team placement:" + AnsiColors.ANSI_RESET);}
+        else System.out.print(AnsiColors.ANSI_YELLOW + "Step:" + step + AnsiColors.ANSI_RESET);
+        step++;
         Main.all.forEach((v) -> l = Math.max(l, v.toString().length()));
         System.out.print(AnsiColors.ANSI_YELLOW + "⌛".repeat(l) + AnsiColors.ANSI_RESET);
         System.out.println();

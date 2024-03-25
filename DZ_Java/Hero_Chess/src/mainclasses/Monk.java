@@ -45,7 +45,7 @@ public class Monk extends HealClass {
     //Уникальный метод для монахов
     private Integer blessOfFanaticism(BaseClass unit) {
         if ((Math.random() * (100 - 1) + 1) <= 40) {
-            unit.setAttack(unit.getAttack() * 2);
+            unit.setAttack(unit.getAttack() * 4);
         }
         return unit.getAttack();
     }

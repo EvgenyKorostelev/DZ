@@ -38,10 +38,9 @@ public class Rogue extends MeleeClass {
     public void attackDamage(BaseClass unit) {
         //if(если в мили нет противника делает шаг к ближайшему противнику)
         //else(бьет)
-        if (stamina >= 1) {
+        if (stamina > 0) {
             super.attackDamage(unit);
             unit.setAttack(poisoning(unit));
-
         }
         if(unit.getHealth() <= 0) {
             unit.setDie(true);
@@ -50,7 +49,7 @@ public class Rogue extends MeleeClass {
     }
     //Уникальный метод для разбойников
     private Integer poisoning(BaseClass unit) {
-        if ((Math.random() * (100 - 1) + 1) <= 25) {
+        if ((Math.random() * (100 - 1) + 1) <= 35) {
             unit.setAttack(1);
         }
         return unit.getAttack();

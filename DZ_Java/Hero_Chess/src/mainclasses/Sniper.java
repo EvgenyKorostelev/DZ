@@ -14,12 +14,12 @@ public class Sniper extends RangeClass {
 
     public Sniper(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 15, 45, 20, 3, 10, 10, false, team, "");
+                20, 10, 30, 20, 3, 10, 10, false, team, "");
     }
 
     public Sniper() {
         this(randomName(), 1, new Point(), 200, 200, 20,
-                15, 45, 20, 3, 10, 10, false, "нет", "");
+                10, 30, 20, 3, 10, 10, false, "нет", "");
     }
 
     @Override
@@ -44,25 +44,16 @@ public class Sniper extends RangeClass {
         double hI;
         double dmg = Math.random() * (damageMax - damageMin) + damageMin;
         i = attack - unit.getDefense();
-
-        if (i < 0) {
-            signI = -1;
-        } else if (i == 0) {
-            signI = 0;
-        } else {
-            signI = 1;
-        }
-
+        signI = Integer.compare(i, 0);
         if (i < 0) {
             absI = -i;
         } else {
             absI = i;
         }
-
         hI = (1 + 0.1 * Math.pow(0.1 * signI, absI));
 
         if (snipeShot()) {
-            unit.setHealth(unit.getHealth() - (dmg * hI) * 1.5);
+            unit.setHealth(unit.getHealth() - dmg * hI * 1.5);
         } else {
             unit.setHealth(unit.getHealth() - dmg * hI);
         }
@@ -70,7 +61,6 @@ public class Sniper extends RangeClass {
             unit.setDie(true);
             unit.setHealth(0);
         }
-
     }
 
     //Уникальный метод для снайперов

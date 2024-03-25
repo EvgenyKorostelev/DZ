@@ -14,12 +14,12 @@ public class Crossbowman extends RangeClass {
 
     public Crossbowman(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 25, 45, 20, 3, 10, 10, false, team, "");
+                20, 35, 55, 20, 3, 10, 10, false, team, "");
     }
 
     public Crossbowman() {
         this(randomName(), 1, new Point(), 200, 200,
-                20, 25, 45, 20, 3, 10, 10, false, "нет", "");
+                20, 35, 55, 20, 3, 10, 10, false, "нет", "");
     }
 
     @Override
@@ -43,13 +43,7 @@ public class Crossbowman extends RangeClass {
         double hI;
         double dmg = Math.random() * (damageMax - damageMin) + damageMin;
         i = attack - unit.getDefense();
-        if (i < 0) {
-            signI = -1;
-        } else if (i == 0) {
-            signI = 0;
-        } else {
-            signI = 1;
-        }
+        signI = Integer.compare(i, 0);
         if (i < 0) {
             absI = -i;
         } else {
@@ -58,12 +52,11 @@ public class Crossbowman extends RangeClass {
         hI = (1 + 0.1 * Math.pow(0.1 * signI, absI));
 
         if (doubleShot()) {
-            if(this.unitpoint.distanceTo(unit.getUnitpoint()) >= unitpoint.getFieldsize() / 2) { //зависивость от расстояния до цели
-                unit.setHealth(unit.getHealth() - (dmg * hI) / 2);
+            if(this.unitpoint.distanceTo(unit.getUnitpoint()) >= (double) unitpoint.getFieldsize() / 2) { //зависимость от расстояния до цели
+                unit.setHealth(unit.getHealth() - dmg * hI / 2);
                 dmg = Math.random() * (damageMax - damageMin) + damageMin;//урон для второго выстрела
-                unit.setHealth(unit.getHealth() - (dmg * hI) / 2);
+                unit.setHealth(unit.getHealth() - dmg * hI / 2);
             }
-
             else{
                     unit.setHealth(unit.getHealth() - dmg * hI);
                     dmg = Math.random() * (damageMax - damageMin) + damageMin;//урон для второго выстрела
@@ -71,8 +64,8 @@ public class Crossbowman extends RangeClass {
                 }
             }
         else {
-            if(this.unitpoint.distanceTo(unit.getUnitpoint()) >= unitpoint.getFieldsize() / 2) //зависивость от расстояния до цели
-                {unit.setHealth(unit.getHealth() - (dmg * hI) / 2);}
+            if(this.unitpoint.distanceTo(unit.getUnitpoint()) >= (double) unitpoint.getFieldsize() / 2) //зависимость от расстояния до цели
+                {unit.setHealth(unit.getHealth() - dmg * hI / 2);}
             else
                 {unit.setHealth(unit.getHealth() - dmg * hI);}
         }

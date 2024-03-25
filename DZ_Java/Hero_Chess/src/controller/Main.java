@@ -49,7 +49,7 @@ public class Main {
             temp = 3;
         }
         int yY = 0;
-        while (teamSize >= yY++) {
+        while (teamSize > yY++) {
             int r = temp + rnd.nextInt(4);
             switch (r) {
                 case 0:
@@ -85,13 +85,17 @@ public class Main {
         return team;
     }
     //метод боя
-    public static void fight(ArrayList<BaseClass> team1, ArrayList<BaseClass> team2){
+    public static void fight(ArrayList<BaseClass> team1, ArrayList<BaseClass> team2) {
         HashSet<BaseClass> deadAlliance = new HashSet<>();
         HashSet<BaseClass> deadHorde = new HashSet<>();
         ArrayList<BaseClass> queue = turnOrder(team1, team2);
         Scanner step = new Scanner(System.in);
+        ArrayList<String> log = new ArrayList<>();
 
-        System.out.println("Да начнется битва !!!");
+         System.out.println("""
+
+                                                                                               Да начнется битва !!!
+                 """);
         playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/fight.wav");
 
         while (deadAlliance.size() < queue.size() / 2 && deadHorde.size() < queue.size() / 2) {
@@ -103,14 +107,19 @@ public class Main {
                     if(unit.getDie()) deadHorde.add(unit);
                 }
                 View.view();
+                for (String s : log) {
+                    System.out.println(s);
+                }
+                log.clear();
                 for (BaseClass unit : queue) {
                     if (unit.getTeam().equals("Alliance")) {
                         unit.step(team2, team1);
                     } else if (unit.getTeam().equals("Horde")) {
                         unit.step(team1, team2);
                     }
+                    if (!unit.getInfo().isEmpty())
+                        log.add(unit.getInfo());
                 }
-
             } else if (team1.getFirst().getTeam().equals("Horde") && team2.getFirst().getTeam().equals("Alliance")) {
                 for(BaseClass unit : team1 ){
                     if(unit.getDie()) deadHorde.add(unit);
@@ -119,22 +128,34 @@ public class Main {
                     if(unit.getDie()) deadAlliance.add(unit);
                 }
                 View.view();
+                for (String s : log) {
+                    System.out.println(s);
+                }
+                log.clear();
                 for (BaseClass unit : queue) {
                     if (unit.getTeam().equals("Alliance")) {
                         unit.step(team1, team2);
                     }  else if (unit.getTeam().equals("Horde")) {
                         unit.step(team2, team1);
                     }
+                    if (!unit.getInfo().isEmpty())
+                        log.add(unit.getInfo());
                 }
             }
-            step.nextLine();
+//            step.nextLine();
         }
         if(deadAlliance.size() > deadHorde.size()) {
-            System.out.println("Победила команда ОРДЫ !!!");
+            System.out.println("""
+
+                                                                                               Победила команда ОРДЫ !!!
+                 """);
             playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/horde.wav");
         }
         else {
-            System.out.println("Победила команда АЛЬЯНСА !!!");
+            System.out.println("""
+
+                                                                                               Победила команда АЛЬЯНСА !!!
+                 """);
             playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/alliance.wav");
         }
         System.out.println("Потери Альянс:" + deadAlliance);

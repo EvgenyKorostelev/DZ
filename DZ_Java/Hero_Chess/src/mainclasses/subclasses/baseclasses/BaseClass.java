@@ -92,11 +92,9 @@ public abstract class BaseClass implements IMove{
         }
 
         hI = (1 + 0.1 * Math.pow(0.1 * signI, absI));
-        if (unit.defense != 100) {
-            unit.health = unit.health - dmg * hI;
-            if(unit.health <= 0) {unit.die = true;}
-        }
 
+        unit.health = unit.health - Math.abs(dmg * hI);
+        if(unit.health <= 0) {unit.die = true;}
     }
     //Метод исцеления союзника
     public void heal(BaseClass unit) {

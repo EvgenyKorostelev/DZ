@@ -53,25 +53,24 @@ public class Peasant extends WorkersClass {
         combatLog="";
         if(!this.die){
             int min = 10;
-            RangeClass temp = null;
+            RangeClass allieShooter = null;
             for(BaseClass unit : allies){
                 if(RangeClass.class.isAssignableFrom(unit.getClass())){
                    if (((RangeClass) unit).getArrows() < min){
                        min = ((RangeClass) unit).getArrows();
-                       temp = ((RangeClass) unit);
+                       allieShooter = ((RangeClass) unit);
                    }
                 }
             }
-            if (temp != null) {
-                returnArrows(temp);
-                this.combatLog = this.toString().charAt(0) + " " + this.name + " return arrow to: " + temp.toString().charAt(0) + " " + temp.getName();
+            if (allieShooter != null) {
+                returnArrows(allieShooter);
+                this.combatLog = this.toString().charAt(0) + " " + this.name + " return arrow to: " + allieShooter.toString().charAt(0) + " " + allieShooter.getName();
             }
             //else this.attackDamage(this.findTarget(units));
             else {
                 this.combatLog = this.toString().charAt(0) + " " + this.name + " awaits his fate !";
             }
         }
-        System.out.println(getInfo());
     }
 
     @Override

@@ -27,15 +27,15 @@ public abstract class RangeClass extends BaseClass {
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         combatLog="";
         if (!this.die && this.arrows > 0) {
-            double hpBefore = this.findTarget(enemy).getHealth();
-            this.attackDamage(this.findTarget(enemy));
-            double hpAfter = this.findTarget(enemy).getHealth();
+            BaseClass target = this.findTarget(enemy);
+            double hpBefore = target.getHealth();
+            this.attackDamage(target);
+            double hpAfter = target.getHealth();
             this.arrows--;
             this.combatLog = this.toString().charAt(0) + " " + this.name + " shot at: " + this.findTarget(enemy).toString().charAt(0) + " " + this.findTarget(enemy).getName() + " damage: " + (hpBefore - hpAfter);
         } else if (!this.die && this.arrows == 0) {
             this.combatLog = this.toString().charAt(0) + " " + this.name + " awaits his fate !";
         }
-        System.out.println(getInfo());
     }
 
     public Integer getArrows() { return arrows; }
