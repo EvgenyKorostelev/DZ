@@ -22,6 +22,7 @@ public abstract class HealClass extends BaseClass {
     public void heal(BaseClass unit) {
         super.heal(unit);
     }
+    //Метод возрождения союзника
     public boolean resurrection(BaseClass unit){
         if(this.mana >= 50){
             unit.setHealth(unit.getHealthMax()/2);
