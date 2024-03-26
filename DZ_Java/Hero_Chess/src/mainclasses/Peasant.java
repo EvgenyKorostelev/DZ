@@ -25,6 +25,9 @@ public class Peasant extends WorkersClass {
 
     @Override
     public String toString() {
+        String dieStatus;
+        if(die) dieStatus =", \uD83D\uDC80";
+        else dieStatus =", ✅";
         return "Крестьянин{" + name +
                 ", ❤=" + health +
                 ", ♻=" + fatigue +
@@ -32,7 +35,7 @@ public class Peasant extends WorkersClass {
                 ", \uD83D\uDEE1️=" + defense +
                 ", ⚡=" + speed +
                 ", \uD83D\uDEA9" + unitpoint +
-                ", \uD83D\uDC80" + die +
+                dieStatus +
                 '}';
     }
 
@@ -52,11 +55,11 @@ public class Peasant extends WorkersClass {
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         combatLog="";
         if(!this.die){
-            int min = 10;
+            int min = Integer.MAX_VALUE;
             RangeClass allieShooter = null;
             for(BaseClass unit : allies){
                 if(RangeClass.class.isAssignableFrom(unit.getClass())){
-                   if (((RangeClass) unit).getArrows() < min){
+                   if (((RangeClass) unit).getArrows() < min && ((RangeClass) unit).getArrows() < ((RangeClass) unit).getArrowsMax()){
                        min = ((RangeClass) unit).getArrows();
                        allieShooter = ((RangeClass) unit);
                    }

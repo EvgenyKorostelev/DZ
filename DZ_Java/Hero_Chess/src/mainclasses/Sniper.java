@@ -14,16 +14,19 @@ public class Sniper extends RangeClass {
 
     public Sniper(int x, int y, String team) {
         this(randomName(), 1, new Point(x, y, 10), 200, 200,
-                20, 10, 30, 20, 3, 10, 10, false, team, "");
+                20, 20, 40, 20, 3, 10, 10, false, team, "");
     }
 
     public Sniper() {
         this(randomName(), 1, new Point(), 200, 200, 20,
-                10, 30, 20, 3, 10, 10, false, "нет", "");
+                20, 40, 20, 3, 10, 10, false, "нет", "");
     }
 
     @Override
     public String toString() {
+        String dieStatus;
+        if(die) dieStatus =", \uD83D\uDC80";
+        else dieStatus =", ✅";
         return "Снайпер{" + name +
                 ", ❤=" + health +
                 ", \uD83C\uDFF9=" + arrows +
@@ -31,7 +34,7 @@ public class Sniper extends RangeClass {
                 ", \uD83D\uDEE1️=" + defense +
                 ", ⚡=" + speed +
                 ", \uD83D\uDEA9" + unitpoint +
-                ", \uD83D\uDC80" + die +
+                dieStatus +
                 '}';
     }
 

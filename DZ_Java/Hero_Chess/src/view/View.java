@@ -62,7 +62,7 @@ public class View {
         System.out.print(top10 + "    ");
         System.out.print(AnsiColors.ANSI_BLUE + "Alliance side" + AnsiColors.ANSI_RESET);
         //for (int i = 0; i < l[0]-9; i++)
-        System.out.print(" ".repeat(l-12));
+        System.out.print(" ".repeat(l-11));
         System.out.println(":" + AnsiColors.ANSI_GREEN + "\tHorde side" + AnsiColors.ANSI_RESET);
         for (int i = 1; i < 11; i++) {
             System.out.print(getChar(1, i));

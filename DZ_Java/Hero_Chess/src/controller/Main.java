@@ -142,7 +142,7 @@ public class Main {
                         log.add(unit.getInfo());
                 }
             }
-//            step.nextLine();
+            step.nextLine();
         }
         if(deadAlliance.size() > deadHorde.size()) {
             System.out.println("""

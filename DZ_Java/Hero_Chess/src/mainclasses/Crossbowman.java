@@ -24,6 +24,9 @@ public class Crossbowman extends RangeClass {
 
     @Override
     public String toString() {
+        String dieStatus;
+        if(die) dieStatus =", \uD83D\uDC80";
+        else dieStatus =", ✅";
         return "Арбалетчик{" + name +
                 ", ❤=" + health +
                 ", \uD83C\uDFF9=" + arrows +
@@ -31,7 +34,7 @@ public class Crossbowman extends RangeClass {
                 ", \uD83D\uDEE1️=" + defense +
                 ", ⚡=" + speed +
                 ", \uD83D\uDEA9" + unitpoint +
-                ", \uD83D\uDC80" + die +
+                dieStatus +
                 '}';
     }
 

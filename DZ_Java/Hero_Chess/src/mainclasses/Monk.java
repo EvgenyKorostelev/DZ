@@ -23,6 +23,9 @@ public class Monk extends HealClass {
 
     @Override
     public String toString() {
+        String dieStatus;
+        if(die) dieStatus =", \uD83D\uDC80";
+        else dieStatus =", ✅";
         return "Монах{" + name +
                 ", ❤=" + health +
                 ", \uD83D\uDD2E=" + mana +
@@ -30,16 +33,16 @@ public class Monk extends HealClass {
                 ", \uD83D\uDEE1️=" + defense +
                 ", ⚡=" + speed +
                 ", \uD83D\uDEA9" + unitpoint +
-                ", \uD83D\uDC80" + die +
+                dieStatus +
                 '}';
     }
 
     @Override
     public void heal(BaseClass unit) {
-        if (mana >= 15) {
+        if (mana >= 10) {
             super.heal(unit);
             unit.setAttack(blessOfFanaticism(unit));
-            mana -= 15;
+            mana -= 10;
         }
     }
     //Уникальный метод для монахов

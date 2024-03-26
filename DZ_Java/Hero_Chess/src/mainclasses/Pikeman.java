@@ -23,6 +23,9 @@ public class Pikeman extends MeleeClass {
 
     @Override
     public String toString() {
+        String dieStatus;
+        if(die) dieStatus =", \uD83D\uDC80";
+        else dieStatus =", ✅";
         return "Пикинер{" + name +
                 ", ❤=" + health +
                 ", \uD83D\uDCAA=" + stamina +
@@ -30,7 +33,7 @@ public class Pikeman extends MeleeClass {
                 ", \uD83D\uDEE1️=" + defense +
                 ", ⚡=" + speed +
                 ", \uD83D\uDEA9" + unitpoint +
-                ", \uD83D\uDC80" + die +
+                dieStatus +
                 '}';
     }
 
