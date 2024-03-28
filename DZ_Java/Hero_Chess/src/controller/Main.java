@@ -25,6 +25,7 @@ public class Main {
         all = turnOrder(A, H);
 
         fight(A, H);
+
     }
     //Метод создания списка очередности ходов
     public static ArrayList<BaseClass> turnOrder(ArrayList<BaseClass> team1, ArrayList<BaseClass> team2){
@@ -88,7 +89,7 @@ public class Main {
     public static void fight(ArrayList<BaseClass> team1, ArrayList<BaseClass> team2) {
         HashSet<BaseClass> deadAlliance = new HashSet<>();
         HashSet<BaseClass> deadHorde = new HashSet<>();
-        ArrayList<BaseClass> queue = turnOrder(team1, team2);
+//        ArrayList<BaseClass> queue = turnOrder(team1, team2);
         Scanner step = new Scanner(System.in);
         ArrayList<String> log = new ArrayList<>();
 
@@ -98,8 +99,10 @@ public class Main {
                  """);
         playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/fight.wav");
 
-        while (deadAlliance.size() < queue.size() / 2 && deadHorde.size() < queue.size() / 2) {
+        while (deadAlliance.size() < all.size() / 2 && deadHorde.size() < all.size() / 2) {
             if (team1.getFirst().getTeam().equals("Alliance") && team2.getFirst().getTeam().equals("Horde")) {
+                deadAlliance.removeIf(unit -> !unit.getDie());
+                deadHorde.removeIf(unit -> !unit.getDie());
                 for(BaseClass unit : team1 ){
                     if(unit.getDie()) deadAlliance.add(unit);
                 }
@@ -111,7 +114,7 @@ public class Main {
                     System.out.println(s);
                 }
                 log.clear();
-                for (BaseClass unit : queue) {
+                for (BaseClass unit : all) {
                     if (unit.getTeam().equals("Alliance")) {
                         unit.step(team2, team1);
                     } else if (unit.getTeam().equals("Horde")) {
@@ -121,6 +124,8 @@ public class Main {
                         log.add(unit.getInfo());
                 }
             } else if (team1.getFirst().getTeam().equals("Horde") && team2.getFirst().getTeam().equals("Alliance")) {
+                deadAlliance.removeIf(unit -> !unit.getDie());
+                deadHorde.removeIf(unit -> !unit.getDie());
                 for(BaseClass unit : team1 ){
                     if(unit.getDie()) deadHorde.add(unit);
                 }
@@ -132,7 +137,7 @@ public class Main {
                     System.out.println(s);
                 }
                 log.clear();
-                for (BaseClass unit : queue) {
+                for (BaseClass unit : all) {
                     if (unit.getTeam().equals("Alliance")) {
                         unit.step(team1, team2);
                     }  else if (unit.getTeam().equals("Horde")) {
@@ -142,7 +147,7 @@ public class Main {
                         log.add(unit.getInfo());
                 }
             }
-            step.nextLine();
+           step.nextLine();
         }
         if(deadAlliance.size() > deadHorde.size()) {
             System.out.println("""
