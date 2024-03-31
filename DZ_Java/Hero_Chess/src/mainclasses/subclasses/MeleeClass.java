@@ -5,7 +5,7 @@ import mainclasses.subclasses.baseclasses.Point;
 
 import java.util.ArrayList;
 
-//Класс обобщающий юнитов ближнего боя
+//Класс обобщающий персонажей ближнего боя
 public abstract class MeleeClass extends BaseClass {
     protected Integer stamina;
     protected Integer staminaMax;

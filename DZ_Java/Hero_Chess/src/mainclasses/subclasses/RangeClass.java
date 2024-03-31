@@ -5,7 +5,7 @@ import mainclasses.subclasses.baseclasses.Point;
 
 import java.util.ArrayList;
 
-//Класс обобщающий юнитов дальнего боя
+//Класс обобщающий персонажей дальнего боя
 public abstract class RangeClass extends BaseClass {
     protected Integer arrows;
     protected Integer arrowsMax;
@@ -33,7 +33,7 @@ public abstract class RangeClass extends BaseClass {
                 this.attackDamage(target);
                 double hpAfter = target.getHealth();
                 this.arrows--;
-                this.combatLog = this.toString().charAt(0) + " " + this.name + " shot at: " + this.findTarget(enemy).toString().charAt(0) + " " + this.findTarget(enemy).getName() + " damage: " + (hpBefore - hpAfter);
+                this.combatLog = this.toString().charAt(0) + " " + this.name + " shot at: " + target.toString().charAt(0) + " " + target.getName() + " damage: " + (hpBefore - hpAfter);
             } else if (this.arrows == 0) {
                 this.combatLog = this.toString().charAt(0) + " " + this.name + " awaits his fate !";
             }

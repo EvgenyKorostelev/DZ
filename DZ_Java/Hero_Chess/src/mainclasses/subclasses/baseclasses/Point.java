@@ -48,4 +48,11 @@ public class Point {
                 ", " + coordinateY +
                 '}';
     }
+    @Override
+    public boolean equals(Object obj) {
+        Point o = new Point();
+        if(obj != null && this.getClass() == obj.getClass())
+            o = (Point) obj;
+        return this.coordinateX == o.getCoordinateX() && this.coordinateY == o.getCoordinateY() && this.fieldsize == o.getFieldsize();
+    }
 }

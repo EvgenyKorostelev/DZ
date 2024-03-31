@@ -12,12 +12,12 @@ public class Pikeman extends MeleeClass {
         super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, stamina, staminaMax, die, team, combatLog);
     }
     public Pikeman(int x, int y, String team) {
-        this(randomName(), 1, new Point(x, y, 10),300, 300,
+        this(randomNameA(), 1, new Point(x, y, 10),300, 300,
                 30, 25, 75, 30, 2, 10, 10, false, team, "");
     }
 
     public Pikeman() {
-        this(randomName(), 1, new Point(), 300, 300,
+        this(randomNameA(), 1, new Point(), 300, 300,
                 30, 25, 75, 30, 2, 2, 2, false, "нет", "");
     }
 

@@ -5,7 +5,7 @@ import mainclasses.subclasses.baseclasses.Point;
 
 import java.util.ArrayList;
 
-//Класс обобщающий юнитов лекарей
+//Класс обобщающий персонажей лекарей
 public abstract class HealClass extends BaseClass {
     protected Integer mana;
     protected Integer manaMax;

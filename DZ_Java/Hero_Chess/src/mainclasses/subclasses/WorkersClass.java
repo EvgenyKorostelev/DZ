@@ -2,7 +2,7 @@ package mainclasses.subclasses;
 
 import mainclasses.subclasses.baseclasses.BaseClass;
 import mainclasses.subclasses.baseclasses.Point;
-//Класс обобщающий юнитов рабочих
+//Класс обобщающий персонажей рабочих
 public abstract class WorkersClass extends BaseClass {
     protected Integer fatigue;
     protected Integer fatigueMax;

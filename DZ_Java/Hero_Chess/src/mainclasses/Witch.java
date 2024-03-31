@@ -12,12 +12,12 @@ public class Witch extends HealClass {
         super(name, level, unitpoint, health, healthMax, attack, damageMin, damageMax, defense, speed, mana, manaMax, die, team, combatLog);
     }
     public Witch(int x, int y, String team) {
-        this(randomName(), 1, new Point(x, y, 10),100, 100,
+        this(randomNameH(), 1, new Point(x, y, 10),100, 100,
                 1, 35, 45, 10, 1, 150, 150, false, team, "");
     }
 
     public Witch() {
-        this(randomName(), 1, new Point(), 100, 100, 1,
+        this(randomNameH(), 1, new Point(), 100, 100, 1,
                 35, 45, 10, 1, 150, 150, false, "нет", "");
     }
 

@@ -13,12 +13,12 @@ public class Sniper extends RangeClass {
     }
 
     public Sniper(int x, int y, String team) {
-        this(randomName(), 1, new Point(x, y, 10), 200, 200,
+        this(randomNameH(), 1, new Point(x, y, 10), 200, 200,
                 20, 20, 40, 20, 3, 10, 10, false, team, "");
     }
 
     public Sniper() {
-        this(randomName(), 1, new Point(), 200, 200, 20,
+        this(randomNameH(), 1, new Point(), 200, 200, 20,
                 20, 40, 20, 3, 10, 10, false, "нет", "");
     }
 

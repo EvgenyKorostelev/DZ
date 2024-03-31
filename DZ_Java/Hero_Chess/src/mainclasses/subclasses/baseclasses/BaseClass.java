@@ -45,13 +45,38 @@ public abstract class BaseClass implements IMove{
     protected BaseClass() {
         this(randomName(), 99,  new Point(),999, 999, 999, 999, 999, 999, 999,false, "нет", "");
     }
-    //Список стандартных имен
+    //Списки стандартных имен
     public enum Names {
-        Один, Тор, Локи, Мимир, Фригг, Сиф, Идунн, Бальдр, Хеймдалль, Тюр, Хёнир, Браги, Улль, Нанна;
+        Один, Тор, Локи, Мимир, Фригг, Сиф, Идунн, Бальдр, Хеймдалль,
+        Тюр, Хёнир, Браги, Улль, Нанна, Зевс, Гера, Посейдон, Аид, Деметра,
+        Гестия, Афина, Персефона, Афродита, Гефест, Гермес, Аполлон, Арес,
+        Артемида, Дионис, Гандаш, Агум, Шушши, Кандалану, Саргон, Набонид,
+        Навуходоносор, Валтасар, Тиглатпаласар, Синаххериб, Набополассар
     }
-    //Метод извлечения имени из стандартных
+    public enum NamesH {
+        Один, Тор, Локи, Мимир, Фригг, Сиф, Идунн, Бальдр, Хеймдалль,
+        Тюр, Хёнир, Браги, Улль, Нанна
+    }
+    public enum NamesA {
+        Зевс, Гера, Посейдон, Аид, Деметра, Гестия, Афина, Персефона,
+        Афродита, Гефест, Гермес, Аполлон, Арес, Артемида, Дионис
+    }
+    public enum NamesW {
+        Гандаш, Агум, Шушши, Кандалану, Саргон, Набонид, Навуходоносор,
+        Валтасар, Тиглатпаласар, Синаххериб, Набополассар
+    }
+    //Методы извлечения имени из стандартных
     protected static String randomName() {
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
+    }
+    protected static String randomNameH() {
+        return String.valueOf(NamesH.values()[new Random().nextInt(NamesH.values().length)]);
+    }
+    protected static String randomNameA() {
+        return String.valueOf(NamesA.values()[new Random().nextInt(NamesA.values().length)]);
+    }
+    protected static String randomNameW() {
+        return String.valueOf(NamesW.values()[new Random().nextInt(NamesW.values().length)]);
     }
     //Метод поиска ближайшего противника
     public BaseClass findTarget(ArrayList<BaseClass> units){
