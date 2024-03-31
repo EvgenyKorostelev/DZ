@@ -89,7 +89,6 @@ public class Main {
     }
     //метод боя
     public String fight() {
-
         deadAlliance.removeIf(unit -> !unit.getDie());
         deadHorde.removeIf(unit -> !unit.getDie());
         for(BaseClass unit : A ){
@@ -98,9 +97,8 @@ public class Main {
         for(BaseClass unit : H ){
             if(unit.getDie()) deadHorde.add(unit);
         }
-        // View.view();
-
         log.clear();
+
         for (BaseClass unit : all) {
             if (unit.getTeam().equals("Alliance")) {
                 unit.step(H, A);
@@ -113,7 +111,7 @@ public class Main {
         for (String s : log) {
             System.out.println(s);
         }
-
+        System.out.println();
         if(deadAlliance.size() == all.size() / 2  & deadAlliance.size() > deadHorde.size()) {
             return"Победила команда ОРДЫ !!!";
 

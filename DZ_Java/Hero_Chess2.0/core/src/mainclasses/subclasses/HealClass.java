@@ -5,7 +5,7 @@ import mainclasses.subclasses.baseclasses.Point;
 
 import java.util.ArrayList;
 
-//Класс обобщающий юнитов лекарей
+//Класс обобщающий персонажей лекарей
 public abstract class HealClass extends BaseClass {
     protected Integer mana;
     protected Integer manaMax;
@@ -34,7 +34,7 @@ public abstract class HealClass extends BaseClass {
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         combatLog = "";
-        if (!this.die) {
+        if (!this.die && enemy.stream().filter(BaseClass::getDie).count() < 10) {
             if (allies.stream().filter(BaseClass::getDie).count() > 3) {
                 BaseClass allieToRes = allies.stream()
                         .filter(BaseClass::getDie)

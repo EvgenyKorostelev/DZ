@@ -54,7 +54,7 @@ public class Peasant extends WorkersClass {
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         combatLog="";
-        if(!this.die){
+        if(!this.die && enemy.stream().filter(BaseClass::getDie).count() < 10){
             int min = Integer.MAX_VALUE;
             RangeClass allieShooter = null;
             for(BaseClass unit : allies){

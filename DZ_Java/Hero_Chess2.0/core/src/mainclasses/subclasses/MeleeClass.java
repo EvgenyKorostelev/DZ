@@ -22,7 +22,7 @@ public abstract class MeleeClass extends BaseClass {
     public void attackDamage(BaseClass unit) {
         super.attackDamage(unit);
     }
-    //Метод передвижения юнитов ближнего боя
+    //Метод передвижения персонажей ближнего боя
     public void moveTo(BaseClass target, ArrayList<BaseClass> allies) {
         int thisX = this.unitpoint.getCoordinateX();
         int thisY = this.unitpoint.getCoordinateY();
@@ -50,14 +50,14 @@ public abstract class MeleeClass extends BaseClass {
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         combatLog="";
-        if (!this.die) {
+        if (!this.die && enemy.stream().filter(BaseClass::getDie).count() < 10) {
             BaseClass target = this.findTarget(enemy);
-            if (this.unitpoint.distanceTo(target.getUnitpoint()) < 2) {
+            if (this.unitpoint.distanceTo(target.getUnitpoint()) < 2 && !target.getDie()) {
                 double hpBefore = target.getHealth();
                 this.attackDamage(target);
                 double hpAfter = target.getHealth();
                 this.combatLog = this.toString().charAt(0) + " " + this.name + " hit in: " + target.toString().charAt(0) + " " + target.getName() + " damage: " + (hpBefore - hpAfter);
-            } else {
+            } else if (this.unitpoint.distanceTo(target.getUnitpoint()) >= 2 && !target.getDie()){
                 Point positionBefore = this.unitpoint;
                 this.moveTo(target, allies);
                 Point positionAfter = this.unitpoint;
