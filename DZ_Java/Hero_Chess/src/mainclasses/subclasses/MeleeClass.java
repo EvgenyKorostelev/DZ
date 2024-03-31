@@ -54,12 +54,12 @@ public abstract class MeleeClass extends BaseClass {
         combatLog="";
         if (!this.die) {
             BaseClass target = this.findTarget(enemy);
-            if (this.unitpoint.distanceTo(target.getUnitpoint()) < 2) {
+            if (this.unitpoint.distanceTo(target.getUnitpoint()) < 2 && !target.getDie()) {
                 double hpBefore = target.getHealth();
                 this.attackDamage(target);
                 double hpAfter = target.getHealth();
                 this.combatLog = this.toString().charAt(0) + " " + this.name + " hit in: " + target.toString().charAt(0) + " " + target.getName() + " damage: " + (hpBefore - hpAfter);
-            } else {
+            } else if (this.unitpoint.distanceTo(target.getUnitpoint()) >= 2 && !target.getDie()){
                 Point positionBefore = this.unitpoint;
                 this.moveTo(target, allies);
                 Point positionAfter = this.unitpoint;

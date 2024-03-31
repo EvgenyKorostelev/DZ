@@ -100,54 +100,34 @@ public class Main {
         playSound("C:/Users/ddc_s/OneDrive/Рабочий стол/DZ/DZ_Java/Hero_Chess/src/mainclasses/subclasses/baseclasses/sounds/fight.wav");
 
         while (deadAlliance.size() < all.size() / 2 && deadHorde.size() < all.size() / 2) {
-            if (team1.getFirst().getTeam().equals("Alliance") && team2.getFirst().getTeam().equals("Horde")) {
-                deadAlliance.removeIf(unit -> !unit.getDie());
-                deadHorde.removeIf(unit -> !unit.getDie());
-                for(BaseClass unit : team1 ){
-                    if(unit.getDie()) deadAlliance.add(unit);
-                }
-                for(BaseClass unit : team2 ){
-                    if(unit.getDie()) deadHorde.add(unit);
-                }
-                View.view();
-                for (String s : log) {
-                    System.out.println(s);
-                }
-                log.clear();
-                for (BaseClass unit : all) {
-                    if (unit.getTeam().equals("Alliance")) {
-                        unit.step(team2, team1);
-                    } else if (unit.getTeam().equals("Horde")) {
-                        unit.step(team1, team2);
-                    }
-                    if (!unit.getInfo().isEmpty())
-                        log.add(unit.getInfo());
-                }
-            } else if (team1.getFirst().getTeam().equals("Horde") && team2.getFirst().getTeam().equals("Alliance")) {
-                deadAlliance.removeIf(unit -> !unit.getDie());
-                deadHorde.removeIf(unit -> !unit.getDie());
-                for(BaseClass unit : team1 ){
-                    if(unit.getDie()) deadHorde.add(unit);
-                }
-                for(BaseClass unit : team2 ){
-                    if(unit.getDie()) deadAlliance.add(unit);
-                }
-                View.view();
-                for (String s : log) {
-                    System.out.println(s);
-                }
-                log.clear();
-                for (BaseClass unit : all) {
-                    if (unit.getTeam().equals("Alliance")) {
-                        unit.step(team1, team2);
-                    }  else if (unit.getTeam().equals("Horde")) {
-                        unit.step(team2, team1);
-                    }
-                    if (!unit.getInfo().isEmpty())
-                        log.add(unit.getInfo());
-                }
+            deadAlliance.removeIf(unit -> !unit.getDie());
+            deadHorde.removeIf(unit -> !unit.getDie());
+            if (team1.getFirst().getTeam().equals("Horde") && team2.getFirst().getTeam().equals("Alliance")){
+                ArrayList<BaseClass> temp = team1;
+                team1 = team2;
+                team2 = temp;
             }
-           step.nextLine();
+            for(BaseClass unit : team1 ){
+                if(unit.getDie()) deadAlliance.add(unit);
+            }
+            for(BaseClass unit : team2 ){
+                if(unit.getDie()) deadHorde.add(unit);
+            }
+            View.view();
+            for (String s : log) {
+                System.out.println(s);
+            }
+            log.clear();
+            for (BaseClass unit : all) {
+                if (unit.getTeam().equals("Alliance")) {
+                    unit.step(team2, team1);
+                } else if (unit.getTeam().equals("Horde")) {
+                    unit.step(team1, team2);
+                }
+                if (!unit.getInfo().isEmpty())
+                    log.add(unit.getInfo());
+            }
+            step.nextLine();
         }
         if(deadAlliance.size() > deadHorde.size()) {
             System.out.println("""

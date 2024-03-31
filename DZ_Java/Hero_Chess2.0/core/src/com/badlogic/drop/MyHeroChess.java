@@ -25,8 +25,8 @@ public class MyHeroChess extends ApplicationAdapter {
 	private Music victory;
 	private Texture gameover;
 	private Main program;
-	private Vector2 vectorSelf;
-	private Vector2 vectorTarget;
+	// private Vector2 vectorSelf;
+	// private Vector2 vectorTarget;
 
 
 	@Override
@@ -49,8 +49,8 @@ public class MyHeroChess extends ApplicationAdapter {
 		rogue = new Texture("units/rogue.png");
 		deadUnit = new Texture("units/deadUnit.png");
 		arrow = new Texture("shots/arrow.png");
-		vectorSelf = new Vector2();
-		vectorTarget = new Vector2();
+		// vectorSelf = new Vector2();
+		// vectorTarget = new Vector2();
 
 	}
 
@@ -92,21 +92,21 @@ public class MyHeroChess extends ApplicationAdapter {
 			else batch.draw(deadUnit, x, y, deadUnit.getWidth() * k, deadUnit.getHeight());
 		}
 
-		if(program.deadAlliance.size() == 10 || program.deadHorde.size() == 10)
+		if(program.deadAlliance.size() == 10 || program.deadHorde.size() == 10){
 			batch.draw(gameover, Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-
-
-		batch.end();
-
-		if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-			String textWinner = program.fight();
-			shot(program.log);
-			if(textWinner != null) {
-				combatMusic.stop();
-				victory.play();
-				Gdx.graphics.setTitle(textWinner);
+			combatMusic.stop();
+		}
+		else {
+			if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+				String textWinner = program.fight();
+				// shot(program.log);
+				if(textWinner != null) {
+					Gdx.graphics.setTitle(textWinner);
+					victory.play();
+				}
 			}
 		}
+		batch.end();
 	}
 
 	@Override
@@ -125,12 +125,12 @@ public class MyHeroChess extends ApplicationAdapter {
 		gameover.dispose();
 	}
 
-	public void shot(ArrayList <String> all){
-		for (String unit : all) {
-			if(unit.charAt(unit.length()-1) != '!' && (unit.charAt(0) == 'А' || unit.charAt(0) == 'С')){
-				//взять координаты себя и цели
-			}
-		}
-	}
+	// public void shot(ArrayList <String> all){
+	// 	for (String unit : all) {
+	// 		if(unit.charAt(unit.length()-1) != '!' && (unit.charAt(0) == 'А' || unit.charAt(0) == 'С')){
+	// 			//взять координаты себя и цели
+	// 		}
+	// 	}
+	// }
 
 }

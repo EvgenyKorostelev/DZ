@@ -5,7 +5,7 @@ import mainclasses.subclasses.baseclasses.Point;
 
 import java.util.ArrayList;
 
-//Класс обобщающий юнитов дальнего боя
+//Класс обобщающий персонажей дальнего боя
 public abstract class RangeClass extends BaseClass {
     protected Integer arrows;
     protected Integer arrowsMax;
@@ -26,9 +26,9 @@ public abstract class RangeClass extends BaseClass {
     @Override
     public void step(ArrayList<BaseClass> enemy, ArrayList<BaseClass> allies) {
         combatLog = "";
-        if (!this.die) {
-            if (this.arrows > 0) {
-                BaseClass target = this.findTarget(enemy);
+        if (!this.die && enemy.stream().filter(BaseClass::getDie).count() < 10) {
+            BaseClass target = this.findTarget(enemy);
+            if (this.arrows > 0 && !target.getDie()) {
                 double hpBefore = target.getHealth();
                 this.attackDamage(target);
                 double hpAfter = target.getHealth();
