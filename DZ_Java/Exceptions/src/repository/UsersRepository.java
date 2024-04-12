@@ -8,8 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-
-public class UsersRepository implements ISave {
+public class UsersRepository implements IUsersRepository {
 
     private final List<User> users = new LinkedList<>();
 
@@ -29,10 +28,6 @@ public class UsersRepository implements ISave {
         }
     }
 
-    @Override
-    public void saveInDataBase(String[] user) {
-
-    }
 }
 
 
