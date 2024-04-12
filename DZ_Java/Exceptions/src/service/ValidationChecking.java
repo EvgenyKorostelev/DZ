@@ -29,6 +29,7 @@ public class ValidationChecking {
                 }
             }
         } catch (NotValidFormatDateException | NumberFormatException e) {
+            System.out.println("Неверно заполнено поле [дата_рождения].");
             throw new RuntimeException(e);
         }
     }
@@ -41,6 +42,7 @@ public class ValidationChecking {
                 Long.parseLong(phone);
             }
         } catch (NotValidPhoneNumberFormatException | NumberFormatException e) {
+            System.out.println("Неверно заполнено поле [номер_телефона].");
             throw new RuntimeException(e);
         }
     }
@@ -48,11 +50,10 @@ public class ValidationChecking {
     private void validationGender(String[] user){
         try {
             String gender = user[5];
-            if(!gender.equals("f") &&
-                    !gender.equals("m") &&
-                    !gender.equals("F") &&
-                    !gender.equals("M")) throw new NotValidGenderFormatException();
+            if(!gender.equals("f") && !gender.equals("m"))
+                throw new NotValidGenderFormatException();
         }catch (NotValidGenderFormatException e){
+            System.out.println("Неверно заполнено поле [пол].");
             throw new RuntimeException(e);
         }
     }

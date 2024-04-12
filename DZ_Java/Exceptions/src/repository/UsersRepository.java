@@ -21,7 +21,7 @@ public class UsersRepository implements IUsersRepository {
     @Override
     public void saveInFile(String[] user){
         try (FileWriter writer = new FileWriter(user[0]+".txt", true)){
-            writer.write("<"+ String.join("><", user) +">\n" );
+            writer.write("<"+ String.join("> <", user) +">\n" );
             writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
