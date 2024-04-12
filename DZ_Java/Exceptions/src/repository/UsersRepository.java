@@ -4,9 +4,9 @@ import entity.User;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 
 
 public class UsersRepository implements ISave {
@@ -15,7 +15,8 @@ public class UsersRepository implements ISave {
 
     @Override
     public void saveInCache(String[] user) {
-
+        users.add(new User(user[0],user[1], user[2], user[3],
+                Long.parseLong(user[4]), user[5].charAt(0)));
     }
 
     @Override

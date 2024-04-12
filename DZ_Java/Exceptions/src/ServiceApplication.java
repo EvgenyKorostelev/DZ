@@ -2,7 +2,7 @@ import repository.UsersRepository;
 import service.DefaultUserService;
 import service.ValidationChecking;
 
-public class Authentication {
+public class ServiceApplication {
 
     public static void main(String[] args) {
 

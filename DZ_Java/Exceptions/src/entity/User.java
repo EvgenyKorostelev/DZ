@@ -1,22 +1,21 @@
 package entity;
 
 public class User {
-    private int id;
+
     private String name;
     private String surname;
     private String middleName;
     private String dateOfBirth;
-    private int phoneNumber;
+    private long phoneNumber;
     private char gender;
 
-    public User(String dateOfBirth, char gender, int id, String middleName,
-                String name, int phoneNumber, String surname) {
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.id = id;
-        this.middleName = middleName;
+    public User(String name, String surname, String middleName,
+                String dateOfBirth, long phoneNumber, char gender) {
         this.name = name;
-        this.phoneNumber = phoneNumber;
         this.surname = surname;
+        this.middleName = middleName;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
     }
 }
