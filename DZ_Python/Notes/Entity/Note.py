@@ -11,6 +11,7 @@ class Note:
         self.description = description
         self.date = date
 
+<<<<<<< HEAD
     def get_id(self):
         return self.id
 
@@ -26,3 +27,10 @@ class Note:
     def scheme_note(self):
         return ('\nID: ' + self.id + '\n' + 'Название: ' + self.title + '\n'
                 + 'Описание: ' + self.description + '\n' + 'Дата записи: ' + self.date)
+=======
+    def get_title(self):
+        return self.title
+
+    def to_string(self):
+        return self.id + ';' + self.title + ';' + self.description + ';' + self.date
+>>>>>>> 50fc5ccdbb762f8d6d8dc2ec2200ed9002cbdae1

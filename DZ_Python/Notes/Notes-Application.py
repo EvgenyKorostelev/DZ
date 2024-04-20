@@ -1,11 +1,15 @@
+<<<<<<< HEAD
 from Controller.Service import find_all_notes, create_note, find_note_by_id, find_note_by_date
 
 
+=======
+>>>>>>> 50fc5ccdbb762f8d6d8dc2ec2200ed9002cbdae1
 def start_application():
     print(
         'Что Вы хотите сделать? \n'
         '1 - Создать заметку \n'
         '2 - Вывести список всех заметок \n'
+<<<<<<< HEAD
         '3 - Найти заметку \n'
         '4 - Редактировать заметку \n'
         '5 - Удалить заметку'
@@ -38,6 +42,30 @@ def start_application():
         pass
     elif command == "q":
         print("Завершение работы программы . . .")
+=======
+        '3 - Показать заметку \n'
+        '4 - Редактировать заметку \n'
+        '5 - Удалить заметку'
+        'q - Завершить программу')
+    
+    command = str(input('Ваш выбор: '))
+
+    while command < 1 or command > 5 or command != "q":
+        command = str(input('Ошибка! Ваш выбор: '))
+        if command == "1":
+            pass
+        elif command == "2":
+            pass
+        elif command == "3":
+            pass
+        elif command == "4":
+            pass
+        elif command == "5":
+            pass
+        elif command == "q":
+            print("Завершение работы программы . . .")
+            break
+>>>>>>> 50fc5ccdbb762f8d6d8dc2ec2200ed9002cbdae1
 
 
 start_application()
