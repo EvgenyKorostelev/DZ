@@ -1,9 +1,6 @@
 import Entity.Note
-<<<<<<< HEAD
-import Repository.findInFile
-=======
 
->>>>>>> 50fc5ccdbb762f8d6d8dc2ec2200ed9002cbdae1
+import Repository.findInFile
 
 
 def create_note():
@@ -12,7 +9,6 @@ def create_note():
     note = Entity.Note.Note(title=note_title, description=note_description)
     return note
 
-<<<<<<< HEAD
 
 def find_all_notes():
     print("\nСписок всех заметок:")
@@ -45,17 +41,4 @@ def find_note_by_date():
 
 
 def edit_note():
-    pass
-
-
-=======
-    pass
-def find_all_notes():
-    pass
-def find_note():
-    pass
-def edit_note():
-    pass
->>>>>>> 50fc5ccdbb762f8d6d8dc2ec2200ed9002cbdae1
-def delete_note():
     pass
