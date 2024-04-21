@@ -1,7 +1,13 @@
 import sys
 
-from Services.Service import find_all_notes, create_note, find_note_by_id, find_note_by_date, delete_note, edit_note
+
 from Repository.saveToFile import save_to_file
+from Services.CreateNoteService import create_note
+from Services.DeleteNote import delete_note
+from Services.EditNoteService import edit_note
+from Services.FindAllNotesService import find_all_notes
+from Services.FindNoteByDateService import find_note_by_date
+from Services.FindNoteByIdService import find_note_by_id
 
 
 def start_application():
