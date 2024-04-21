@@ -9,4 +9,3 @@ while True:
                   "или 'q' для выхода из приложения: ")
     if value == 'q':
         sys.exit()
-

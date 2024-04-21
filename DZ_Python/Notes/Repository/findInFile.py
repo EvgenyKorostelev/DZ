@@ -1,4 +1,6 @@
 import Entity.Note
+
+
 def find_in_file():
     data = []
     with open(f'My_Notes.csv', 'r', encoding='utf-8') as file:
@@ -12,4 +14,4 @@ def find_in_file():
         if len(data) != 0:
             return data
         else:
-            print("Список заметок пуст")
+            print("\nСписок заметок пуст.")
