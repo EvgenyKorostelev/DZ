@@ -1,12 +1,18 @@
+from datetime import datetime
+
 import Entity.Note
 
 import Repository.findInFile
+from Entity import idFactory
 
 
 def create_note():
+    note_id = str(idFactory.create_id())
     note_title = input("Введите заголовок заметки:\n")
     note_description = input("Введите описание заметки:\n")
-    notes = [Entity.Note.Note(title=note_title, description=note_description)]
+    note_date = str(datetime.now().strftime("%d.%m.%Y %H:%M"))
+    notes = [Entity.Note.Note(id=note_id, title=note_title,
+                              description=note_description, date=note_date)]
     return notes
 
 
@@ -46,13 +52,12 @@ def edit_note():
     value = []
     for note in data:
         if id == note.get_id():
-            note.title = input("Введите новый заголовок:\n")
-            note.description = input("Введите новое описание:\n")
-            Entity.Note.Note.set_date(note)
-            value.append(note)
-        else:
-            value.append(note)
+            note.set_title()
+            note.set_description()
+            note.set_date()
+        value.append(note)
     return value
+
 
 def delete_note():
     data = Repository.findInFile.find_in_file()

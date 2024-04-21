@@ -1,11 +1,9 @@
 from datetime import datetime
 
-from Entity import idFactory
-
 
 class Note:
-    def __init__(self, id=str(idFactory.create_id()), title="title", description="description",
-                 date=str(datetime.now().strftime("%d.%m.%Y %H:%M"))):
+    def __init__(self, id="id", title="title", description="description",
+                 date="date"):
         self.id = id
         self.title = title
         self.description = description
@@ -19,6 +17,12 @@ class Note:
 
     def get_date(self):
         return self.date
+
+    def set_title(self):
+        self.title = input("Введите новый заголовок:\n")
+
+    def set_description(self):
+        self.description = input("Введите новое описание:\n")
 
     def set_date(self):
         self.date = str(datetime.now().strftime("%d.%m.%Y %H:%M"))

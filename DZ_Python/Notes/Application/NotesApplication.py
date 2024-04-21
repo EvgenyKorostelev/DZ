@@ -1,4 +1,6 @@
-from Controller.Service import find_all_notes, create_note, find_note_by_id, find_note_by_date, delete_note, edit_note
+import sys
+
+from Services.Service import find_all_notes, create_note, find_note_by_id, find_note_by_date, delete_note, edit_note
 from Repository.saveToFile import save_to_file
 
 
@@ -36,12 +38,13 @@ def start_application():
             find_note_by_date()
         elif command == "q":
             print("Завершение работы программы . . .")
+            sys.exit()
     elif command == "4":
         save_to_file(edit_note())
     elif command == "5":
         save_to_file(delete_note())
     elif command == "q":
         print("Завершение работы программы . . .")
+        sys.exit()
 
 
-start_application()
