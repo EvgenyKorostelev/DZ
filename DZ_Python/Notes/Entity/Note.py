@@ -20,6 +20,9 @@ class Note:
     def get_date(self):
         return self.date
 
+    def set_date(self):
+        self.date = str(datetime.now().strftime("%d.%m.%Y %H:%M"))
+
     def to_string(self):
         return self.id + ';' + self.title + ';' + self.description + ';' + self.date
 

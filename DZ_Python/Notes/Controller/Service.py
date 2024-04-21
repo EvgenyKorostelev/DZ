@@ -41,12 +41,22 @@ def find_note_by_date():
 
 
 def edit_note():
-    pass
-
+    data = Repository.findInFile.find_in_file()
+    id = input("Введите id заметки, для редактирования: ")
+    value = []
+    for note in data:
+        if id == note.get_id():
+            note.title = input("Введите новый заголовок:\n")
+            note.description = input("Введите новое описание:\n")
+            Entity.Note.Note.set_date(note)
+            value.append(note)
+        else:
+            value.append(note)
+    return value
 
 def delete_note():
     data = Repository.findInFile.find_in_file()
-    id = input("Введите id заметки, для удаления: ")
+    id = input("Введите id заметки, для УДАЛЕНИЯ: ")
     value = []
     for note in data:
         if id != note.get_id():
