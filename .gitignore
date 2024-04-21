@@ -486,3 +486,5 @@ bin/
 .DS_Store
 
 ## My
+My_Notes.csv
+id_counter.csv
