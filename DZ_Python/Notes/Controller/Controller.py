@@ -46,5 +46,3 @@ def start_application():
     elif command == "q":
         print("Завершение работы программы . . .")
         sys.exit()
-
-

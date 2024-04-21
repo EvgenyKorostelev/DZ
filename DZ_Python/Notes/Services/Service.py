@@ -24,7 +24,6 @@ def find_all_notes():
             print(Entity.Note.Note.scheme_note(note))
 
 
-
 def find_note_by_id():
     data = Repository.findInFile.find_in_file()
     id = input("Введите id заметки: ")
