@@ -39,7 +39,7 @@ public class Toy {
     public String toString() {
         return "Toy{" +
                 "id=" + id +
-                ", name=" + name  +
+                ", name='" + name + '\'' +
                 ", count=" + count +
                 ", rate=" + rate +
                 '}';

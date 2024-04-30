@@ -1,25 +1,43 @@
 package services;
 
 import entity.Toy;
+import repository.FindAllToys;
 import repository.SaveToyToFile;
 
 import java.util.*;
 
 public class ToyDrawing {
 
-    public void drawing(List<Toy> toys, String pathPrize) {
+    public List<Toy> drawing(List<Toy> toys, String pathPrize) {
+        int countAllToys = 0;
+        for (Toy toy : toys) {
+            countAllToys += toy.getCount();
+        }
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите количество игрушек, которые хотите разыграть: ");
-        int countDraws = scanner.nextInt();
+        System.out.println("Сейчас в магазине ВСЕГО " + countAllToys + " игрушек, ");
+        System.out.println("введите количество игрушек, которые хотите разыграть: ");
+        int countDraws = Integer.MAX_VALUE;
+        while (countDraws > countAllToys || countDraws < 1) {
+            try {
+                countDraws = Integer.parseInt(scanner.nextLine());
+                if(countDraws > countAllToys || countDraws < 1)
+                    System.out.println("Количество игрушек, для розыгрыша должно быть" +
+                            " больше 0 и меньше " + countAllToys + " повторите ввод: ");
+            } catch (NumberFormatException e) {
+                System.out.println("Неверный формат, повторите ввод: ");
+            }
+        }
+
         List<Toy> prizeToys = new ArrayList<>();
         for (int i = 0; i < countDraws; i++) {
             prizeToys.add(choicePrizeToy(toys));
         }
         System.out.println("Вы выйграли следующие игрушки: ");
         receivingPrizeToy(prizeToys, pathPrize);
-        for (Toy prizeToy : prizeToys) {
-            System.out.println(prizeToy);
+        for (Toy toy : prizeToys) {
+            System.out.println(toy);
         }
+        return prizeToys;
     }
 
     private Toy choicePrizeToy(List<Toy> toys) {//выбор призовой игрушки
@@ -31,6 +49,7 @@ public class ToyDrawing {
             for (Toy toy : toys) {
                 if (randomNumber <= toy.getRate()) {
                     prizeToy = toy;
+                    prizeToy.setCount(1);
                     break;
                 }
             }

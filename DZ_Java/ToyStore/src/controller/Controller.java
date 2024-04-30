@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Toy;
+import repository.DeleteToyFromFile;
 import repository.FindAllToys;
 import repository.FindToyByName;
 import repository.SaveToyToFile;
@@ -55,8 +56,11 @@ public class Controller {
                 break;
             case (4):
                 ToyDrawing drawing = new ToyDrawing();
-                drawing.drawing(finderAll.findAll(pathStore), pathPrizes);
-                System.out.println();
+                DeleteToyFromFile removePrizeToys = new DeleteToyFromFile();
+                List<Toy> prizeToys = drawing.drawing(finderAll.findAll(pathStore), pathPrizes);
+                for (Toy prizeToy : prizeToys) {
+                    removePrizeToys.deleteToy(prizeToy, pathStore);
+                }
                 break;
         }
     }

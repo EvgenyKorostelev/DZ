@@ -71,7 +71,7 @@ public class SaveToyToFile implements Save {
     }
 
     @Override
-    public void saveEditCountToy(Toy toy, String path) {
+    public void saveAfterDrawToy(Toy toy, String path) {
 
     }
 
