@@ -12,13 +12,13 @@ public class FindAllToys {
 
     public List<Toy> findAll(String path){
         List<Toy> toys = new ArrayList<>();
-        String[] toyArr;
+        String[] toysArr;
         String line;
         try (BufferedReader bfr = new BufferedReader(new FileReader(path))){
             while ((line = bfr.readLine()) != null) {
-                toyArr = line.split(";");
-                Toy toy = new Toy(Integer.parseInt(toyArr[0]), toyArr[1],
-                        Integer.parseInt(toyArr[2]), Float.parseFloat(toyArr[3]));
+                toysArr = line.split(";");
+                Toy toy = new Toy(Integer.parseInt(toysArr[0]), toysArr[1],
+                        Integer.parseInt(toysArr[2]), Float.parseFloat(toysArr[3]));
                 toys.add(toy);
             }
         } catch (IOException e) {

@@ -2,8 +2,6 @@ package repository;
 
 import entity.Toy;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 public class DeleteToyFromFile {
@@ -25,7 +23,7 @@ public class DeleteToyFromFile {
 //            throw new RuntimeException(e);
 //        }
         for (Toy toyJ : toysInFile) {
-            saveToyToFile.save(toyJ, path);
+            saveToyToFile.saveNewToy(toyJ, path);
         }
     }
 }

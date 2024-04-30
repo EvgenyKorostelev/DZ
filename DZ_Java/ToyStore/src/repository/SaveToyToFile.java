@@ -1,6 +1,7 @@
 package repository;
 
 import entity.Toy;
+import services.EditRateToy;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +14,7 @@ import java.util.List;
 public class SaveToyToFile implements Save {
 
     @Override
-    public void save(Toy toy, String path) {//"storageToys.txt", "prizeToys.txt"
+    public void saveNewToy(Toy toy, String path) {//"storageToys.txt", "prizeToys.txt"
         Path file = Paths.get(path);
         FindAllToys finder = new FindAllToys();
         if (Files.exists(file)) {
@@ -22,7 +23,7 @@ public class SaveToyToFile implements Save {
             for (Toy toyI : toysInFile) {
                 if(toy.getName().equals(toyI.getName())){
                     flag =true;
-                    toyI.setCount(toyI.getCount() + 1);
+                    toyI.setCount(toyI.getCount() + toy.getCount());
                     try {
                         Files.writeString(file, "");
                     } catch (IOException e) {
@@ -38,6 +39,40 @@ public class SaveToyToFile implements Save {
             new File(path);
             write(toy, path);
         }
+    }
+
+    @Override
+    public void saveEditRateToy(Toy toy, String path) {
+        EditRateToy editRateToy = new EditRateToy();
+        Path file = Paths.get(path);
+        FindAllToys finder = new FindAllToys();
+        if (Files.exists(file)) {
+            List<Toy> toysInFile = finder.findAll(path);
+            boolean flag = false;
+            for (Toy toyI : toysInFile) {
+                if(toy.getName().equals(toyI.getName())){
+                    flag =true;
+                    toyI.setRate(editRateToy.editRate(toy).getRate());
+                    try {
+                        Files.writeString(file, "");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    for (Toy toyJ : toysInFile) {
+                        write(toyJ, path);
+                    }
+                }
+            }
+            if(!flag) System.out.println("Такой игрушки нет в магазине.");
+        } else {
+            new File(path);
+            write(toy, path);
+        }
+    }
+
+    @Override
+    public void saveEditCountToy(Toy toy, String path) {
+
     }
 
     private void write(Toy toy, String path) {

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ToyDrawing {
 
-    public void Drawing(List<Toy> toys) {
+    public void drawing(List<Toy> toys, String pathPrize) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите количество игрушек, которые хотите разыграть: ");
         int countDraws = scanner.nextInt();
@@ -15,10 +15,11 @@ public class ToyDrawing {
         for (int i = 0; i < countDraws; i++) {
             prizeToys.add(choicePrizeToy(toys));
         }
-
-
-
-
+        System.out.println("Вы выйграли следующие игрушки: ");
+        receivingPrizeToy(prizeToys, pathPrize);
+        for (Toy prizeToy : prizeToys) {
+            System.out.println(prizeToy);
+        }
     }
 
     private Toy choicePrizeToy(List<Toy> toys) {//выбор призовой игрушки
@@ -37,11 +38,10 @@ public class ToyDrawing {
         return prizeToy;
     }
 
-    private void receivingPrizeToy(List<Toy> toys) {//получение призовой игрушки
-        String path = "prizeToys.txt";
+    private void receivingPrizeToy(List<Toy> toys, String pathPrize) {//получение призовой игрушки
         SaveToyToFile receiving = new SaveToyToFile();
         for (Toy toy : toys) {
-            receiving.save(toy, path);
+            receiving.saveNewToy(toy, pathPrize);
         }
     }
 }
