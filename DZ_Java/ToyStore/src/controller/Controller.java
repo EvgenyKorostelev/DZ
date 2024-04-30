@@ -29,17 +29,18 @@ public class Controller {
                 """);
         int command = scanner.nextInt();
         switch (command) {
+
             case (1):
                 AddNewToy adder = new AddNewToy();
                 saver.saveNewToy(adder.add(), pathStore);
                 System.out.println("Игрушка добавлена в магазин.");
-
+                break;
             case (2):
-
                 List<Toy> allToys = finderAll.findAll(pathStore);
                 for (Toy toy : allToys) {
                     System.out.println(toy);
                 }
+                break;
             case (3):
                 FindToyByName finderOne = new FindToyByName();
                 System.out.println("Введите название игрушки: ");
@@ -51,10 +52,12 @@ public class Controller {
                     saver.saveEditRateToy(toy, pathStore);
                     System.out.println("Шанс выпадения " + toy.getName() + " изменен.");
                 }
+                break;
             case (4):
                 ToyDrawing drawing = new ToyDrawing();
                 drawing.drawing(finderAll.findAll(pathStore), pathPrizes);
                 System.out.println();
+                break;
         }
     }
 }
