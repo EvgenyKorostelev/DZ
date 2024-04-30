@@ -18,6 +18,7 @@ public class Controller {
         String pathStore = "storageToys.txt";
         String pathPrizes = "prizeToys.txt";
         FindAllToys finderAll = new FindAllToys();
+        FindToyByName finderOne = new FindToyByName();
         SaveToyToFile saver = new SaveToyToFile();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Добро пожаловать в ToyStore :)");
@@ -28,7 +29,17 @@ public class Controller {
                 3 - Изменить шанс выпадения игрушки по названию.
                 4 - Провести розыгрыш.
                 """);
-        int command = scanner.nextInt();
+
+        int command = Integer.MAX_VALUE;
+        while (command < 1 || command > 4) {
+            try {
+                command = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Неверный формат, повторите ввод: ");
+            }
+        }
+
+
         switch (command) {
 
             case (1):
@@ -38,12 +49,13 @@ public class Controller {
                 break;
             case (2):
                 List<Toy> allToys = finderAll.findAll(pathStore);
+                if(allToys.isEmpty())
+                    System.out.println("В магазине нет ни одной игрушки.");
                 for (Toy toy : allToys) {
                     System.out.println(toy);
                 }
                 break;
             case (3):
-                FindToyByName finderOne = new FindToyByName();
                 System.out.println("Введите название игрушки: ");
                 String nameToy = scanner.nextLine();
                 Toy toy = finderOne.findByName(nameToy, pathStore);

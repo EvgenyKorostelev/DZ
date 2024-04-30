@@ -22,7 +22,7 @@ public class FindAllToys {
                 toys.add(toy);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("В магазине нет ни одной игрушки.");
         }
         return toys;
     }

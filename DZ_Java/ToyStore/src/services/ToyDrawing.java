@@ -1,7 +1,6 @@
 package services;
 
 import entity.Toy;
-import repository.FindAllToys;
 import repository.SaveToyToFile;
 
 import java.util.*;
@@ -9,6 +8,7 @@ import java.util.*;
 public class ToyDrawing {
 
     public List<Toy> drawing(List<Toy> toys, String pathPrize) {
+        List<Toy> toysForDraw = new ArrayList<>(toys);
         int countAllToys = 0;
         for (Toy toy : toys) {
             countAllToys += toy.getCount();
@@ -20,7 +20,7 @@ public class ToyDrawing {
         while (countDraws > countAllToys || countDraws < 1) {
             try {
                 countDraws = Integer.parseInt(scanner.nextLine());
-                if(countDraws > countAllToys || countDraws < 1)
+                if (countDraws > countAllToys || countDraws < 1)
                     System.out.println("Количество игрушек, для розыгрыша должно быть" +
                             " больше 0 и меньше " + countAllToys + " повторите ввод: ");
             } catch (NumberFormatException e) {
@@ -30,7 +30,20 @@ public class ToyDrawing {
 
         List<Toy> prizeToys = new ArrayList<>();
         for (int i = 0; i < countDraws; i++) {
-            prizeToys.add(choicePrizeToy(toys));
+            Toy prizeToy = choicePrizeToy(toysForDraw);
+            prizeToys.add(prizeToy);
+
+
+            for (int j = 0; j < toys.size() - 1; j++) {
+                if (prizeToy.getName().equals(toys.get(j).getName())
+                        && toys.get(j).getCount() > 1) {
+                    toysForDraw.get(j).setCount(toysForDraw.get(j).getCount() - 1);
+                } else if (prizeToy.getName().equals(toys.get(j).getName())
+                        && toys.get(j).getCount() == 1) {
+                    toysForDraw.remove(toysForDraw.get(j));
+                }
+            }
+
         }
         System.out.println("Вы выйграли следующие игрушки: ");
         receivingPrizeToy(prizeToys, pathPrize);
@@ -44,8 +57,8 @@ public class ToyDrawing {
         Collections.shuffle(toys);
         Toy prizeToy = null;
         Random rnd = new Random();
-        float randomNumber = rnd.nextFloat();
         while (prizeToy == null) {
+            float randomNumber = rnd.nextFloat();
             for (Toy toy : toys) {
                 if (randomNumber <= toy.getRate()) {
                     prizeToy = toy;
