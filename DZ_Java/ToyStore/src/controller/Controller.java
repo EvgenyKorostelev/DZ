@@ -23,11 +23,12 @@ public class Controller {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Добро пожаловать в ToyStore :)");
         System.out.println("""
-                Введите команду из списка:
+                    Введите команду из списка:
                 1 - Добавить игрушку в магазин.
                 2 - Получить список всех игрушек в магазине.
                 3 - Изменить шанс выпадения игрушки по названию.
                 4 - Провести розыгрыш.
+                    Ваш выбор:
                 """);
 
         int command = Integer.MAX_VALUE;
@@ -35,10 +36,16 @@ public class Controller {
             try {
                 command = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Неверный формат, повторите ввод: ");
+                System.out.println("""
+                    Нет такой команды, повторите ввод:
+                1 - Добавить игрушку в магазин.
+                2 - Получить список всех игрушек в магазине.
+                3 - Изменить шанс выпадения игрушки по названию.
+                4 - Провести розыгрыш.
+                    Ваш выбор:
+                """);
             }
         }
-
 
         switch (command) {
 

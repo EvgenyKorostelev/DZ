@@ -70,10 +70,7 @@ public class SaveToyToFile implements Save {
         }
     }
 
-    @Override
-    public void saveAfterDrawToy(Toy toy, String path) {
 
-    }
 
     private void write(Toy toy, String path) {
         try (FileWriter writer = new FileWriter(path, true)) {

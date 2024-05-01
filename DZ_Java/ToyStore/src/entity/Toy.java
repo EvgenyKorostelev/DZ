@@ -39,9 +39,9 @@ public class Toy {
     public String toString() {
         return "Toy{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", count=" + count +
-                ", rate=" + rate +
+                ", название='" + name + '\'' +
+                ", количество=" + count +
+                ", шанс выпадения=" + rate +
                 '}';
     }
 }

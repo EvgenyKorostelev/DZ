@@ -33,14 +33,13 @@ public class ToyDrawing {
             Toy prizeToy = choicePrizeToy(toysForDraw);
             prizeToys.add(prizeToy);
 
-
-            for (int j = 0; j < toys.size() - 1; j++) {
+            for (int j = 0; j < toysForDraw.size(); j++) {
                 if (prizeToy.getName().equals(toys.get(j).getName())
                         && toys.get(j).getCount() > 1) {
                     toysForDraw.get(j).setCount(toysForDraw.get(j).getCount() - 1);
                 } else if (prizeToy.getName().equals(toys.get(j).getName())
                         && toys.get(j).getCount() == 1) {
-                    toysForDraw.remove(toysForDraw.get(j));
+                    toysForDraw.remove(toys.get(j));
                 }
             }
 

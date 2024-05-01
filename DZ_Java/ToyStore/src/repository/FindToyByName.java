@@ -15,13 +15,12 @@ public class FindToyByName {
             while ((line = bfr.readLine()) != null) {
                 toysArr = line.split(";");
                 if (toysArr[1].equals(name)) {
-                    Toy toy = new Toy(Integer.parseInt(toysArr[0]), toysArr[1],
+                    return new Toy(Integer.parseInt(toysArr[0]), toysArr[1],
                             Integer.parseInt(toysArr[2]), Float.parseFloat(toysArr[3]));
-                    return toy;
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println();
         }
         return null;
     }

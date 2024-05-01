@@ -17,7 +17,7 @@ public class DeleteToyFromFile {
         List<Toy> toysForSave = new ArrayList<>(toysInFile);
         SaveToyToFile saveToyToFile = new SaveToyToFile();
 
-        for (int i = 0; i < toysInFile.size() - 1; i++) {
+        for (int i = 0; i < toysForSave.size(); i++) {
             if (toy.getName().equals(toysInFile.get(i).getName())
                     && toysInFile.get(i).getCount() > 1) {
                 toysForSave.get(i).setCount(toysForSave.get(i).getCount() - 1);
