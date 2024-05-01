@@ -17,13 +17,13 @@ public class DeleteToyFromFile {
         List<Toy> toysForSave = new ArrayList<>(toysInFile);
         SaveToyToFile saveToyToFile = new SaveToyToFile();
 
-        for (int i = 0; i < toysForSave.size(); i++) {
+        for (int i = 0; i < toysInFile.size(); i++) {
             if (toy.getName().equals(toysInFile.get(i).getName())
                     && toysInFile.get(i).getCount() > 1) {
-                toysForSave.get(i).setCount(toysForSave.get(i).getCount() - 1);
+                toysInFile.get(i).setCount(toysInFile.get(i).getCount() - 1);
             } else if (toy.getName().equals(toysInFile.get(i).getName())
                     && toysInFile.get(i).getCount() == 1) {
-                toysForSave.remove(toysForSave.get(i));
+                toysInFile.remove(toysInFile.get(i));
             }
         }
 
@@ -36,7 +36,7 @@ public class DeleteToyFromFile {
         }
 
 
-        for (Toy toyI : toysForSave) {
+        for (Toy toyI : toysInFile) {
             saveToyToFile.saveNewToy(toyI, path);
         }
     }
