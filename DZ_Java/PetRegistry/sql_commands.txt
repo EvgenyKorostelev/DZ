@@ -1,0 +1,188 @@
+DROP DATABASE IF EXISTS human_friends;
+CREATE DATABASE human_friends;
+USE human_friends;
+-- ===============================================================
+DROP TABLE IF EXISTS animals;
+CREATE TABLE animals(
+id INT PRIMARY KEY AUTO_INCREMENT,
+type_animal VARCHAR(30)
+);
+INSERT INTO animals (type_animal)
+VALUES ("home animals"), ("pack animals");
+-- ===============================================================
+DROP TABLE IF EXISTS home_animals;
+CREATE TABLE home_animals(
+id INT PRIMARY KEY AUTO_INCREMENT,
+kind_animal VARCHAR(30),
+type_id INT,
+FOREIGN KEY (type_id) REFERENCES animals (id)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO home_animals (kind_animal, type_id)
+VALUES ("dogs", 1), ("cats", 1), ("hamsters", 1);
+-- ===============================================================
+DROP TABLE IF EXISTS pack_animals;
+CREATE TABLE pack_animals(
+id INT PRIMARY KEY AUTO_INCREMENT,
+kind_animal VARCHAR(30),
+type_id INT,
+FOREIGN KEY (type_id) REFERENCES animals (id)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO pack_animals (kind_animal, type_id)
+VALUES ("horses", 2), ("camels", 2), ("donkeys", 2);
+-- ===============================================================
+DROP TABLE IF EXISTS dogs;
+CREATE TABLE dogs(
+id INT PRIMARY KEY,
+name VARCHAR(10),
+commands VARCHAR(100),
+date_birth DATE,
+kind_id INT,
+FOREIGN KEY (kind_id) REFERENCES home_animals (id)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO dogs (id, name, commands, date_birth, kind_id)
+VALUES (11111111, "Rem", "sit, lie, voice", "1996-05-04", 1),
+	   (11111112, "Zeta", "sit, lie, take", "1994-08-12", 1),
+	   (11111113, "Pit", "sit, lie, give", "1992-01-28", 1);
+-- ===============================================================	   
+DROP TABLE IF EXISTS cats;
+CREATE TABLE cats(
+id INT PRIMARY KEY,
+name VARCHAR(10),
+commands VARCHAR(100),
+date_birth DATE,
+kind_id INT,
+FOREIGN KEY (kind_id) REFERENCES home_animals (id)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO cats (id, name, commands, date_birth, kind_id)
+VALUES (22222221, "Murka", "kis-kis-kis, eat", "2001-07-21", 2),
+	   (22222222, "Lapka", "kis-kis-kis, eat", "2007-03-08", 2),
+	   (22222223, "Gav", "kis-kis-kis, eat", "2014-11-17", 2);
+-- ===============================================================	   
+DROP TABLE IF EXISTS hamsters;
+CREATE TABLE hamsters(
+id INT PRIMARY KEY,
+name VARCHAR(10),
+commands VARCHAR(100),
+date_birth DATE,
+kind_id INT,
+FOREIGN KEY (kind_id) REFERENCES home_animals (id)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO hamsters (id, name, commands, date_birth, kind_id)
+VALUES (33333331, "Homa", "eat", "2022-11-02", 3),
+	   (33333332, "Depp", "eat", "2022-12-09", 3),
+	   (33333333, "Sonya", "eat", "2022-7-22", 3);
+-- ===============================================================
+DROP TABLE IF EXISTS horses;
+CREATE TABLE horses(
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(10),
+commands VARCHAR(100),
+date_birth DATE,
+kind_id INT,
+FOREIGN KEY (kind_id) REFERENCES pack_animals (id)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO horses (name, commands, date_birth, kind_id)
+VALUES ("Sky", "gallop, step, passage", "1990-03-23", 1),
+	   ("Rocket", "gallop, step, passage", "1990-02-22", 1),
+	   ("Yasha", "gallop, step, passage", "1990-07-06", 1);
+-- ===============================================================	   
+DROP TABLE IF EXISTS camels;
+CREATE TABLE camels(
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(10),
+commands VARCHAR(100),
+date_birth DATE,
+kind_id INT,
+FOREIGN KEY (kind_id) REFERENCES pack_animals (id)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO camels (name, commands, date_birth, kind_id)
+VALUES ("Marlboro", "Gee, stop", "1980-08-02", 2),
+	   ("Quasimodo", "Gee, stop", "1982-05-30", 2),
+	   ("Igor", "Gee, stop", "1983-11-17", 2);
+-- ===============================================================	   
+DROP TABLE IF EXISTS donkeys;
+CREATE TABLE donkeys(
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(10),
+commands VARCHAR(100),
+date_birth DATE,
+kind_id INT,
+FOREIGN KEY (kind_id) REFERENCES pack_animals (id)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO donkeys (name, commands, date_birth, kind_id)
+VALUES ("American", "Gee, stop", "1980-01-23", 3),
+	   ("Ia", "Gee, stop", "1990-01-24", 3),
+	   ("Feral", "Gee, stop", "2000-01-27", 3);
+-- ===============================================================	  
+DELETE FROM camels;
+SELECT name, commands, date_birth, kind_id FROM horses
+UNION
+SELECT name, commands, date_birth, kind_id FROM  donkeys;
+-- ===============================================================
+DROP TABLE IF EXISTS young_animals;
+CREATE TABLE young_animals AS
+SELECT name,
+	   commands,
+	   date_birth,
+	   kind_id,
+	   concat(CAST(TIMESTAMPDIFF(YEAR, date_birth, CURDATE()) AS CHAR), " лет ",
+	   		  CAST(MOD(TIMESTAMPDIFF(MONTH, date_birth, CURDATE()), 12) AS CHAR), " мес.")
+	   		  AS age
+FROM (SELECT * FROM horses
+	  UNION
+	  SELECT * FROM  camels
+	  UNION
+	  SELECT * FROM  donkeys
+	  UNION
+	  SELECT * FROM  dogs
+	  UNION
+	  SELECT * FROM  cats
+	  UNION
+	  SELECT * FROM  hamsters) AS all_animals 
+WHERE date_birth >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR) AND
+	  date_birth <= DATE_SUB(CURDATE(), INTERVAL 1 YEAR);
+SELECT * FROM young_animals;
+-- ===============================================================
+SELECT dogs.name, dogs.commands, dogs.date_birth, home_animals.kind_animal, animals.type_animal, young_animals.age 
+FROM dogs
+LEFT JOIN home_animals ON home_animals.id = dogs.kind_id
+LEFT JOIN animals ON animals.id = home_animals.type_id 
+LEFT JOIN young_animals ON young_animals.name = dogs.name 
+UNION 
+SELECT cats.name, cats.commands, cats.date_birth, home_animals.kind_animal, animals.type_animal, young_animals.age
+FROM cats
+LEFT JOIN home_animals ON home_animals.id = cats.kind_id
+LEFT JOIN animals ON animals.id = home_animals.type_id
+LEFT JOIN young_animals ON young_animals.name = cats.name
+UNION 
+SELECT hamsters.name, hamsters.commands, hamsters.date_birth, home_animals.kind_animal, animals.type_animal, young_animals.age
+FROM hamsters
+LEFT JOIN home_animals ON home_animals.id = hamsters.kind_id
+LEFT JOIN animals ON animals.id = home_animals.type_id 
+LEFT JOIN young_animals ON young_animals.name = hamsters.name
+UNION
+SELECT horses.name, horses.commands, horses.date_birth, pack_animals.kind_animal, animals.type_animal, young_animals.age
+FROM horses
+LEFT JOIN pack_animals ON pack_animals.id = horses.kind_id
+LEFT JOIN animals ON animals.id = pack_animals.type_id
+LEFT JOIN young_animals ON young_animals.name = horses.name
+UNION
+SELECT camels.name, camels.commands, camels.date_birth, pack_animals.kind_animal, animals.type_animal, young_animals.age
+FROM camels
+LEFT JOIN pack_animals ON pack_animals.id = camels.kind_id
+LEFT JOIN animals ON animals.id = pack_animals.type_id
+LEFT JOIN young_animals ON young_animals.name = camels.name 
+UNION
+SELECT donkeys.name, donkeys.commands, donkeys.date_birth, pack_animals.kind_animal, animals.type_animal, young_animals.age
+FROM donkeys
+LEFT JOIN pack_animals ON pack_animals.id = donkeys.kind_id
+LEFT JOIN animals ON animals.id = pack_animals.type_id
+LEFT JOIN young_animals ON young_animals.name = donkeys.name

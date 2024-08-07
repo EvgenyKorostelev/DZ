@@ -1,0 +1,35 @@
+avetto@gb-linux:~$ cat > home_animals
+собаки
+кошки
+хомяки
+^C
+avetto@gb-linux:~$ cat > pack_animals
+лошади
+верблюды
+ослы
+^C
+avetto@gb-linux:~$ cat home_animals pack_animals > all_animals
+avetto@gb-linux:~$ cat all_animals
+собаки
+кошки
+хомяки
+лошади
+верблюды
+ослы
+avetto@gb-linux:~$ mv all_animals human_friends
+avetto@gb-linux:~$ mkdir DZ_Specialization
+avetto@gb-linux:~$ mv /home/avetto/human_friends /home/avetto/DZ_Specialization/human_friends
+
+avetto@gb-linux:~$ mkdir MySQL
+avetto@gb-linux:~$ cd mysql/
+avetto@gb-linux:~/mysql$ wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.32-1_all.deb
+avetto@gb-linux:~/mysql$ sudo dpkg -i mysql-apt-config_0.8.32-1_all.deb
+avetto@gb-linux:~/mysql$ sudo apt-get update
+avetto@gb-linux:~/mysql$ sudo apt-get install mysql-server
+avetto@gb-linux:~/mysql$ systemctl status mysql
+
+avetto@gb-linux:~/mysql$ wget -c https://download.virtualbox.org/virtualbox/7.0.20/virtualbox-7.0_7.0.20-163906~Ubuntu~jammy_amd64.deb
+avetto@gb-linux:~/mysql$ sudo dpkg -i virtualbox-7.0_7.0.20-163906~Ubuntu~jammy_amd64.deb
+avetto@gb-linux:~/mysql$ whereis virtualbox
+avetto@gb-linux:~/mysql$ dpkg -S /usr/bin/virtualbox /usr/lib/virtualbox /usr/share/virtualbox
+avetto@gb-linux:~/mysql$ sudo dpkg -P virtualbox-7.0
