@@ -30,28 +30,29 @@ public class ServerWindow extends JFrame {
         fieldAllMessages = new JTextArea();
         JScrollPane spFieldAllMessages = new JScrollPane(fieldAllMessages);
         fieldAllMessages.setLineWrap(true);
-        fieldAllMessages.setText(findMessagesAllUsers());
+
 
         buttonStart = new JButton("Start");
         buttonStop = new JButton("Stop");
 
         buttonStart.addActionListener(e -> {
             if (!isServerStatus()) {
-                fieldAllMessages.setText(fieldAllMessages.getText() + "Server Up !!!" + "\n");
+                fieldAllMessages.setText("Server Up !!!" + "\n"
+                        + findMessagesAllUsers());
             } else {
-                fieldAllMessages.setText(fieldAllMessages.getText() + "Сервер уже запущен." + "\n");
-                System.out.println("Сервер уже запущен.");
+                fieldAllMessages.setText(fieldAllMessages.getText()
+                        + "Сервер уже запущен." + "\n");
             }
             serverStatus = true;
         });
 
         buttonStop.addActionListener(e -> {
             if (isServerStatus()) {
-                fieldAllMessages.setText(fieldAllMessages.getText() + "Server Down !!!" + "\n");
-                System.out.println("Server Down !!!");
+                fieldAllMessages.setText(fieldAllMessages.getText()
+                        + "Server Down !!!" + "\n");
             } else {
-                fieldAllMessages.setText(fieldAllMessages.getText() + "Сервер НЕ запущен." + "\n");
-                System.out.println("Сервер НЕ запущен.");
+                fieldAllMessages.setText(fieldAllMessages.getText()
+                        + "Сервер НЕ запущен." + "\n");
             }
             serverStatus = false;
         });

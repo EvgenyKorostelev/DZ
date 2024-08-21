@@ -15,6 +15,9 @@ public class Main {
             while (true) {
                 try {
                     for (ClientWindow client : clients) {
+                        if(!server.isServerStatus()){
+                            client.setClientStatus(false);
+                        }
                         client.generateTextAllMessages(server);
                     }
                     Thread.sleep(1000); //1000 == 1 сек

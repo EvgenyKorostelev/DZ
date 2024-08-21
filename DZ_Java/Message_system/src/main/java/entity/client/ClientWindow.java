@@ -36,7 +36,10 @@ public class ClientWindow extends JFrame {
         }
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
-        setLocationRelativeTo(null);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
+        setLocation((screenSize.width-1000)/2, (screenSize.height-800)/2);
+        //setLocationRelativeTo(null);
 
         clientStatus = false;
 
@@ -109,6 +112,10 @@ public class ClientWindow extends JFrame {
 
     public boolean isClientStatus() {
         return clientStatus;
+    }
+
+    public void setClientStatus(boolean clientStatus) {
+        this.clientStatus = clientStatus;
     }
 
     public void postMessage(Message msg, ServerWindow serverWindow) {
