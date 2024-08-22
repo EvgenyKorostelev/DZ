@@ -122,14 +122,14 @@ public class ClientWindow extends JFrame {
     }
 
     public void postMessage(Message msg, ServerWindow serverWindow) {
-        if (!message.getTextMessage().isEmpty() && message.getUserLogin().equals(user)) {
+        if (!message.getTextMessage().isEmpty() && message.getAuthorMessage().equals(user)) {
             serverWindow.saveMessage(msg);
         }
     }
 
     private String generateTextMessage(Message message) {
-        return message.getDate() + " "
-                + message.getUserLogin() + ": "
+        return message.getDateMessage() + " "
+                + message.getAuthorMessage() + ": "
                 + message.getTextMessage() + "\n";
     }
 
@@ -147,7 +147,7 @@ public class ClientWindow extends JFrame {
                     fieldMessage.getText());
             postMessage(message, serverWindow);
             generateTextAllMessages(serverWindow);
-            if (!message.getTextMessage().isEmpty() && message.getUserLogin().equals(user)) {
+            if (!message.getTextMessage().isEmpty() && message.getAuthorMessage().equals(user)) {
                 serverWindow.setFieldAllMessages(serverWindow.getFieldAllMessages().getText()
                         + generateTextMessage(message));
                 fieldMessage.setText("");

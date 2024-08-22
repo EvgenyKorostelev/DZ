@@ -8,32 +8,32 @@ import java.util.Locale;
 
 public class Message  implements Comparable<Message> {
 
-    private String userLogin;
+    private String authorMessage;
     private String textMessage;
-    private String date;
+    private String dateMessage;
 
-    public Message(String userLogin, String textMessage, String date) {
-        this.userLogin = userLogin;
+    public Message(String authorMessage, String textMessage, String dateMessage) {
+        this.authorMessage = authorMessage;
         this.textMessage = textMessage;
-        this.date = date;
+        this.dateMessage = dateMessage;
     }
 
-    public Message(String userLogin, String textMessage) {
-        this.userLogin = userLogin;
+    public Message(String authorMessage, String textMessage) {
+        this.authorMessage = authorMessage;
         this.textMessage = textMessage;
-        this.date = dateGenerator();
+        this.dateMessage = dateGenerator();
     }
 
-    public String getUserLogin() {
-        return userLogin;
+    public String getAuthorMessage() {
+        return authorMessage;
     }
 
     public String getTextMessage() {
         return textMessage;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateMessage() {
+        return dateMessage;
     }
 
     private String dateGenerator() {
@@ -43,16 +43,16 @@ public class Message  implements Comparable<Message> {
     @Override
     public int compareTo(Message o) {
         return ComparisonChain.start()
-                .compare(Integer.parseInt(this.getDate().substring(0, 4)),
-                        Integer.parseInt(o.getDate().substring(0, 4)))
-                .compare(Integer.parseInt(this.getDate().substring(5, 7)),
-                        Integer.parseInt(o.getDate().substring(5, 7)))
-                .compare(Integer.parseInt(this.getDate().substring(8, 10)),
-                        Integer.parseInt(o.getDate().substring(8, 10)))
-                .compare(Integer.parseInt(this.getDate().substring(12, 14)),
-                        Integer.parseInt(o.getDate().substring(12, 14)))
-                .compare(Integer.parseInt(this.getDate().substring(15, 17)),
-                        Integer.parseInt(o.getDate().substring(15, 17)))
+                .compare(Integer.parseInt(this.getDateMessage().substring(0, 4)),
+                        Integer.parseInt(o.getDateMessage().substring(0, 4)))
+                .compare(Integer.parseInt(this.getDateMessage().substring(5, 7)),
+                        Integer.parseInt(o.getDateMessage().substring(5, 7)))
+                .compare(Integer.parseInt(this.getDateMessage().substring(8, 10)),
+                        Integer.parseInt(o.getDateMessage().substring(8, 10)))
+                .compare(Integer.parseInt(this.getDateMessage().substring(12, 14)),
+                        Integer.parseInt(o.getDateMessage().substring(12, 14)))
+                .compare(Integer.parseInt(this.getDateMessage().substring(15, 17)),
+                        Integer.parseInt(o.getDateMessage().substring(15, 17)))
                 .result();
     }
 }

@@ -16,9 +16,9 @@ public class SaveMessagesToFile {
         Path file = Paths.get(path);
         if (Files.exists(file)) {
             try (FileWriter writer = new FileWriter(path, true)) {
-                writer.append(message.getUserLogin()).append(";")
+                writer.append(message.getAuthorMessage()).append(";")
                         .append(message.getTextMessage()).append(";")
-                        .append(message.getDate())
+                        .append(message.getDateMessage())
                         .append("\n");
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -78,12 +78,12 @@ public class ServerWindow extends JFrame {
 
     public String findMessagesAllUsers() {
         List<Message> logArray = readerAllUsers.readAllFromFile();
-        logArray.sort(Comparator.comparing(Message::getDate));
+        logArray.sort(Comparator.comparing(Message::getDateMessage));
         StringBuilder stringBuilder = new StringBuilder();
         for (Message message : logArray) {
-            stringBuilder.append(message.getDate())
+            stringBuilder.append(message.getDateMessage())
                     .append(" ")
-                    .append(message.getUserLogin())
+                    .append(message.getAuthorMessage())
                     .append(": ")
                     .append(message.getTextMessage())
                     .append("\n");
