@@ -14,6 +14,7 @@ public class ClientWindow extends JFrame {
     private static final int HEIGHT = 480;
     private final IdFactory idFactory = new IdFactory();
 
+    private ServerWindow serverWindow;
     private boolean clientStatus;
     private Message message;
     private JTextField ipServer;
@@ -29,6 +30,7 @@ public class ClientWindow extends JFrame {
 
 
     public ClientWindow(ServerWindow serverWindow) {
+        this.serverWindow = serverWindow;
         try {
             clientId = idFactory.createId();
         } catch (IOException e) {
@@ -82,7 +84,7 @@ public class ClientWindow extends JFrame {
         buttonSend.addActionListener(e -> actionSend(serverWindow));
 
         JPanel panelTop = new JPanel(new GridLayout(2, 1));
-        JPanel panelTopFirst = new JPanel(new GridLayout(1, 4));
+        JPanel panelTopFirst = new JPanel(new GridLayout(1, 5));
         JPanel panelTopSecond = new JPanel(new GridLayout(1, 5));
         JPanel panelCenter = new JPanel(new GridLayout(1, 1));
         JPanel panelBottom = new JPanel(new GridLayout(1, 2));
@@ -91,6 +93,7 @@ public class ClientWindow extends JFrame {
         panelTopFirst.add(ipServer);
         panelTopFirst.add(new JLabel("порт: "));
         panelTopFirst.add(portServer);
+        panelTopFirst.add(new JPanel());
 
         panelTopSecond.add(new JLabel("логин: "));
         panelTopSecond.add(loginUser);
