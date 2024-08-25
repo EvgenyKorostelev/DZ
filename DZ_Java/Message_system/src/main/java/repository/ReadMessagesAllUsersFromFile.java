@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadMessagesAllUsersFromFile {
+public class ReadMessagesAllUsersFromFile implements ReadFromFile {
+
+    @Override
     public List<Message> readAllFromFile() {
         String path = "src/main/resources/log.txt";
         List<Message> log = new ArrayList<>();

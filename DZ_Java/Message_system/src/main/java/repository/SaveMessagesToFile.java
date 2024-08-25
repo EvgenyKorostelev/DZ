@@ -9,9 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class SaveMessagesToFile {
+public class SaveMessagesToFile implements SaveToFile {
 
-    public static void writeToFile(Message message){
+    @Override
+    public void writeToFile(Message message) {
         String path = "src/main/resources/log.txt";
         Path file = Paths.get(path);
         if (Files.exists(file)) {

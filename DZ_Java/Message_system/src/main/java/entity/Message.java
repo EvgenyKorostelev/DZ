@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class Message  implements Comparable<Message> {
+public class Message implements Comparable<Message> {
 
     private String authorMessage;
     private String textMessage;
@@ -40,6 +40,7 @@ public class Message  implements Comparable<Message> {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.ITALY);
         return dateFormat.format(new Date());
     }
+
     @Override
     public int compareTo(Message o) {
         return ComparisonChain.start()

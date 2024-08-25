@@ -1,76 +1,47 @@
 package entity.client;
 
-import entity.IdFactory;
 import entity.Message;
-import entity.server.ServerWindow;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.awt.event.WindowEvent;
 
-public class ClientWindow extends JFrame {
+public class ClientWindow extends JFrame implements ClientView {
 
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
-    private final IdFactory idFactory = new IdFactory();
 
-    private ServerWindow serverWindow;
-    private boolean clientStatus;
-    private Message message;
-    private JTextField ipServer;
-    private JTextField portServer;
-    private JTextField loginUser;
-    private String user;
-    private JPasswordField passwordUser;
+    private JTextField fieldIp;
+    private JTextField fieldPort;
+    private JTextField fieldLogin;
+    private JPasswordField fieldPassword;
     private JButton buttonLogin;
     private JTextField fieldMessage;
     private JButton buttonSend;
     private JTextArea fieldAllMessages;
-    private int clientId;
+
+    private Client client;
 
 
-    public ClientWindow(ServerWindow serverWindow) {
-        this.serverWindow = serverWindow;
-        try {
-            clientId = idFactory.createId();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public ClientWindow() {
+
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
 
-        Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-        setLocation((screenSize.width-1000)/2, (screenSize.height-800)/2);
-        //setLocationRelativeTo(null);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((screenSize.width - 1000) / 2, (screenSize.height - 800) / 2);
 
-        clientStatus = false;
-
-        setTitle("Message Client");
+        setTitle("Client");
         setResizable(true);
 
-        ipServer = new JTextField(15);
-        portServer = new JTextField(4);
-        loginUser = new JTextField(10);
-        passwordUser = new JPasswordField(8);
-        passwordUser.setEchoChar('*');
+        fieldIp = new JTextField(15);
+        fieldPort = new JTextField(4);
+        fieldLogin = new JTextField(10);
+        fieldPassword = new JPasswordField(8);
+        fieldPassword.setEchoChar('*');
 
         buttonLogin = new JButton("Login");
-        buttonLogin.addActionListener(e -> {
-            if (serverWindow.isServerStatus() && !loginUser.getText().isEmpty()) {
-                user = loginUser.getText();
-                generateTextAllMessages(serverWindow);
-                clientStatus = true;
-                serverWindow.setFieldAllMessages(serverWindow.getFieldAllMessages().getText()
-                        + "Пользователь " + loginUser.getText()
-                        + " присоединился к серверу" + "\n");
-            } else if (!serverWindow.isServerStatus()) {
-                fieldAllMessages.setText(fieldAllMessages.getText()
-                        + "Сервер недоступен Connection Failed !!!" + "\n");
-            } else if (serverWindow.isServerStatus() && loginUser.getText().isEmpty()) {
-                fieldAllMessages.setText(fieldAllMessages.getText()
-                        + "Заполните поле Login." + "\n");
-            }
-        });
+        buttonLogin.addActionListener(e -> actionLoginClient());
 
         fieldAllMessages = new JTextArea();
         JScrollPane spFieldAllMessages = new JScrollPane(fieldAllMessages);
@@ -78,10 +49,12 @@ public class ClientWindow extends JFrame {
         fieldAllMessages.setWrapStyleWord(true);
 
         fieldMessage = new JTextField(50);
-        fieldMessage.addActionListener(e -> actionSend(serverWindow));
+        fieldMessage.addActionListener(e ->
+                actionSendMessageClient());
 
         buttonSend = new JButton("Send");
-        buttonSend.addActionListener(e -> actionSend(serverWindow));
+        buttonSend.addActionListener(e ->
+                actionSendMessageClient());
 
         JPanel panelTop = new JPanel(new GridLayout(2, 1));
         JPanel panelTopFirst = new JPanel(new GridLayout(1, 5));
@@ -90,15 +63,15 @@ public class ClientWindow extends JFrame {
         JPanel panelBottom = new JPanel(new GridLayout(1, 2));
 
         panelTopFirst.add(new JLabel("ip адрес: "));
-        panelTopFirst.add(ipServer);
+        panelTopFirst.add(fieldIp);
         panelTopFirst.add(new JLabel("порт: "));
-        panelTopFirst.add(portServer);
+        panelTopFirst.add(fieldPort);
         panelTopFirst.add(new JPanel());
 
         panelTopSecond.add(new JLabel("логин: "));
-        panelTopSecond.add(loginUser);
+        panelTopSecond.add(fieldLogin);
         panelTopSecond.add(new JLabel("пароль: "));
-        panelTopSecond.add(passwordUser);
+        panelTopSecond.add(fieldPassword);
         panelTopSecond.add(buttonLogin);
 
         panelTop.add(panelTopFirst);
@@ -113,48 +86,47 @@ public class ClientWindow extends JFrame {
         setVisible(true);
     }
 
-    public boolean isClientStatus() {
-        return clientStatus;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public void setClientStatus(boolean clientStatus) {
-        this.clientStatus = clientStatus;
+    @Override
+    public void actionLoginClient() {
+        client.connectToServer();
     }
 
-    public void postMessage(Message msg, ServerWindow serverWindow) {
-        if (!message.getTextMessage().isEmpty() && message.getAuthorMessage().equals(user)) {
-            serverWindow.saveMessage(msg);
-        }
+    @Override
+    public void actionSendMessageClient() {
+        client.sendMessage();
+        this.fieldMessage.setText("");
     }
 
-    private String generateTextMessage(Message message) {
-        return message.getDateMessage() + " "
-                + message.getAuthorMessage() + ": "
-                + message.getTextMessage() + "\n";
+    @Override
+    public String findAllTextMessages() {
+        return fieldAllMessages.getText();
     }
 
-    public void generateTextAllMessages(ServerWindow serverWindow) {
-        if (serverWindow.isServerStatus() && clientStatus) {
-            fieldAllMessages.setText(
-                    "Connection OK !!!"
-                            + "\n" + serverWindow.findMessagesAllUsers());
-        }
+    @Override
+    public String findUserLogin() {
+        return fieldLogin.getText();
     }
 
-    private void actionSend(ServerWindow serverWindow) {
-        if (serverWindow.isServerStatus() && isClientStatus()) {
-            message = new Message(loginUser.getText(),
-                    fieldMessage.getText());
-            postMessage(message, serverWindow);
-            generateTextAllMessages(serverWindow);
-            if (!message.getTextMessage().isEmpty() && message.getAuthorMessage().equals(user)) {
-                serverWindow.setFieldAllMessages(serverWindow.getFieldAllMessages().getText()
-                        + generateTextMessage(message));
-                fieldMessage.setText("");
-            }
-        } else {
-            fieldAllMessages.setText(fieldAllMessages.getText() +
-                    "Нет соединения сервером, нажмите кнопку Login" + "\n");
+    @Override
+    public void showTextAllMessagesClient(String string) {
+        fieldAllMessages.setText(string);
+    }
+
+    @Override
+    public Message generateMessage() {
+        return new Message(fieldLogin.getText(), fieldMessage.getText());
+    }
+
+    @Override
+    protected void processWindowEvent(WindowEvent e) {
+        super.processWindowEvent(e);
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+            client.setClientStatus(false);
+            client.disconnectFromServer();
         }
     }
 }
